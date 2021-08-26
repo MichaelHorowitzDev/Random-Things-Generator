@@ -42,9 +42,9 @@ private struct HomeViewItem: View {
         .font(.title)
         .fontWeight(.semibold)
         .foregroundColor(color.isLight ? .black : .white)
+        .frame(height: 100)
+        .frame(maxWidth: .infinity)
     }
-    .frame(height: 100)
-    .frame(maxWidth: .infinity)
     .background(color)
     .cornerRadius(15)
   }

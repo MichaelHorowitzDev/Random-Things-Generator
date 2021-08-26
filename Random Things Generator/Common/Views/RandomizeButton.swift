@@ -18,17 +18,11 @@ struct RandomizeButton: View {
         .foregroundColor(.black)
         .font(.title)
         .fontWeight(.medium)
+        .frame(height: 70)
+        .frame(maxWidth: .infinity)
     }
-    .frame(height: 70)
-    .frame(maxWidth: .infinity)
     .background(Color.white)
     .cornerRadius(15)
     .padding()
   }
 }
-
-//struct RandomizeButton_Previews: PreviewProvider {
-//  static var previews: some View {
-//    RandomizeButton()
-//  }
-//}
