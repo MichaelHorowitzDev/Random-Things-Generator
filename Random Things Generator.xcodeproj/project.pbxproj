@@ -15,6 +15,8 @@
 		8B74E1D526D6CD1B00886949 /* Random_Things_Generator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1D326D6CD1B00886949 /* Random_Things_Generator.xcdatamodeld */; };
 		8B74E1E126D7093700886949 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1E026D7093700886949 /* HomeView.swift */; };
 		8B74E1E326D7353400886949 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1E226D7353400886949 /* Color+Extensions.swift */; };
+		8B74E1E826D75DDD00886949 /* NumberGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1E726D75DDD00886949 /* NumberGenerator.swift */; };
+		8B74E1EB26D760FA00886949 /* RandomizeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1EA26D760FA00886949 /* RandomizeButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +29,8 @@
 		8B74E1D426D6CD1B00886949 /* Random_Things_Generator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Random_Things_Generator.xcdatamodel; sourceTree = "<group>"; };
 		8B74E1E026D7093700886949 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		8B74E1E226D7353400886949 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		8B74E1E726D75DDD00886949 /* NumberGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberGenerator.swift; sourceTree = "<group>"; };
+		8B74E1EA26D760FA00886949 /* RandomizeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomizeButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				8B74E1DC26D6CDBE00886949 /* Main */,
+				8B74E1E426D75D8A00886949 /* Random Generators */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -98,6 +103,7 @@
 		8B74E1DD26D6CDD900886949 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				8B74E1E926D760EE00886949 /* Views */,
 				8B74E1DE26D6CDDF00886949 /* Extensions */,
 			);
 			path = Common;
@@ -117,6 +123,22 @@
 				8B74E1CC26D6CD1B00886949 /* Assets.xcassets */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		8B74E1E426D75D8A00886949 /* Random Generators */ = {
+			isa = PBXGroup;
+			children = (
+				8B74E1E726D75DDD00886949 /* NumberGenerator.swift */,
+			);
+			path = "Random Generators";
+			sourceTree = "<group>";
+		};
+		8B74E1E926D760EE00886949 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8B74E1EA26D760FA00886949 /* RandomizeButton.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,7 +216,9 @@
 				8B74E1C926D6CD1A00886949 /* Random_Things_GeneratorApp.swift in Sources */,
 				8B74E1E126D7093700886949 /* HomeView.swift in Sources */,
 				8B74E1D526D6CD1B00886949 /* Random_Things_Generator.xcdatamodeld in Sources */,
+				8B74E1E826D75DDD00886949 /* NumberGenerator.swift in Sources */,
 				8B74E1E326D7353400886949 /* Color+Extensions.swift in Sources */,
+				8B74E1EB26D760FA00886949 /* RandomizeButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
