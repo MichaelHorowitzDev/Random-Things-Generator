@@ -13,6 +13,8 @@
 		8B74E1D026D6CD1B00886949 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B74E1CF26D6CD1B00886949 /* Preview Assets.xcassets */; };
 		8B74E1D226D6CD1B00886949 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1D126D6CD1B00886949 /* Persistence.swift */; };
 		8B74E1D526D6CD1B00886949 /* Random_Things_Generator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1D326D6CD1B00886949 /* Random_Things_Generator.xcdatamodeld */; };
+		8B74E1E126D7093700886949 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1E026D7093700886949 /* HomeView.swift */; };
+		8B74E1E326D7353400886949 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1E226D7353400886949 /* Color+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		8B74E1CF26D6CD1B00886949 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8B74E1D126D6CD1B00886949 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		8B74E1D426D6CD1B00886949 /* Random_Things_Generator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Random_Things_Generator.xcdatamodel; sourceTree = "<group>"; };
+		8B74E1E026D7093700886949 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		8B74E1E226D7353400886949 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,10 +59,9 @@
 		8B74E1C726D6CD1A00886949 /* Random Things Generator */ = {
 			isa = PBXGroup;
 			children = (
-				8B74E1C826D6CD1A00886949 /* Random_Things_GeneratorApp.swift */,
-				8B74E1CA26D6CD1A00886949 /* ContentView.swift */,
-				8B74E1CC26D6CD1B00886949 /* Assets.xcassets */,
-				8B74E1D126D6CD1B00886949 /* Persistence.swift */,
+				8B74E1DB26D6CDAA00886949 /* Application */,
+				8B74E1DD26D6CDD900886949 /* Common */,
+				8B74E1DF26D6CDFD00886949 /* Assets */,
 				8B74E1D326D6CD1B00886949 /* Random_Things_Generator.xcdatamodeld */,
 				8B74E1CE26D6CD1B00886949 /* Preview Content */,
 			);
@@ -71,6 +74,49 @@
 				8B74E1CF26D6CD1B00886949 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8B74E1DB26D6CDAA00886949 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				8B74E1DC26D6CDBE00886949 /* Main */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		8B74E1DC26D6CDBE00886949 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				8B74E1D126D6CD1B00886949 /* Persistence.swift */,
+				8B74E1C826D6CD1A00886949 /* Random_Things_GeneratorApp.swift */,
+				8B74E1CA26D6CD1A00886949 /* ContentView.swift */,
+				8B74E1E026D7093700886949 /* HomeView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		8B74E1DD26D6CDD900886949 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				8B74E1DE26D6CDDF00886949 /* Extensions */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		8B74E1DE26D6CDDF00886949 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8B74E1E226D7353400886949 /* Color+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8B74E1DF26D6CDFD00886949 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				8B74E1CC26D6CD1B00886949 /* Assets.xcassets */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,7 +192,9 @@
 				8B74E1D226D6CD1B00886949 /* Persistence.swift in Sources */,
 				8B74E1CB26D6CD1A00886949 /* ContentView.swift in Sources */,
 				8B74E1C926D6CD1A00886949 /* Random_Things_GeneratorApp.swift in Sources */,
+				8B74E1E126D7093700886949 /* HomeView.swift in Sources */,
 				8B74E1D526D6CD1B00886949 /* Random_Things_Generator.xcdatamodeld in Sources */,
+				8B74E1E326D7353400886949 /* Color+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
