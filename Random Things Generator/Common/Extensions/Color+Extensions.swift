@@ -19,6 +19,6 @@ extension Color {
     var isLight: Bool {
         let components = components
         let luminance = (0.299*components.red*255 + 0.587*components.green*255 + 0.114*components.blue*255)/255
-        return luminance > 0.5
+      return luminance > 0.65
     }
 }
