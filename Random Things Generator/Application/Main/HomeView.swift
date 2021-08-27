@@ -10,11 +10,13 @@ import SwiftUI
 class UserPreferences: ObservableObject {
   @Published var themeColor: Color = .blue
   @Published var showsRandomButton = true
+  @Published var hasHapticFeedback = true
 }
 
 struct HomeView: View {
   let types = ["Number", "Word", "Card", "Coin", "Date", "Password"]
   @EnvironmentObject var preferences: UserPreferences
+  @State private var settingsPresented = false
   var body: some View {
     NavigationView {
       ScrollView {
@@ -38,16 +40,21 @@ struct HomeView: View {
             print(preferences.themeColor)
           }
         }
+        
       }
       .navigationBarTitle("Random")
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button {
             print("pressed")
+            settingsPresented = true
           } label: {
             Image(systemName: "gear")
               .font(.system(size: 18, weight: .bold))
               .foregroundColor(preferences.themeColor)
+          }
+          .sheet(isPresented: $settingsPresented) {
+            SettingsMenu()
           }
         }
       }

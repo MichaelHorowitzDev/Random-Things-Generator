@@ -11,6 +11,11 @@ struct RandomizeButton: View {
   let buttonTitle: String
   let buttonPressed: () -> ()
   @State private var isPressingDown = false
+  @EnvironmentObject var preferences: UserPreferences
+  init(_ buttonTitle: String, _ buttonPressed: @escaping () -> ()) {
+    self.buttonTitle = buttonTitle
+    self.buttonPressed = buttonPressed
+  }
   var body: some View {
     Button {
       buttonPressed()
@@ -33,7 +38,9 @@ struct RandomizeButton: View {
       }).onEnded({
         print("ENDED \($0)")
         isPressingDown = false
-        UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+        if preferences.hasHapticFeedback {
+          UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+        }
       })
     )
   }

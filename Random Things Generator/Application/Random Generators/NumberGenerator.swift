@@ -20,7 +20,11 @@ struct NumberGenerator: View {
         VStack {
           HStack(spacing: 20) {
             NumberEntry(placeholder: "First Number", number: $firstNumber, isFocused: $isFocused)
+              .highPriorityGesture(TapGesture().onEnded({
+              }))
             NumberEntry(placeholder: "Second Number", number: $secondNumber, isFocused: $isFocused)
+              .highPriorityGesture(TapGesture().onEnded({
+              }))
           }
           .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
@@ -37,7 +41,7 @@ struct NumberGenerator: View {
         if preferences.showsRandomButton {
           VStack {
             Spacer()
-            RandomizeButton(buttonTitle: "Randomize") {
+            RandomizeButton("Randomize") {
               isFocused = false
               setNumbers()
               guard let num1 = Int(firstNumber) else { return }
@@ -66,11 +70,14 @@ struct NumberGenerator: View {
             guard let num2 = Int(secondNumber) else { return }
             let randNum = Int.random(in: num1...num2)
             randomNumber = String(randNum)
+            if preferences.hasHapticFeedback {
+              UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+            }
           }
         } else {
           isFocused = false
         }
-      }
+      }      
     }
   func setNumbers() {
     guard var num1 = Int(firstNumber) else { return }

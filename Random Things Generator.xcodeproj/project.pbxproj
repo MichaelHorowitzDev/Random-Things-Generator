@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B5B4F3E26D98377001994F4 /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5B4F3D26D98377001994F4 /* SettingsMenu.swift */; };
 		8B74E1C926D6CD1A00886949 /* Random_Things_GeneratorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1C826D6CD1A00886949 /* Random_Things_GeneratorApp.swift */; };
 		8B74E1CB26D6CD1A00886949 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1CA26D6CD1A00886949 /* ContentView.swift */; };
 		8B74E1CD26D6CD1B00886949 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B74E1CC26D6CD1B00886949 /* Assets.xcassets */; };
@@ -19,9 +20,11 @@
 		8B74E1EB26D760FA00886949 /* RandomizeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1EA26D760FA00886949 /* RandomizeButton.swift */; };
 		8B74E1F026D89FB900886949 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1EF26D89FB900886949 /* Int+Extensions.swift */; };
 		8B74E1F226D8B46200886949 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1F126D8B46200886949 /* View+Extensions.swift */; };
+		8B7E861B26D98AE4004B0011 /* Binding+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E861A26D98AE4004B0011 /* Binding+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8B5B4F3D26D98377001994F4 /* SettingsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
 		8B74E1C526D6CD1A00886949 /* Random Things Generator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Random Things Generator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B74E1C826D6CD1A00886949 /* Random_Things_GeneratorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random_Things_GeneratorApp.swift; sourceTree = "<group>"; };
 		8B74E1CA26D6CD1A00886949 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -35,6 +38,7 @@
 		8B74E1EA26D760FA00886949 /* RandomizeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomizeButton.swift; sourceTree = "<group>"; };
 		8B74E1EF26D89FB900886949 /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
 		8B74E1F126D8B46200886949 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		8B7E861A26D98AE4004B0011 /* Binding+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +52,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B5B4F3F26D9837C001994F4 /* SettingsMenu */ = {
+			isa = PBXGroup;
+			children = (
+				8B5B4F3D26D98377001994F4 /* SettingsMenu.swift */,
+			);
+			path = SettingsMenu;
+			sourceTree = "<group>";
+		};
 		8B74E1BC26D6CD1A00886949 = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				8B74E1DC26D6CDBE00886949 /* Main */,
+				8B5B4F3F26D9837C001994F4 /* SettingsMenu */,
 				8B74E1E426D75D8A00886949 /* Random Generators */,
 			);
 			path = Application;
@@ -119,6 +132,7 @@
 				8B74E1E226D7353400886949 /* Color+Extensions.swift */,
 				8B74E1EF26D89FB900886949 /* Int+Extensions.swift */,
 				8B74E1F126D8B46200886949 /* View+Extensions.swift */,
+				8B7E861A26D98AE4004B0011 /* Binding+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -226,7 +240,9 @@
 				8B74E1E326D7353400886949 /* Color+Extensions.swift in Sources */,
 				8B74E1EB26D760FA00886949 /* RandomizeButton.swift in Sources */,
 				8B74E1F226D8B46200886949 /* View+Extensions.swift in Sources */,
+				8B7E861B26D98AE4004B0011 /* Binding+Extensions.swift in Sources */,
 				8B74E1F026D89FB900886949 /* Int+Extensions.swift in Sources */,
+				8B5B4F3E26D98377001994F4 /* SettingsMenu.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
