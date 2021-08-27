@@ -9,12 +9,9 @@ import SwiftUI
 import Combine
 
 struct NumberGenerator: View {
-  @State private var firstNumber = "" {
-    didSet {
-      print(firstNumber)
-    }
-  }
+  @State private var firstNumber = ""
   @State private var secondNumber = ""
+  @State private var randomNumber = "?"
   @FocusState private var isFocused: Bool
   @EnvironmentObject var preferences: UserPreferences
     var body: some View {
@@ -40,26 +37,44 @@ struct NumberGenerator: View {
         VStack {
           Spacer()
           RandomizeButton(buttonTitle: "Randomize") {
+            isFocused = false
+            setNumbers()
+            guard let num1 = Int(firstNumber) else { return }
+            guard let num2 = Int(secondNumber) else { return }
+            let randNum = Int.random(in: num1...num2)
+            randomNumber = String(randNum)
+            
             print("pressed")
           }
         }
-        Text("?")
+        Text(randomNumber)
           .font(.system(size: 100))
+          .minimumScaleFactor(0.2)
+          .lineLimit(1)
           .foregroundColor(preferences.themeColor.isLight ? .black : .white)
+          .padding()
         .navigationTitle("Number")
         .navigationBarTitleDisplayMode(.inline)
       }
     }
+  func setNumbers() {
+    guard var num1 = Int(firstNumber) else { return }
+    guard var num2 = Int(secondNumber) else { return }
+    if num1 >= num2 {
+      if String(num2+1).count > 10 {
+        num1 = num2 - 1
+        firstNumber = String(num1)
+      } else {
+        num2 = num1 + 1
+        secondNumber = String(num2)
+      }
+    }
+  }
 }
 
 private struct NumberEntry: View {
   let placeholder: String
-  @Binding var number: String {
-    willSet {
-      print(number)
-      print(newValue)
-    }
-  }
+  @Binding var number: String
   private var isFocused: FocusState<Bool>.Binding
   init(placeholder: String, number: Binding<String>, isFocused: FocusState<Bool>.Binding) {
     self.placeholder = placeholder
