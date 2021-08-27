@@ -7,9 +7,13 @@
 
 import SwiftUI
 
+class UserPreferences: ObservableObject {
+  @Published var themeColor: Color = .blue
+}
+
 struct HomeView: View {
   let types = ["Number", "Word", "Card", "Coin", "Date", "Password"]
-  @Environment(\.accentColor) var accentColor
+  @EnvironmentObject var preferences: UserPreferences
   var body: some View {
     NavigationView {
       ScrollView {
@@ -23,6 +27,15 @@ struct HomeView: View {
             }
             .padding([.leading, .trailing])
           }
+          Button("Press") {
+            let r = Double.random(in: 0...255)/255
+            let g = Double.random(in: 0...255)/255
+            let b = Double.random(in: 0...255)/255
+            let color = Color(red: r, green: g, blue: b, opacity: 1)
+            print(color)
+            preferences.themeColor = color
+            print(preferences.themeColor)
+          }
         }
       }
       .navigationBarTitle("Random")
@@ -33,7 +46,7 @@ struct HomeView: View {
 
 private struct HomeViewItem: View {
   let item: String
-  var color: Color = .blue
+  @EnvironmentObject var preferences: UserPreferences
   let destinationView: AnyView
   var body: some View {
     NavigationLink {
@@ -42,11 +55,11 @@ private struct HomeViewItem: View {
       Text(item)
         .font(.title)
         .fontWeight(.semibold)
-        .foregroundColor(color.isLight ? .black : .white)
+        .foregroundColor(preferences.themeColor.isLight ? .black : .white)
         .frame(height: 100)
         .frame(maxWidth: .infinity)
     }
-    .background(color)
+    .background(preferences.themeColor)
     .cornerRadius(15)
   }
 }
