@@ -21,6 +21,7 @@
 		8B74E1F026D89FB900886949 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1EF26D89FB900886949 /* Int+Extensions.swift */; };
 		8B74E1F226D8B46200886949 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1F126D8B46200886949 /* View+Extensions.swift */; };
 		8B7E861B26D98AE4004B0011 /* Binding+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E861A26D98AE4004B0011 /* Binding+Extensions.swift */; };
+		8B7E861E26D99563004B0011 /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E861D26D99563004B0011 /* ThemeColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		8B74E1EF26D89FB900886949 /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
 		8B74E1F126D8B46200886949 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		8B7E861A26D98AE4004B0011 /* Binding+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extensions.swift"; sourceTree = "<group>"; };
+		8B7E861D26D99563004B0011 /* ThemeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 		8B5B4F3F26D9837C001994F4 /* SettingsMenu */ = {
 			isa = PBXGroup;
 			children = (
+				8B7E861C26D99552004B0011 /* Theme */,
 				8B5B4F3D26D98377001994F4 /* SettingsMenu.swift */,
 			);
 			path = SettingsMenu;
@@ -161,6 +164,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		8B7E861C26D99552004B0011 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				8B7E861D26D99563004B0011 /* ThemeColor.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -231,6 +242,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B7E861E26D99563004B0011 /* ThemeColor.swift in Sources */,
 				8B74E1D226D6CD1B00886949 /* Persistence.swift in Sources */,
 				8B74E1CB26D6CD1A00886949 /* ContentView.swift in Sources */,
 				8B74E1C926D6CD1A00886949 /* Random_Things_GeneratorApp.swift in Sources */,

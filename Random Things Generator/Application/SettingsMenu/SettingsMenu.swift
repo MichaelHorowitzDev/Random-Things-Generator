@@ -9,18 +9,42 @@ import SwiftUI
 
 struct SettingsMenu: View {
   @EnvironmentObject var preferences: UserPreferences
+  @Environment(\.presentationMode) var presentationMode
     var body: some View {
-      List {
-        Section("General") {
-          HStack {
-            Image(systemName: "waveform")
-            Spacer()
-            Toggle("Haptics", isOn: $preferences.hasHapticFeedback)
+      NavigationView {
+        List {
+          Section("General") {
+            HStack {
+              Image(systemName: "waveform")
+              Spacer()
+              Toggle("Haptics", isOn: $preferences.hasHapticFeedback)
+            }
+            HStack {
+              Image(systemName: "hand.tap.fill")
+              Spacer()
+              Toggle("Tap to Randomize", isOn: !$preferences.showsRandomButton)
+            }
           }
-          HStack {
-            Image(systemName: "hand.tap.fill")
-            Spacer()
-            Toggle("Tap to Randomize", isOn: !$preferences.showsRandomButton)
+          Section("Customization") {
+            HStack {
+              Image(systemName: "paintbrush.fill")
+              Spacer()
+              NavigationLink("Theme") {
+                ThemeColor()
+              }
+            }
+          }
+        }
+        .navigationTitle("Settings")
+        .toolbar {
+          ToolbarItem(placement: .navigationBarTrailing) {
+            Button {
+              presentationMode.wrappedValue.dismiss()
+            } label: {
+              Text("Done")
+                .fontWeight(.bold)
+            }
+
           }
         }
       }
