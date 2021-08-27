@@ -17,6 +17,7 @@
 		8B74E1E326D7353400886949 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1E226D7353400886949 /* Color+Extensions.swift */; };
 		8B74E1E826D75DDD00886949 /* NumberGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1E726D75DDD00886949 /* NumberGenerator.swift */; };
 		8B74E1EB26D760FA00886949 /* RandomizeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1EA26D760FA00886949 /* RandomizeButton.swift */; };
+		8B74E1ED26D8626C00886949 /* AccentColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1EC26D8626C00886949 /* AccentColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		8B74E1E226D7353400886949 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		8B74E1E726D75DDD00886949 /* NumberGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberGenerator.swift; sourceTree = "<group>"; };
 		8B74E1EA26D760FA00886949 /* RandomizeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomizeButton.swift; sourceTree = "<group>"; };
+		8B74E1EC26D8626C00886949 /* AccentColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 		8B74E1DD26D6CDD900886949 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				8B74E1EE26D862C100886949 /* Evironment */,
 				8B74E1E926D760EE00886949 /* Views */,
 				8B74E1DE26D6CDDF00886949 /* Extensions */,
 			);
@@ -139,6 +142,14 @@
 				8B74E1EA26D760FA00886949 /* RandomizeButton.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		8B74E1EE26D862C100886949 /* Evironment */ = {
+			isa = PBXGroup;
+			children = (
+				8B74E1EC26D8626C00886949 /* AccentColor.swift */,
+			);
+			path = Evironment;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,6 +223,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B74E1D226D6CD1B00886949 /* Persistence.swift in Sources */,
+				8B74E1ED26D8626C00886949 /* AccentColor.swift in Sources */,
 				8B74E1CB26D6CD1A00886949 /* ContentView.swift in Sources */,
 				8B74E1C926D6CD1A00886949 /* Random_Things_GeneratorApp.swift in Sources */,
 				8B74E1E126D7093700886949 /* HomeView.swift in Sources */,

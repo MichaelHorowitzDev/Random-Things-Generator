@@ -11,6 +11,7 @@ struct NumberGenerator: View {
   @State private var firstNumber = ""
   @State private var secondNumber = ""
   @FocusState private var isFocused: Bool
+  @Environment(\.accentColor) var accentColor
     var body: some View {
       ZStack {
         Color.blue.ignoresSafeArea(.all, edges: [.horizontal, .bottom])
@@ -28,6 +29,8 @@ struct NumberGenerator: View {
             }
           }
           .padding()
+          .padding(.top, 50)
+          Spacer()
         }
         VStack {
           Spacer()
@@ -35,6 +38,9 @@ struct NumberGenerator: View {
             print("pressed")
           }
         }
+        Text("?")
+          .font(.system(size: 100))
+          .foregroundColor(accentColor.isLight ? .black : .white)
         .navigationTitle("Number")
         .navigationBarTitleDisplayMode(.inline)
       }

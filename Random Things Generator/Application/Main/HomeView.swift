@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
   let types = ["Number", "Word", "Card", "Coin", "Date", "Password"]
+  @Environment(\.accentColor) var accentColor
   var body: some View {
     NavigationView {
       ScrollView {
