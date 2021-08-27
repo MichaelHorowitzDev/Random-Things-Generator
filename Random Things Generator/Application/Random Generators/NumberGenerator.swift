@@ -34,17 +34,17 @@ struct NumberGenerator: View {
           .padding(.top, 50)
           Spacer()
         }
-        VStack {
-          Spacer()
-          RandomizeButton(buttonTitle: "Randomize") {
-            isFocused = false
-            setNumbers()
-            guard let num1 = Int(firstNumber) else { return }
-            guard let num2 = Int(secondNumber) else { return }
-            let randNum = Int.random(in: num1...num2)
-            randomNumber = String(randNum)
-            
-            print("pressed")
+        if preferences.showsRandomButton {
+          VStack {
+            Spacer()
+            RandomizeButton(buttonTitle: "Randomize") {
+              isFocused = false
+              setNumbers()
+              guard let num1 = Int(firstNumber) else { return }
+              guard let num2 = Int(secondNumber) else { return }
+              let randNum = Int.random(in: num1...num2)
+              randomNumber = String(randNum)
+            }
           }
         }
         Text(randomNumber)
@@ -55,6 +55,21 @@ struct NumberGenerator: View {
           .padding()
         .navigationTitle("Number")
         .navigationBarTitleDisplayMode(.inline)
+      }
+      .onTapGesture {
+        if !preferences.showsRandomButton {
+          if isFocused {
+            isFocused = false
+          } else {
+            setNumbers()
+            guard let num1 = Int(firstNumber) else { return }
+            guard let num2 = Int(secondNumber) else { return }
+            let randNum = Int.random(in: num1...num2)
+            randomNumber = String(randNum)
+          }
+        } else {
+          isFocused = false
+        }
       }
     }
   func setNumbers() {

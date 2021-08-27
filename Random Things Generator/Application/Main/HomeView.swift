@@ -9,6 +9,7 @@ import SwiftUI
 
 class UserPreferences: ObservableObject {
   @Published var themeColor: Color = .blue
+  @Published var showsRandomButton = true
 }
 
 struct HomeView: View {
@@ -39,6 +40,17 @@ struct HomeView: View {
         }
       }
       .navigationBarTitle("Random")
+      .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button {
+            print("pressed")
+          } label: {
+            Image(systemName: "gear")
+              .font(.system(size: 18, weight: .bold))
+              .foregroundColor(preferences.themeColor)
+          }
+        }
+      }
     }
   }
   let typeToView = ["Number":NumberGenerator()]

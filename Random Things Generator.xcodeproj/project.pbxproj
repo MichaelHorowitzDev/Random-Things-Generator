@@ -18,6 +18,7 @@
 		8B74E1E826D75DDD00886949 /* NumberGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1E726D75DDD00886949 /* NumberGenerator.swift */; };
 		8B74E1EB26D760FA00886949 /* RandomizeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1EA26D760FA00886949 /* RandomizeButton.swift */; };
 		8B74E1F026D89FB900886949 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1EF26D89FB900886949 /* Int+Extensions.swift */; };
+		8B74E1F226D8B46200886949 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1F126D8B46200886949 /* View+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		8B74E1E726D75DDD00886949 /* NumberGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberGenerator.swift; sourceTree = "<group>"; };
 		8B74E1EA26D760FA00886949 /* RandomizeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomizeButton.swift; sourceTree = "<group>"; };
 		8B74E1EF26D89FB900886949 /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
+		8B74E1F126D8B46200886949 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 			children = (
 				8B74E1E226D7353400886949 /* Color+Extensions.swift */,
 				8B74E1EF26D89FB900886949 /* Int+Extensions.swift */,
+				8B74E1F126D8B46200886949 /* View+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 				8B74E1E826D75DDD00886949 /* NumberGenerator.swift in Sources */,
 				8B74E1E326D7353400886949 /* Color+Extensions.swift in Sources */,
 				8B74E1EB26D760FA00886949 /* RandomizeButton.swift in Sources */,
+				8B74E1F226D8B46200886949 /* View+Extensions.swift in Sources */,
 				8B74E1F026D89FB900886949 /* Int+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
