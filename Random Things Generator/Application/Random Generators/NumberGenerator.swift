@@ -15,8 +15,7 @@ struct NumberGenerator: View {
   @FocusState private var isFocused: Bool
   @EnvironmentObject var preferences: UserPreferences
     var body: some View {
-      ZStack {
-        preferences.themeColor.ignoresSafeArea(.all, edges: [.horizontal, .bottom])
+      RandomGeneratorView {
         VStack {
           HStack(spacing: 20) {
             NumberEntry(placeholder: "First Number", number: $firstNumber, isFocused: $isFocused)
@@ -38,19 +37,6 @@ struct NumberGenerator: View {
           .padding(.top, 50)
           Spacer()
         }
-        if preferences.showsRandomButton {
-          VStack {
-            Spacer()
-            RandomizeButton("Randomize") {
-              isFocused = false
-              setNumbers()
-              guard let num1 = Int(firstNumber) else { return }
-              guard let num2 = Int(secondNumber) else { return }
-              let randNum = Int.random(in: num1...num2)
-              randomNumber = String(randNum)
-            }
-          }
-        }
         Text(randomNumber)
           .font(.system(size: 100))
           .minimumScaleFactor(0.2)
@@ -60,24 +46,18 @@ struct NumberGenerator: View {
         .navigationTitle("Number")
         .navigationBarTitleDisplayMode(.inline)
       }
-      .onTapGesture {
-        if !preferences.showsRandomButton {
-          if isFocused {
-            isFocused = false
-          } else {
-            setNumbers()
-            guard let num1 = Int(firstNumber) else { return }
-            guard let num2 = Int(secondNumber) else { return }
-            let randNum = Int.random(in: num1...num2)
-            randomNumber = String(randNum)
-            if preferences.hasHapticFeedback {
-              UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-            }
-          }
-        } else {
-          isFocused = false
-        }
-      }      
+      .onRandomPressed {
+        isFocused = false
+        setNumbers()
+        guard let num1 = Int(firstNumber) else { return }
+        guard let num2 = Int(secondNumber) else { return }
+        let randNum = Int.random(in: num1...num2)
+        randomNumber = String(randNum)
+      }
+      .onTap {
+        isFocused = false
+      }
+      .canTapToRandomize(!isFocused)
     }
   func setNumbers() {
     guard var num1 = Int(firstNumber) else { return }
