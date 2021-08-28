@@ -22,6 +22,10 @@
 		8B74E1F226D8B46200886949 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1F126D8B46200886949 /* View+Extensions.swift */; };
 		8B7E861B26D98AE4004B0011 /* Binding+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E861A26D98AE4004B0011 /* Binding+Extensions.swift */; };
 		8B7E861E26D99563004B0011 /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E861D26D99563004B0011 /* ThemeColor.swift */; };
+		8B7E862326D9EC70004B0011 /* half_dollar_reverse.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B7E862126D9EC70004B0011 /* half_dollar_reverse.png */; };
+		8B7E862626D9ED39004B0011 /* half_dollar_obverse.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B7E862526D9ED39004B0011 /* half_dollar_obverse.png */; };
+		8B7E862826D9ED64004B0011 /* CoinFlipper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E862726D9ED64004B0011 /* CoinFlipper.swift */; };
+		8B7E862A26D9EDB7004B0011 /* RandomGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E862926D9EDB7004B0011 /* RandomGeneratorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +45,10 @@
 		8B74E1F126D8B46200886949 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		8B7E861A26D98AE4004B0011 /* Binding+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extensions.swift"; sourceTree = "<group>"; };
 		8B7E861D26D99563004B0011 /* ThemeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColor.swift; sourceTree = "<group>"; };
+		8B7E862126D9EC70004B0011 /* half_dollar_reverse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = half_dollar_reverse.png; sourceTree = "<group>"; };
+		8B7E862526D9ED39004B0011 /* half_dollar_obverse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = half_dollar_obverse.png; sourceTree = "<group>"; };
+		8B7E862726D9ED64004B0011 /* CoinFlipper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinFlipper.swift; sourceTree = "<group>"; };
+		8B7E862926D9EDB7004B0011 /* RandomGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGeneratorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +151,7 @@
 		8B74E1DF26D6CDFD00886949 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				8B7E861F26D9DEDF004B0011 /* Coins */,
 				8B74E1CC26D6CD1B00886949 /* Assets.xcassets */,
 			);
 			path = Assets;
@@ -152,6 +161,8 @@
 			isa = PBXGroup;
 			children = (
 				8B74E1E726D75DDD00886949 /* NumberGenerator.swift */,
+				8B7E862726D9ED64004B0011 /* CoinFlipper.swift */,
+				8B7E862926D9EDB7004B0011 /* RandomGeneratorView.swift */,
 			);
 			path = "Random Generators";
 			sourceTree = "<group>";
@@ -170,6 +181,23 @@
 				8B7E861D26D99563004B0011 /* ThemeColor.swift */,
 			);
 			path = Theme;
+			sourceTree = "<group>";
+		};
+		8B7E861F26D9DEDF004B0011 /* Coins */ = {
+			isa = PBXGroup;
+			children = (
+				8B7E862026D9EC66004B0011 /* Half Dollar */,
+			);
+			path = Coins;
+			sourceTree = "<group>";
+		};
+		8B7E862026D9EC66004B0011 /* Half Dollar */ = {
+			isa = PBXGroup;
+			children = (
+				8B7E862526D9ED39004B0011 /* half_dollar_obverse.png */,
+				8B7E862126D9EC70004B0011 /* half_dollar_reverse.png */,
+			);
+			path = "Half Dollar";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,7 +259,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B74E1D026D6CD1B00886949 /* Preview Assets.xcassets in Resources */,
+				8B7E862326D9EC70004B0011 /* half_dollar_reverse.png in Resources */,
 				8B74E1CD26D6CD1B00886949 /* Assets.xcassets in Resources */,
+				8B7E862626D9ED39004B0011 /* half_dollar_obverse.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,8 +277,10 @@
 				8B74E1CB26D6CD1A00886949 /* ContentView.swift in Sources */,
 				8B74E1C926D6CD1A00886949 /* Random_Things_GeneratorApp.swift in Sources */,
 				8B74E1E126D7093700886949 /* HomeView.swift in Sources */,
+				8B7E862A26D9EDB7004B0011 /* RandomGeneratorView.swift in Sources */,
 				8B74E1D526D6CD1B00886949 /* Random_Things_Generator.xcdatamodeld in Sources */,
 				8B74E1E826D75DDD00886949 /* NumberGenerator.swift in Sources */,
+				8B7E862826D9ED64004B0011 /* CoinFlipper.swift in Sources */,
 				8B74E1E326D7353400886949 /* Color+Extensions.swift in Sources */,
 				8B74E1EB26D760FA00886949 /* RandomizeButton.swift in Sources */,
 				8B74E1F226D8B46200886949 /* View+Extensions.swift in Sources */,
