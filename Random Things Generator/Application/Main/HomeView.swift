@@ -27,7 +27,7 @@ struct HomeView: View {
         VStack {
           ForEach(0..<(types.count+1)/2) { num in
             HStack(spacing: 20) {
-              HomeViewItem(item: types[num*2], destinationView: AnyView(typeToView[types[num]]))
+              HomeViewItem(item: types[num*2], destinationView: AnyView(typeToView[types[num*2]]))
               if num*2+1 < types.count {
                 HomeViewItem(item: types[num*2+1], destinationView: AnyView(typeToView[types[num*2+1]]))
               }
@@ -64,7 +64,7 @@ struct HomeView: View {
       }
     }
   }
-  let typeToView: [String: AnyView] = ["Number": AnyView(NumberGenerator()), "Coin":  AnyView(CoinFlipper())]
+  let typeToView: [String: AnyView] = ["Number": AnyView(NumberGenerator()), "Coin":  AnyView(CoinFlipper()), "Card": AnyView(CardRandomizer())]
 }
 
 private struct HomeViewItem: View {

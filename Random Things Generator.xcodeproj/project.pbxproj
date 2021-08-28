@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8B5B4F3E26D98377001994F4 /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5B4F3D26D98377001994F4 /* SettingsMenu.swift */; };
+		8B61A02D26DAF2CC007DBC50 /* CardRandomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B61A02C26DAF2CC007DBC50 /* CardRandomizer.swift */; };
 		8B74E1C926D6CD1A00886949 /* Random_Things_GeneratorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1C826D6CD1A00886949 /* Random_Things_GeneratorApp.swift */; };
 		8B74E1CB26D6CD1A00886949 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1CA26D6CD1A00886949 /* ContentView.swift */; };
 		8B74E1CD26D6CD1B00886949 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B74E1CC26D6CD1B00886949 /* Assets.xcassets */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		8B5B4F3D26D98377001994F4 /* SettingsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
+		8B61A02C26DAF2CC007DBC50 /* CardRandomizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardRandomizer.swift; sourceTree = "<group>"; };
 		8B74E1C526D6CD1A00886949 /* Random Things Generator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Random Things Generator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B74E1C826D6CD1A00886949 /* Random_Things_GeneratorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random_Things_GeneratorApp.swift; sourceTree = "<group>"; };
 		8B74E1CA26D6CD1A00886949 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				8B74E1E726D75DDD00886949 /* NumberGenerator.swift */,
 				8B7E862726D9ED64004B0011 /* CoinFlipper.swift */,
 				8B7E862926D9EDB7004B0011 /* RandomGeneratorView.swift */,
+				8B61A02C26DAF2CC007DBC50 /* CardRandomizer.swift */,
 			);
 			path = "Random Generators";
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				8B7E861B26D98AE4004B0011 /* Binding+Extensions.swift in Sources */,
 				8B74E1F026D89FB900886949 /* Int+Extensions.swift in Sources */,
 				8B5B4F3E26D98377001994F4 /* SettingsMenu.swift in Sources */,
+				8B61A02D26DAF2CC007DBC50 /* CardRandomizer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
