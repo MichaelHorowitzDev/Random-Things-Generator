@@ -12,6 +12,7 @@ struct NumberGenerator: View {
   @State private var firstNumber = ""
   @State private var secondNumber = ""
   @State private var randomNumber = "?"
+  @State private var animationAmount: CGFloat = 1
   @FocusState private var isFocused: Bool
   @EnvironmentObject var preferences: UserPreferences
     var body: some View {
@@ -19,11 +20,9 @@ struct NumberGenerator: View {
         VStack {
           HStack(spacing: 20) {
             NumberEntry(placeholder: "First Number", number: $firstNumber, isFocused: $isFocused)
-              .highPriorityGesture(TapGesture().onEnded({
-              }))
+              .highPriorityGesture(TapGesture())
             NumberEntry(placeholder: "Second Number", number: $secondNumber, isFocused: $isFocused)
-              .highPriorityGesture(TapGesture().onEnded({
-              }))
+              .highPriorityGesture(TapGesture())
           }
           .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
@@ -43,10 +42,11 @@ struct NumberGenerator: View {
           .lineLimit(1)
           .foregroundColor(preferences.themeColor.isLight ? .black : .white)
           .padding()
+          .scaleEffect(animationAmount)
         .navigationTitle("Number")
-        .navigationBarTitleDisplayMode(.inline)
       }
       .onRandomPressed {
+        animationAmount = 1
         isFocused = false
         setNumbers()
         guard let num1 = Int(firstNumber) else { return }
@@ -56,6 +56,9 @@ struct NumberGenerator: View {
       }
       .onTap {
         isFocused = false
+      }
+      .onRandomTapDown {
+        animationAmount = 0.97
       }
       .canTapToRandomize(!isFocused)
     }

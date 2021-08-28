@@ -11,6 +11,10 @@ class UserPreferences: ObservableObject {
   @Published var themeColor: Color = .blue
   @Published var showsRandomButton = true
   @Published var hasHapticFeedback = true
+  
+  var textColor: Color {
+    themeColor.isLight ? .black : .white
+  }
 }
 
 struct HomeView: View {
@@ -25,7 +29,7 @@ struct HomeView: View {
             HStack(spacing: 20) {
               HomeViewItem(item: types[num*2], destinationView: AnyView(typeToView[types[num]]))
               if num*2+1 < types.count {
-                HomeViewItem(item: types[num*2+1], destinationView: AnyView(typeToView[types[num+1]]))
+                HomeViewItem(item: types[num*2+1], destinationView: AnyView(typeToView[types[num*2+1]]))
               }
             }
             .padding([.leading, .trailing])
@@ -60,7 +64,7 @@ struct HomeView: View {
       }
     }
   }
-  let typeToView = ["Number":NumberGenerator()]
+  let typeToView: [String: AnyView] = ["Number": AnyView(NumberGenerator()), "Coin":  AnyView(CoinFlipper())]
 }
 
 private struct HomeViewItem: View {
