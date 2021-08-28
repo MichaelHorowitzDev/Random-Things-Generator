@@ -23,9 +23,9 @@ struct HomeView: View {
         VStack {
           ForEach(0..<(types.count+1)/2) { num in
             HStack(spacing: 20) {
-              HomeViewItem(item: types[num], destinationView: AnyView(typeToView[types[num]]))
-              if num+1 < types.count {
-                HomeViewItem(item: types[num+1], destinationView: AnyView(typeToView[types[num+1]]))
+              HomeViewItem(item: types[num*2], destinationView: AnyView(typeToView[types[num]]))
+              if num*2+1 < types.count {
+                HomeViewItem(item: types[num*2+1], destinationView: AnyView(typeToView[types[num+1]]))
               }
             }
             .padding([.leading, .trailing])
