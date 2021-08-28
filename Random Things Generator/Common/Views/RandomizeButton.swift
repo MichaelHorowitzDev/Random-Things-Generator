@@ -10,7 +10,8 @@ import SwiftUI
 struct RandomizeButton: View {
   let buttonTitle: String
   let buttonPressed: () -> ()
-  private var onTapDown: (() -> Void)?
+  private var onTouchDown: (() -> Void)?
+  private var onTouchUp: (() -> Void)?
   @State private var isPressingDown = false
   @EnvironmentObject var preferences: UserPreferences
   init(_ buttonTitle: String, _ buttonPressed: @escaping () -> ()) {
@@ -20,6 +21,9 @@ struct RandomizeButton: View {
   var body: some View {
     Button {
       buttonPressed()
+      if preferences.hasHapticFeedback {
+        UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+      }
     } label: {
       Text("Randomize")
         .foregroundColor(.black)
@@ -33,25 +37,26 @@ struct RandomizeButton: View {
     .padding()
     .padding([.leading, .trailing, .bottom, .top], isPressingDown ? 2.5 : 0)
     .simultaneousGesture(
-      DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({
-      print("DOWN \($0)")
+      DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({_ in
         isPressingDown = true
-        onTapDown?()
-      }).onEnded({
-        print("ENDED \($0)")
+        onTouchDown?()
+      }).onEnded({_ in 
         isPressingDown = false
-        if preferences.hasHapticFeedback {
-          UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-        }
+        onTouchUp?()
       })
     )
   }
 }
 
 extension RandomizeButton {
-  func onTapDown(_ closure: @escaping () -> Void) -> Self {
+  func onTouchDown(_ closure: @escaping () -> Void) -> Self {
     var copy = self
-    copy.onTapDown = closure
+    copy.onTouchDown = closure
+    return copy
+  }
+  func onTouchUp(_ closure: @escaping () -> Void) -> Self {
+    var copy = self
+    copy.onTouchUp = closure
     return copy
   }
 }

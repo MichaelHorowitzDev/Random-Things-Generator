@@ -46,7 +46,6 @@ struct NumberGenerator: View {
         .navigationTitle("Number")
       }
       .onRandomPressed {
-        animationAmount = 1
         isFocused = false
         setNumbers()
         guard let num1 = Int(firstNumber) else { return }
@@ -57,8 +56,11 @@ struct NumberGenerator: View {
       .onTap {
         isFocused = false
       }
-      .onRandomTapDown {
+      .onRandomTouchDown {
         animationAmount = 0.97
+      }
+      .onRandomTouchUp {
+        animationAmount = 1
       }
       .canTapToRandomize(!isFocused)
     }

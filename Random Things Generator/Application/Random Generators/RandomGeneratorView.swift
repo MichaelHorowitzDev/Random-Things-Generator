@@ -17,7 +17,8 @@ public struct RandomGeneratorView<Content>: View where Content: View {
   private var randomButtonTitle = "Randomize"
   private var onRandomPressed: (() -> Void)?
   private var onTap: (() -> Void)?
-  private var onTapDown: (() -> Void)?
+  private var onTouchDown: (() -> Void)?
+  private var onTouchUp: (() -> Void)?
   private var canTap = true
   private func generateHaptic() {
     if preferences.hasHapticFeedback {
@@ -34,15 +35,30 @@ public struct RandomGeneratorView<Content>: View where Content: View {
               onRandomPressed?()
               generateHaptic()
             }
-            .onTapDown {
-              onTapDown?()
+            .onTouchDown {
+              onTouchDown?()
+            }
+            .onTouchUp {
+              onTouchUp?()
             }
           }
         }
         content
       }
       .navigationBarTitleDisplayMode(.inline)
-      .onTapGesture {
+      .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({_ in
+        if canTap {
+          if !preferences.showsRandomButton {
+            onTouchDown?()
+          }
+        }
+      }).onEnded({_ in
+        if canTap {
+          if !preferences.showsRandomButton {
+            onTouchUp?()
+          }
+        }
+      }).sequenced(before: TapGesture().onEnded({_ in
         onTap?()
         if canTap {
           if !preferences.showsRandomButton {
@@ -50,17 +66,7 @@ public struct RandomGeneratorView<Content>: View where Content: View {
             generateHaptic()
           }
         }
-      }
-//      .simultaneousGesture(
-//        DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({_ in
-//          print("DOWN")
-//          if canTap {
-//            if !preferences.showsRandomButton {
-//              onTapDown?()
-//            }
-//          }
-//        })
-//      )
+      })))
     }
 }
 extension RandomGeneratorView {
@@ -84,15 +90,16 @@ extension RandomGeneratorView {
     copy.canTap = bool
     return copy
   }
-  func onRandomTapDown(_ closure: @escaping () -> Void) -> Self {
+  ///When the user touches down on the screen. Should be used for animation effects
+  func onRandomTouchDown(_ closure: @escaping () -> Void) -> Self {
     var copy = self
-    copy.onTapDown = closure
+    copy.onTouchDown = closure
+    return copy
+  }
+  ///When the user touches up from the screen. Doesn't necessarily constitute a tap.
+  func onRandomTouchUp(_ closure: @escaping () -> Void) -> Self {
+    var copy = self
+    copy.onTouchUp = closure
     return copy
   }
 }
-
-//struct RandomGeneratorView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RandomGeneratorView()
-//    }
-//}
