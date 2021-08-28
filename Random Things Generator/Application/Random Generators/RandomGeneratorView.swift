@@ -31,7 +31,7 @@ public struct RandomGeneratorView<Content>: View where Content: View {
         if preferences.showsRandomButton {
           VStack {
             Spacer()
-            RandomizeButton("Randomize") {
+            RandomizeButton(randomButtonTitle) {
               onRandomPressed?()
               generateHaptic()
             }

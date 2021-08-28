@@ -32,14 +32,13 @@ struct CoinFlipper: View {
       }
       .randomButtonTitle("Flip")
       .onRandomPressed {
+        heads = Bool.random()
+      }
+      .onRandomTouchDown {
         animationAmount = 0.97
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-          withAnimation(.linear(duration: 0.05)) {
-            animationAmount = 1
-            heads = Bool.random()
-          }
-          
-        }
+      }
+      .onRandomTouchUp {
+        animationAmount = 1
       }
       .navigationTitle("Coin")
     }

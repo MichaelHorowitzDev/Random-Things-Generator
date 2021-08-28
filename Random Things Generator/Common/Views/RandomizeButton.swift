@@ -25,7 +25,7 @@ struct RandomizeButton: View {
         UIImpactFeedbackGenerator(style: .soft).impactOccurred()
       }
     } label: {
-      Text("Randomize")
+      Text(buttonTitle)
         .foregroundColor(.black)
         .font(.title)
         .fontWeight(.medium)
