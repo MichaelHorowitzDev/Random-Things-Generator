@@ -10,6 +10,7 @@ import SwiftUI
 struct RandomizeButton: View {
   let buttonTitle: String
   let buttonPressed: () -> ()
+  private var onTapDown: (() -> Void)?
   @State private var isPressingDown = false
   @EnvironmentObject var preferences: UserPreferences
   init(_ buttonTitle: String, _ buttonPressed: @escaping () -> ()) {
@@ -35,6 +36,7 @@ struct RandomizeButton: View {
       DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({
       print("DOWN \($0)")
         isPressingDown = true
+        onTapDown?()
       }).onEnded({
         print("ENDED \($0)")
         isPressingDown = false
@@ -43,5 +45,13 @@ struct RandomizeButton: View {
         }
       })
     )
+  }
+}
+
+extension RandomizeButton {
+  func onTapDown(_ closure: @escaping () -> Void) -> Self {
+    var copy = self
+    copy.onTapDown = closure
+    return copy
   }
 }

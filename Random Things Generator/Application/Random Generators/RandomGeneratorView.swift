@@ -17,6 +17,7 @@ public struct RandomGeneratorView<Content>: View where Content: View {
   private var randomButtonTitle = "Randomize"
   private var onRandomPressed: (() -> Void)?
   private var onTap: (() -> Void)?
+  private var onTapDown: (() -> Void)?
   private var canTap = true
   private func generateHaptic() {
     if preferences.hasHapticFeedback {
@@ -33,10 +34,14 @@ public struct RandomGeneratorView<Content>: View where Content: View {
               onRandomPressed?()
               generateHaptic()
             }
+            .onTapDown {
+              onTapDown?()
+            }
           }
         }
         content
       }
+      .navigationBarTitleDisplayMode(.inline)
       .onTapGesture {
         onTap?()
         if canTap {
@@ -46,6 +51,16 @@ public struct RandomGeneratorView<Content>: View where Content: View {
           }
         }
       }
+//      .simultaneousGesture(
+//        DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({_ in
+//          print("DOWN")
+//          if canTap {
+//            if !preferences.showsRandomButton {
+//              onTapDown?()
+//            }
+//          }
+//        })
+//      )
     }
 }
 extension RandomGeneratorView {
@@ -67,6 +82,11 @@ extension RandomGeneratorView {
   func canTapToRandomize(_ bool: Bool) -> Self {
     var copy = self
     copy.canTap = bool
+    return copy
+  }
+  func onRandomTapDown(_ closure: @escaping () -> Void) -> Self {
+    var copy = self
+    copy.onTapDown = closure
     return copy
   }
 }
