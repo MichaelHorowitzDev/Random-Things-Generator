@@ -20,7 +20,6 @@
 		8B74E1E826D75DDD00886949 /* NumberGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1E726D75DDD00886949 /* NumberGenerator.swift */; };
 		8B74E1EB26D760FA00886949 /* RandomizeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1EA26D760FA00886949 /* RandomizeButton.swift */; };
 		8B74E1F026D89FB900886949 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1EF26D89FB900886949 /* Int+Extensions.swift */; };
-		8B74E1F226D8B46200886949 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1F126D8B46200886949 /* View+Extensions.swift */; };
 		8B7E861B26D98AE4004B0011 /* Binding+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E861A26D98AE4004B0011 /* Binding+Extensions.swift */; };
 		8B7E861E26D99563004B0011 /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E861D26D99563004B0011 /* ThemeColor.swift */; };
 		8B7E862826D9ED64004B0011 /* CoinFlipper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E862726D9ED64004B0011 /* CoinFlipper.swift */; };
@@ -42,7 +41,6 @@
 		8B74E1E726D75DDD00886949 /* NumberGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberGenerator.swift; sourceTree = "<group>"; };
 		8B74E1EA26D760FA00886949 /* RandomizeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomizeButton.swift; sourceTree = "<group>"; };
 		8B74E1EF26D89FB900886949 /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
-		8B74E1F126D8B46200886949 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		8B7E861A26D98AE4004B0011 /* Binding+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extensions.swift"; sourceTree = "<group>"; };
 		8B7E861D26D99563004B0011 /* ThemeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColor.swift; sourceTree = "<group>"; };
 		8B7E862726D9ED64004B0011 /* CoinFlipper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinFlipper.swift; sourceTree = "<group>"; };
@@ -140,7 +138,6 @@
 			children = (
 				8B74E1E226D7353400886949 /* Color+Extensions.swift */,
 				8B74E1EF26D89FB900886949 /* Int+Extensions.swift */,
-				8B74E1F126D8B46200886949 /* View+Extensions.swift */,
 				8B7E861A26D98AE4004B0011 /* Binding+Extensions.swift */,
 			);
 			path = Extensions;
@@ -262,7 +259,6 @@
 				8B7E862826D9ED64004B0011 /* CoinFlipper.swift in Sources */,
 				8B74E1E326D7353400886949 /* Color+Extensions.swift in Sources */,
 				8B74E1EB26D760FA00886949 /* RandomizeButton.swift in Sources */,
-				8B74E1F226D8B46200886949 /* View+Extensions.swift in Sources */,
 				8B7E861B26D98AE4004B0011 /* Binding+Extensions.swift in Sources */,
 				8B74E1F026D89FB900886949 /* Int+Extensions.swift in Sources */,
 				8B5B4F3E26D98377001994F4 /* SettingsMenu.swift in Sources */,
