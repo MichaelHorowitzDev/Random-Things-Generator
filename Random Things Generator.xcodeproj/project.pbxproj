@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B29756F26DC7ECF0038CD92 /* DateGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B29756E26DC7ECF0038CD92 /* DateGenerator.swift */; };
+		8B29757126DCAAB20038CD92 /* MapGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B29757026DCAAB20038CD92 /* MapGenerator.swift */; };
 		8B5B4F3E26D98377001994F4 /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5B4F3D26D98377001994F4 /* SettingsMenu.swift */; };
 		8B61A02D26DAF2CC007DBC50 /* CardRandomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B61A02C26DAF2CC007DBC50 /* CardRandomizer.swift */; };
 		8B74E1C926D6CD1A00886949 /* Random_Things_GeneratorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1C826D6CD1A00886949 /* Random_Things_GeneratorApp.swift */; };
@@ -27,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8B29756E26DC7ECF0038CD92 /* DateGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateGenerator.swift; sourceTree = "<group>"; };
+		8B29757026DCAAB20038CD92 /* MapGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapGenerator.swift; sourceTree = "<group>"; };
 		8B5B4F3D26D98377001994F4 /* SettingsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
 		8B61A02C26DAF2CC007DBC50 /* CardRandomizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardRandomizer.swift; sourceTree = "<group>"; };
 		8B74E1C526D6CD1A00886949 /* Random Things Generator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Random Things Generator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -158,6 +162,8 @@
 				8B7E862726D9ED64004B0011 /* CoinFlipper.swift */,
 				8B7E862926D9EDB7004B0011 /* RandomGeneratorView.swift */,
 				8B61A02C26DAF2CC007DBC50 /* CardRandomizer.swift */,
+				8B29756E26DC7ECF0038CD92 /* DateGenerator.swift */,
+				8B29757026DCAAB20038CD92 /* MapGenerator.swift */,
 			);
 			path = "Random Generators";
 			sourceTree = "<group>";
@@ -251,11 +257,13 @@
 				8B7E861E26D99563004B0011 /* ThemeColor.swift in Sources */,
 				8B74E1D226D6CD1B00886949 /* Persistence.swift in Sources */,
 				8B74E1CB26D6CD1A00886949 /* ContentView.swift in Sources */,
+				8B29756F26DC7ECF0038CD92 /* DateGenerator.swift in Sources */,
 				8B74E1C926D6CD1A00886949 /* Random_Things_GeneratorApp.swift in Sources */,
 				8B74E1E126D7093700886949 /* HomeView.swift in Sources */,
 				8B7E862A26D9EDB7004B0011 /* RandomGeneratorView.swift in Sources */,
 				8B74E1D526D6CD1B00886949 /* Random_Things_Generator.xcdatamodeld in Sources */,
 				8B74E1E826D75DDD00886949 /* NumberGenerator.swift in Sources */,
+				8B29757126DCAAB20038CD92 /* MapGenerator.swift in Sources */,
 				8B7E862826D9ED64004B0011 /* CoinFlipper.swift in Sources */,
 				8B74E1E326D7353400886949 /* Color+Extensions.swift in Sources */,
 				8B74E1EB26D760FA00886949 /* RandomizeButton.swift in Sources */,
