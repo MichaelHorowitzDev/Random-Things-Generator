@@ -8,13 +8,30 @@
 import SwiftUI
 
 class UserPreferences: ObservableObject {
-  @Published var themeColor: Color = .blue
-  @Published var showsRandomButton = true
-  @Published var hasHapticFeedback = true
-  
+  @Published var themeColor: Color = .blue {
+    didSet { saveUserDefaults(value: themeColor.hex, key: themeColorDefaults) }
+  }
+  @Published var showsRandomButton = true {
+    didSet { saveUserDefaults(value: showsRandomButton, key: randomButtonDefaults) }
+  }
+  @Published var hasHapticFeedback = true {
+    didSet { saveUserDefaults(value: hasHapticFeedback, key: hapticFeedbackDefaults) }
+  }
+  let defaults = UserDefaults.standard
   var textColor: Color {
     themeColor.isLight ? .black : .white
   }
+  func saveUserDefaults(value: Any, key: String) {
+    defaults.set(value, forKey: key)
+  }
+  init() {
+    themeColor = Color(hex: defaults.object(forKey: themeColorDefaults) as? Int ?? Color.blue.hex)
+    showsRandomButton = defaults.object(forKey: randomButtonDefaults) as? Bool ?? true
+    hasHapticFeedback = defaults.object(forKey: hapticFeedbackDefaults) as? Bool ?? true
+  }
+  private var themeColorDefaults = "theme_color"
+  private var randomButtonDefaults = "shows_random_button"
+  private var hapticFeedbackDefaults = "has_haptic_feedback"
 }
 
 struct HomeView: View {
@@ -27,9 +44,9 @@ struct HomeView: View {
         VStack {
           ForEach(0..<(types.count+1)/2) { num in
             HStack(spacing: 20) {
-              HomeViewItem(item: types[num*2], destinationView: AnyView(typeToView[types[num*2]]))
+              HomeViewItem(item: types[num*2], color: preferences.themeColor, destinationView: AnyView(typeToView[types[num*2]]))
               if num*2+1 < types.count {
-                HomeViewItem(item: types[num*2+1], destinationView: AnyView(typeToView[types[num*2+1]]))
+                HomeViewItem(item: types[num*2+1], color: preferences.themeColor, destinationView: AnyView(typeToView[types[num*2+1]]))
               }
             }
             .padding([.leading, .trailing])
@@ -40,6 +57,7 @@ struct HomeView: View {
             let b = Double.random(in: 0...255)/255
             let color = Color(red: r, green: g, blue: b, opacity: 1)
             print(color)
+            print(preferences.themeColor)
             preferences.themeColor = color
             print(preferences.themeColor)
           }
@@ -64,12 +82,12 @@ struct HomeView: View {
       }
     }
   }
-  let typeToView: [String: AnyView] = ["Number": AnyView(NumberGenerator()), "Coin":  AnyView(CoinFlipper()), "Card": AnyView(CardRandomizer())]
+  let typeToView: [String: AnyView] = ["Number": AnyView(NumberGenerator()), "Coin": AnyView(CoinFlipper()), "Card": AnyView(CardRandomizer())]
 }
 
 private struct HomeViewItem: View {
   let item: String
-  @EnvironmentObject var preferences: UserPreferences
+  let color: Color
   let destinationView: AnyView
   var body: some View {
     NavigationLink {
@@ -78,11 +96,11 @@ private struct HomeViewItem: View {
       Text(item)
         .font(.title)
         .fontWeight(.semibold)
-        .foregroundColor(preferences.themeColor.isLight ? .black : .white)
+        .foregroundColor(color.isLight ? .black : .white)
         .frame(height: 100)
         .frame(maxWidth: .infinity)
     }
-    .background(preferences.themeColor)
+    .background(color)
     .cornerRadius(15)
   }
 }
