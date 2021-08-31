@@ -15,6 +15,8 @@ struct NumberGenerator: View {
   @State private var animationAmount: CGFloat = 1
   @FocusState private var isFocused: Bool
   @EnvironmentObject var preferences: UserPreferences
+  @Environment(\.managedObjectContext) var moc
+  @State private var settingsPresented = false
     var body: some View {
       RandomGeneratorView {
         VStack {
@@ -52,6 +54,11 @@ struct NumberGenerator: View {
         guard let num2 = Int(secondNumber) else { return }
         let randNum = Int.random(in: num1...num2)
         randomNumber = String(randNum)
+        let coreDataItem = Random(context: moc)
+        coreDataItem.randomType = "Number"
+        coreDataItem.timestamp = Date()
+        coreDataItem.value = randomNumber
+        try? moc.save()
       }
       .onTap {
         isFocused = false

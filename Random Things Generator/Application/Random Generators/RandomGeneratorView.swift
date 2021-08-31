@@ -21,6 +21,10 @@ public struct RandomGeneratorView<Content>: View where Content: View {
   private var onTouchUp: (() -> Void)?
   private var canTap = true
   private var overrideShowRandomButton = false
+  @State private var settingsPresented = false
+  private var canPresentSettings = true
+  private var randomType: String?
+  private var onSettingsPressed: (() -> Void)?
   private func generateHaptic() {
     if preferences.hasHapticFeedback {
       UIImpactFeedbackGenerator(style: .soft).impactOccurred()
@@ -45,6 +49,32 @@ public struct RandomGeneratorView<Content>: View where Content: View {
           }
         }
         content
+      }
+      .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button {
+            if onSettingsPressed != nil {
+              onSettingsPressed?()
+            } else {
+              if canPresentSettings && randomType != nil {
+                settingsPresented = true
+              } else if randomType == nil {
+                fatalError("randomType is nil")
+              }
+            }
+          } label: {
+            Image(systemName: "ellipsis")
+              .font(.system(size: 18, weight: .bold))
+              .foregroundColor(preferences.themeColor)
+          }
+          .sheet(isPresented: $settingsPresented) {
+            if randomType != nil {
+              RandomHistory(randomType: randomType!)
+            } else {
+              fatalError("randomType is nil")
+            }
+          }
+        }
       }
       .navigationBarTitleDisplayMode(.inline)
       .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({_ in
@@ -106,6 +136,22 @@ extension RandomGeneratorView {
   func showRandomButton(_ shows: Bool) -> Self {
     var copy = self
     copy.overrideShowRandomButton = shows
+    return copy
+  }
+  ///Name of Random View used for getting history in Core Data
+  func randomType(_ type: String) -> Self {
+    var copy = self
+    copy.randomType = type
+    return copy
+  }
+  func onSettingsPressed(_ pressed: @escaping () -> Void) -> Self {
+    var copy = self
+    copy.onSettingsPressed = pressed
+    return copy
+  }
+  func presentsSettings(_ presents: Bool) -> Self {
+    var copy = self
+    copy.canPresentSettings = presents
     return copy
   }
 }

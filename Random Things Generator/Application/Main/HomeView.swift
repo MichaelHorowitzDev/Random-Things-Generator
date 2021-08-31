@@ -51,18 +51,7 @@ struct HomeView: View {
             }
             .padding([.leading, .trailing])
           }
-          Button("Press") {
-            let r = Double.random(in: 0...255)/255
-            let g = Double.random(in: 0...255)/255
-            let b = Double.random(in: 0...255)/255
-            let color = Color(red: r, green: g, blue: b, opacity: 1)
-            print(color)
-            print(preferences.themeColor)
-            preferences.themeColor = color
-            print(preferences.themeColor)
-          }
         }
-        
       }
       .navigationBarTitle("Random")
       .toolbar {
@@ -81,6 +70,7 @@ struct HomeView: View {
         }
       }
     }
+    .navigationViewStyle(.stack)
   }
   let typeToView: [String: AnyView] = ["Number": AnyView(NumberGenerator()), "Coin": AnyView(CoinFlipper()), "Card": AnyView(CardRandomizer()), "Date": AnyView(DateGenerator()), "Map": AnyView(MapGenerator())]
 }

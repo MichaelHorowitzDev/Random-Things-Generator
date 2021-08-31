@@ -22,6 +22,9 @@ struct MapGenerator: View {
         RandomizeButton("Randomize") {
           updateMap()
         }
+        .shadow(color: .black.opacity(0.2), radius: 10, x: 10, y: 10)
+        .shadow(color: .black.opacity(0.2), radius: 10, x: -5, y: -5)
+        .padding(.bottom)
       }
     }
   }

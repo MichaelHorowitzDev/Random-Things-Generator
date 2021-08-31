@@ -15,6 +15,7 @@ struct Random_Things_GeneratorApp: App {
         WindowGroup {
             HomeView()
             .environmentObject(UserPreferences())
+            .environment(\.managedObjectContext, persistenceController.container.viewContext)
 //            ContentView()
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }

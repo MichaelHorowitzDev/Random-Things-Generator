@@ -27,6 +27,10 @@
 		8B7E861E26D99563004B0011 /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E861D26D99563004B0011 /* ThemeColor.swift */; };
 		8B7E862826D9ED64004B0011 /* CoinFlipper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E862726D9ED64004B0011 /* CoinFlipper.swift */; };
 		8B7E862A26D9EDB7004B0011 /* RandomGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E862926D9EDB7004B0011 /* RandomGeneratorView.swift */; };
+		8B9FEFDE26DE1B3200D24301 /* Random+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9FEFDC26DE1B3200D24301 /* Random+CoreDataClass.swift */; };
+		8B9FEFDF26DE1B3200D24301 /* Random+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9FEFDD26DE1B3200D24301 /* Random+CoreDataProperties.swift */; };
+		8B9FEFE126DE1C9800D24301 /* RandomHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9FEFE026DE1C9800D24301 /* RandomHistory.swift */; };
+		8B9FEFE526DE233500D24301 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9FEFE426DE233500D24301 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +55,12 @@
 		8B7E861D26D99563004B0011 /* ThemeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColor.swift; sourceTree = "<group>"; };
 		8B7E862726D9ED64004B0011 /* CoinFlipper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinFlipper.swift; sourceTree = "<group>"; };
 		8B7E862926D9EDB7004B0011 /* RandomGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGeneratorView.swift; sourceTree = "<group>"; };
+		8B9FEFDC26DE1B3200D24301 /* Random+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Random+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		8B9FEFDD26DE1B3200D24301 /* Random+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Random+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		8B9FEFE026DE1C9800D24301 /* RandomHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomHistory.swift; sourceTree = "<group>"; };
+		8B9FEFE226DE233100D24301 /* Random Things Generator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Random Things Generator.entitlements"; sourceTree = "<group>"; };
+		8B9FEFE426DE233500D24301 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		8BD23D2426DEDEA8003C5489 /* Random-Things-Generator-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Random-Things-Generator-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B9FEFE526DE233500D24301 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +89,7 @@
 			children = (
 				8B74E1C726D6CD1A00886949 /* Random Things Generator */,
 				8B74E1C626D6CD1A00886949 /* Products */,
+				8B9FEFE326DE233500D24301 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -92,6 +104,9 @@
 		8B74E1C726D6CD1A00886949 /* Random Things Generator */ = {
 			isa = PBXGroup;
 			children = (
+				8BD23D2426DEDEA8003C5489 /* Random-Things-Generator-Info.plist */,
+				8B9FEFE226DE233100D24301 /* Random Things Generator.entitlements */,
+				8B9FEFDB26DE1AF000D24301 /* Core Data Model */,
 				8B74E1DB26D6CDAA00886949 /* Application */,
 				8B74E1DD26D6CDD900886949 /* Common */,
 				8B74E1DF26D6CDFD00886949 /* Assets */,
@@ -167,6 +182,7 @@
 				8B61A02C26DAF2CC007DBC50 /* CardRandomizer.swift */,
 				8B29756E26DC7ECF0038CD92 /* DateGenerator.swift */,
 				8B29757026DCAAB20038CD92 /* MapGenerator.swift */,
+				8B9FEFE026DE1C9800D24301 /* RandomHistory.swift */,
 			);
 			path = "Random Generators";
 			sourceTree = "<group>";
@@ -185,6 +201,23 @@
 				8B7E861D26D99563004B0011 /* ThemeColor.swift */,
 			);
 			path = Theme;
+			sourceTree = "<group>";
+		};
+		8B9FEFDB26DE1AF000D24301 /* Core Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				8B9FEFDC26DE1B3200D24301 /* Random+CoreDataClass.swift */,
+				8B9FEFDD26DE1B3200D24301 /* Random+CoreDataProperties.swift */,
+			);
+			path = "Core Data Model";
+			sourceTree = "<group>";
+		};
+		8B9FEFE326DE233500D24301 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8B9FEFE426DE233500D24301 /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,11 +293,14 @@
 				8B7E861E26D99563004B0011 /* ThemeColor.swift in Sources */,
 				8B74E1D226D6CD1B00886949 /* Persistence.swift in Sources */,
 				8B74E1CB26D6CD1A00886949 /* ContentView.swift in Sources */,
+				8B9FEFDE26DE1B3200D24301 /* Random+CoreDataClass.swift in Sources */,
 				8B29756F26DC7ECF0038CD92 /* DateGenerator.swift in Sources */,
 				8B74E1C926D6CD1A00886949 /* Random_Things_GeneratorApp.swift in Sources */,
+				8B9FEFDF26DE1B3200D24301 /* Random+CoreDataProperties.swift in Sources */,
 				8B74E1E126D7093700886949 /* HomeView.swift in Sources */,
 				8B7E862A26D9EDB7004B0011 /* RandomGeneratorView.swift in Sources */,
 				8B74E1D526D6CD1B00886949 /* Random_Things_Generator.xcdatamodeld in Sources */,
+				8B9FEFE126DE1C9800D24301 /* RandomHistory.swift in Sources */,
 				8B74E1E826D75DDD00886949 /* NumberGenerator.swift in Sources */,
 				8B29757126DCAAB20038CD92 /* MapGenerator.swift in Sources */,
 				8B690BBD26DDB83200413FDA /* UIColor+Extensions.swift in Sources */,
@@ -402,12 +438,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Random Things Generator/Random Things Generator.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Random Things Generator/Preview Content\"";
 				DEVELOPMENT_TEAM = LR745V324B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Random-Things-Generator-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -432,12 +470,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Random Things Generator/Random Things Generator.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Random Things Generator/Preview Content\"";
 				DEVELOPMENT_TEAM = LR745V324B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Random-Things-Generator-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
