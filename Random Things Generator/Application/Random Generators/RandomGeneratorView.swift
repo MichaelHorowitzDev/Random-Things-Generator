@@ -20,6 +20,7 @@ public struct RandomGeneratorView<Content>: View where Content: View {
   private var onTouchDown: (() -> Void)?
   private var onTouchUp: (() -> Void)?
   private var canTap = true
+  private var overrideShowRandomButton = false
   private func generateHaptic() {
     if preferences.hasHapticFeedback {
       UIImpactFeedbackGenerator(style: .soft).impactOccurred()
@@ -28,7 +29,7 @@ public struct RandomGeneratorView<Content>: View where Content: View {
   public var body: some View {
       ZStack {
         preferences.themeColor.ignoresSafeArea(.all, edges: [.horizontal, .bottom])
-        if preferences.showsRandomButton {
+        if preferences.showsRandomButton || overrideShowRandomButton {
           VStack {
             Spacer()
             RandomizeButton(randomButtonTitle) {
@@ -100,6 +101,11 @@ extension RandomGeneratorView {
   func onRandomTouchUp(_ closure: @escaping () -> Void) -> Self {
     var copy = self
     copy.onTouchUp = closure
+    return copy
+  }
+  func showRandomButton(_ shows: Bool) -> Self {
+    var copy = self
+    copy.overrideShowRandomButton = shows
     return copy
   }
 }

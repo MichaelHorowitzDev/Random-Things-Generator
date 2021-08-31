@@ -47,6 +47,7 @@ struct DateGenerator: View {
         }
         .padding()
         .zIndex(1)
+        .navigationTitle("Date")
         RandomGeneratorView {}
         .onRandomTouchDown {
           animationAmount = 0.97

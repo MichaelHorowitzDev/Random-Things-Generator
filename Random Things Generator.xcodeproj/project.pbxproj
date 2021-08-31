@@ -11,6 +11,7 @@
 		8B29757126DCAAB20038CD92 /* MapGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B29757026DCAAB20038CD92 /* MapGenerator.swift */; };
 		8B5B4F3E26D98377001994F4 /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5B4F3D26D98377001994F4 /* SettingsMenu.swift */; };
 		8B61A02D26DAF2CC007DBC50 /* CardRandomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B61A02C26DAF2CC007DBC50 /* CardRandomizer.swift */; };
+		8B690BBD26DDB83200413FDA /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B690BBC26DDB83200413FDA /* UIColor+Extensions.swift */; };
 		8B74E1C926D6CD1A00886949 /* Random_Things_GeneratorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1C826D6CD1A00886949 /* Random_Things_GeneratorApp.swift */; };
 		8B74E1CB26D6CD1A00886949 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B74E1CA26D6CD1A00886949 /* ContentView.swift */; };
 		8B74E1CD26D6CD1B00886949 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B74E1CC26D6CD1B00886949 /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 		8B29757026DCAAB20038CD92 /* MapGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapGenerator.swift; sourceTree = "<group>"; };
 		8B5B4F3D26D98377001994F4 /* SettingsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
 		8B61A02C26DAF2CC007DBC50 /* CardRandomizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardRandomizer.swift; sourceTree = "<group>"; };
+		8B690BBC26DDB83200413FDA /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		8B74E1C526D6CD1A00886949 /* Random Things Generator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Random Things Generator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B74E1C826D6CD1A00886949 /* Random_Things_GeneratorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random_Things_GeneratorApp.swift; sourceTree = "<group>"; };
 		8B74E1CA26D6CD1A00886949 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				8B74E1E226D7353400886949 /* Color+Extensions.swift */,
 				8B74E1EF26D89FB900886949 /* Int+Extensions.swift */,
 				8B7E861A26D98AE4004B0011 /* Binding+Extensions.swift */,
+				8B690BBC26DDB83200413FDA /* UIColor+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				8B74E1D526D6CD1B00886949 /* Random_Things_Generator.xcdatamodeld in Sources */,
 				8B74E1E826D75DDD00886949 /* NumberGenerator.swift in Sources */,
 				8B29757126DCAAB20038CD92 /* MapGenerator.swift in Sources */,
+				8B690BBD26DDB83200413FDA /* UIColor+Extensions.swift in Sources */,
 				8B7E862826D9ED64004B0011 /* CoinFlipper.swift in Sources */,
 				8B74E1E326D7353400886949 /* Color+Extensions.swift in Sources */,
 				8B74E1EB26D760FA00886949 /* RandomizeButton.swift in Sources */,

@@ -35,7 +35,7 @@ class UserPreferences: ObservableObject {
 }
 
 struct HomeView: View {
-  let types = ["Number", "Word", "Card", "Coin", "Date", "Password"]
+  let types = ["Number", "Word", "Card", "Coin", "Date", "Map"]
   @EnvironmentObject var preferences: UserPreferences
   @State private var settingsPresented = false
   var body: some View {
@@ -82,7 +82,7 @@ struct HomeView: View {
       }
     }
   }
-  let typeToView: [String: AnyView] = ["Number": AnyView(NumberGenerator()), "Coin": AnyView(CoinFlipper()), "Card": AnyView(CardRandomizer())]
+  let typeToView: [String: AnyView] = ["Number": AnyView(NumberGenerator()), "Coin": AnyView(CoinFlipper()), "Card": AnyView(CardRandomizer()), "Date": AnyView(DateGenerator()), "Map": AnyView(MapGenerator())]
 }
 
 private struct HomeViewItem: View {
