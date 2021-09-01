@@ -45,7 +45,7 @@ struct CardRandomizer: View {
         .zIndex(1)
         .foregroundColor(preferences.textColor)
         .padding(.top, 40)
-        RandomGeneratorView {
+        RandomGeneratorView("Card") {
           LazyVGrid(columns: columns) {
             ForEach(currentCards, id: \.self) {
               Image($0.name)

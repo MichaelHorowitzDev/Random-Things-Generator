@@ -11,8 +11,9 @@ public struct RandomGeneratorView<Content>: View where Content: View {
   @EnvironmentObject var preferences: UserPreferences
   let content: Content
   
-  init(@ViewBuilder content: () -> Content) {
+  init(_ randomType: String, @ViewBuilder content: () -> Content) {
     self.content = content()
+    self.randomType = randomType
   }
   private var randomButtonTitle = "Randomize"
   private var onRandomPressed: (() -> Void)?
@@ -20,11 +21,13 @@ public struct RandomGeneratorView<Content>: View where Content: View {
   private var onTouchDown: (() -> Void)?
   private var onTouchUp: (() -> Void)?
   private var canTap = true
+  private var gestureDisabled = false
   private var overrideShowRandomButton = false
   @State private var settingsPresented = false
   private var canPresentSettings = true
-  private var randomType: String?
+  var randomType: String
   private var onSettingsPressed: (() -> Void)?
+  private var formatHistoryValue: ((String) -> AnyView)?
   private func generateHaptic() {
     if preferences.hasHapticFeedback {
       UIImpactFeedbackGenerator(style: .soft).impactOccurred()
@@ -33,6 +36,7 @@ public struct RandomGeneratorView<Content>: View where Content: View {
   public var body: some View {
       ZStack {
         preferences.themeColor.ignoresSafeArea(.all, edges: [.horizontal, .bottom])
+          .zIndex(-1)
         if preferences.showsRandomButton || overrideShowRandomButton {
           VStack {
             Spacer()
@@ -47,19 +51,20 @@ public struct RandomGeneratorView<Content>: View where Content: View {
               onTouchUp?()
             }
           }
+          .zIndex(2)
         }
+          
         content
       }
+      .navigationTitle(randomType)
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button {
             if onSettingsPressed != nil {
               onSettingsPressed?()
             } else {
-              if canPresentSettings && randomType != nil {
+              if canPresentSettings {
                 settingsPresented = true
-              } else if randomType == nil {
-                fatalError("randomType is nil")
               }
             }
           } label: {
@@ -68,16 +73,12 @@ public struct RandomGeneratorView<Content>: View where Content: View {
               .foregroundColor(preferences.themeColor)
           }
           .sheet(isPresented: $settingsPresented) {
-            if randomType != nil {
-              RandomHistory(randomType: randomType!)
-            } else {
-              fatalError("randomType is nil")
-            }
+            RandomHistory(randomType: randomType, formatValue: formatHistoryValue)
           }
         }
       }
       .navigationBarTitleDisplayMode(.inline)
-      .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({_ in
+      .gesture(gestureDisabled ? nil : DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({_ in
         if canTap {
           if !preferences.showsRandomButton {
             onTouchDown?()
@@ -152,6 +153,16 @@ extension RandomGeneratorView {
   func presentsSettings(_ presents: Bool) -> Self {
     var copy = self
     copy.canPresentSettings = presents
+    return copy
+  }
+  func disablesGestures(_ disabled: Bool) -> Self {
+    var copy = self
+    copy.gestureDisabled = disabled
+    return copy
+  }
+  func formatHistoryValue(_ format: @escaping (String) -> AnyView) -> Self {
+    var copy = self
+    copy.formatHistoryValue = format
     return copy
   }
 }

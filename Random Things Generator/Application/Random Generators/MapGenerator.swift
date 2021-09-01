@@ -13,19 +13,28 @@ struct MapGenerator: View {
   @State private var annotations = [MapPoint]()
   var body: some View {
     ZStack {
-      Map(coordinateRegion: $region, annotationItems: annotations) {
-        MapMarker(coordinate: $0.coordinate, tint: nil)
-      }
-        .ignoresSafeArea()
-      VStack {
-        Spacer()
-        RandomizeButton("Randomize") {
-          updateMap()
+      RandomGeneratorView("Map") {
+        Map(coordinateRegion: $region, annotationItems: annotations) {
+          MapMarker(coordinate: $0.coordinate, tint: nil)
         }
-        .shadow(color: .black.opacity(0.2), radius: 10, x: 10, y: 10)
-        .shadow(color: .black.opacity(0.2), radius: 10, x: -5, y: -5)
-        .padding(.bottom)
+        .ignoresSafeArea(.all, edges: [.bottom, .horizontal])
       }
+      .showRandomButton(true)
+      .disablesGestures(true)
+      .onRandomPressed {
+        updateMap()
+      }
+      
+      
+//      VStack {
+//        Spacer()
+//        RandomizeButton("Randomize") {
+//          updateMap()
+//        }
+//        .shadow(color: .black.opacity(0.2), radius: 10, x: 10, y: 10)
+//        .shadow(color: .black.opacity(0.2), radius: 10, x: -5, y: -5)
+//        .padding(.bottom)
+//      }
     }
   }
   func updateMap() {
@@ -48,8 +57,9 @@ struct MapGenerator: View {
       }
     func updateInterface() {
       DispatchQueue.main.async {
-        region.center = coordinate
         annotations = [MapPoint(coordinate: coordinate)]
+        region.center = coordinate
+        
       }
     }
   }

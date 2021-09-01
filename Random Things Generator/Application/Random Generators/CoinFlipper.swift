@@ -12,8 +12,9 @@ struct CoinFlipper: View {
   @EnvironmentObject var preferences: UserPreferences
   @State private var fadeOut = false
   @State private var animationAmount: CGFloat = 1
+  @Environment(\.managedObjectContext) var moc
     var body: some View {
-      RandomGeneratorView {
+      RandomGeneratorView("Coin") {
         VStack {
           Text(heads ? "Heads" : "Tails")
             .foregroundColor(preferences.textColor)
@@ -33,6 +34,11 @@ struct CoinFlipper: View {
       .randomButtonTitle("Flip")
       .onRandomPressed {
         heads = Bool.random()
+        let coreDataItem = Random(context: moc)
+        coreDataItem.randomType = "Coin"
+        coreDataItem.timestamp = Date()
+        coreDataItem.value = heads ? "Heads" : "Tails"
+        try? moc.save()
       }
       .onRandomTouchDown {
         animationAmount = 0.97
@@ -40,7 +46,19 @@ struct CoinFlipper: View {
       .onRandomTouchUp {
         animationAmount = 1
       }
-      .navigationTitle("Coin")
+      .formatHistoryValue { string in
+        if string == "Heads" {
+          return AnyView(Image(Coins.halfDollarObverse)
+                          .resizable()
+                          .aspectRatio(contentMode: .fit))
+        } else if string == "Tails" {
+          return AnyView(Image(Coins.halfDollarReverse)
+                          .resizable()
+                          .aspectRatio(contentMode: .fit))
+        } else {
+          return AnyView(Text("Unknown"))
+        }
+      }
     }
 }
 private struct Coins {

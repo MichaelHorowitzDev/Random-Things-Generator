@@ -18,7 +18,7 @@ struct NumberGenerator: View {
   @Environment(\.managedObjectContext) var moc
   @State private var settingsPresented = false
     var body: some View {
-      RandomGeneratorView {
+      RandomGeneratorView("Number") {
         VStack {
           HStack(spacing: 20) {
             NumberEntry(placeholder: "First Number", number: $firstNumber, isFocused: $isFocused)
@@ -45,7 +45,6 @@ struct NumberGenerator: View {
           .foregroundColor(preferences.themeColor.isLight ? .black : .white)
           .padding()
           .scaleEffect(animationAmount)
-        .navigationTitle("Number")
       }
       .onRandomPressed {
         isFocused = false
