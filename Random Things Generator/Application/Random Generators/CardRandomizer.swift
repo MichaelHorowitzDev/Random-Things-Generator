@@ -11,6 +11,7 @@ struct CardRandomizer: View {
   @State private var currentCards = [CardImage(name: "RED_BACK")]
   @State private var animationAmount: CGFloat = 1
   @EnvironmentObject var preferences: UserPreferences
+  @Environment(\.managedObjectContext) var moc
   @State private var cardCount = 1
   var columns: [GridItem] {
     var gridArray = [GridItem]()
@@ -76,9 +77,86 @@ struct CardRandomizer: View {
             let card = String(value).appending(String(suit))
             return CardImage(name: card)
           })
+          let coreDataItem = Random(context: moc)
+          coreDataItem.randomType = "Card"
+          coreDataItem.timestamp = Date()
+          coreDataItem.value = (currentCards.map { $0.name }).joined(separator: "\n")
+          try? moc.save()
+        }
+        .formatHistoryValue { string in
+          let cards = string.split(separator: "\n").map { String($0) }
+//          return AnyView(VStack {
+//            ForEach(0..<cards.count, id: \.self) {
+//              Text(cards[$0])
+//            }
+//          })
+          return AnyView(cardVStack(cards: cards))
+//          return AnyView(VStack {
+//            if cards.count <= 3 {
+//              HStack {
+//                ForEach(0..<cards.count) { card in
+//                  Image(cards[card])
+//                    .resizable()
+//                    .aspectRatio(contentMode: .fit)
+//                }
+//              }
+//            } else if cards.count == 4 {
+//              ForEach(0..<1, id: \.self) { num in
+//                HStack {
+//                  ForEach(num*2..<num*2+2) { card in
+//                    Image(cards[card])
+//                      .resizable()
+//                      .aspectRatio(contentMode: .fit)
+//                  }
+//                }
+//              }
+//            } else {
+//              ForEach(0..<1, id: \.self) { num in
+//                HStack {
+//                  ForEach(num*3..<num*3+3) { card in
+//                    Image(cards[card])
+//                      .resizable()
+//                      .aspectRatio(contentMode: .fit)
+//                  }
+//                }
+//              }
+//            }
+//          })
+//          return AnyView(cardVStack(cards: cards))
         }
       }
     }
+}
+@ViewBuilder
+func cardVStack(cards: [String]) -> some View {
+  let specialNum: Int = {
+    if cards.count > 4 {
+      return 3
+    } else if cards.count == 4 {
+      return 2
+    } else {
+      return cards.count
+    }
+  }()
+  VStack {
+    ForEach(0..<Int(ceil(Double(cards.count)/Double(specialNum)))) { num in
+      cardHStack(cards: cards, range: num*specialNum..<num*specialNum+specialNum)
+    }
+  }
+}
+@ViewBuilder
+func cardHStack(cards: [String], range: Range<Int>) -> some View {
+  HStack {
+    ForEach(range, id: \.self) { card in
+      if cards.count <= card {
+        EmptyView()
+      } else {
+        Image(cards[card])
+          .resizable()
+          .aspectRatio(contentMode: .fit)
+      }
+    }
+  }
 }
 
 private struct CardImage: Identifiable, Hashable {

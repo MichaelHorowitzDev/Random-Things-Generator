@@ -30,21 +30,27 @@ struct RandomHistory: View {
   private let formatValue: ((_ value: String) -> AnyView)?
   var body: some View {
     NavigationView {
-      List(history) { item in
-        HStack {
-          if let value = item.value {
-            if formatValue != nil {
-              formatValue!(value)
-            } else {
-              Text(value)
-                .font(.title)
+      List {
+        Section("Total \(history.count)") {
+          ForEach(history) { item in
+            HStack {
+              if let value = item.value {
+                if formatValue != nil {
+                  formatValue!(value)
+                } else {
+                  Text(value)
+                    .font(.title)
+                }
+              } else {
+                Text("Unknown")
+              }
+              Spacer(minLength: 50)
+              Text(formatDate(date: item.timestamp))
             }
-          } else {
-            Text("Unknown")
           }
-          Spacer(minLength: 50)
-          Text(formatDate(date: item.timestamp))
+          
         }
+        
       }
       .navigationTitle("History")
     }
