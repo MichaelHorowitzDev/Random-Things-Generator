@@ -11,7 +11,7 @@ struct RandomHistory: View {
   @Environment(\.managedObjectContext) var managedObjectContext
   @State private var predicate: NSPredicate
   @State private var timeFrame = "All Time"
-  @State private var historyCount = 0
+  @Environment(\.presentationMode) var presentationMode
   private var timeFrames = ["7 Days", "30 Days", "90 Days", "All Time"]
   
   init(randomType: String, formatValue: ((_ value: String) -> AnyView)? = nil) {
@@ -46,6 +46,21 @@ struct RandomHistory: View {
           }
       }
       .navigationTitle("History")
+      .toolbar {
+        ToolbarItem(placement: .navigationBarLeading) {
+          Button("Cancel") {
+            presentationMode.wrappedValue.dismiss()
+          }
+        }
+        ToolbarItem(placement: .bottomBar) {
+          Button {
+//            share
+          } label: {
+            Image(systemName: "square.and.arrow.up")
+          }
+
+        }
+      }
     }
   }
 }
@@ -54,7 +69,6 @@ private struct RandomHistoryItems: View {
   @FetchRequest var history: FetchedResults<Random>
   @Binding var timeFrame: String
   private var timeFrames = ["7 Days", "30 Days", "90 Days", "All Time"]
-  
   
   init(predicate: NSPredicate, timeFrame: Binding<String>, formatValue: ((_ value: String) -> AnyView)? = nil) {
     self._history = FetchRequest(entity: Random.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Random.timestamp, ascending: false)], predicate: predicate, animation: .default)
@@ -76,7 +90,7 @@ private struct RandomHistoryItems: View {
   private let formatValue: ((_ value: String) -> AnyView)?
   var body: some View {
     Section {
-      ForEach(history) { item in
+      ForEach(history, id: \.self) { item in
         HStack {
           if let value = item.value {
             if formatValue != nil {

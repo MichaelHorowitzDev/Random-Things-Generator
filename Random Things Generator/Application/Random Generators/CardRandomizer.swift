@@ -85,44 +85,7 @@ struct CardRandomizer: View {
         }
         .formatHistoryValue { string in
           let cards = string.split(separator: "\n").map { String($0) }
-//          return AnyView(VStack {
-//            ForEach(0..<cards.count, id: \.self) {
-//              Text(cards[$0])
-//            }
-//          })
           return AnyView(cardVStack(cards: cards))
-//          return AnyView(VStack {
-//            if cards.count <= 3 {
-//              HStack {
-//                ForEach(0..<cards.count) { card in
-//                  Image(cards[card])
-//                    .resizable()
-//                    .aspectRatio(contentMode: .fit)
-//                }
-//              }
-//            } else if cards.count == 4 {
-//              ForEach(0..<1, id: \.self) { num in
-//                HStack {
-//                  ForEach(num*2..<num*2+2) { card in
-//                    Image(cards[card])
-//                      .resizable()
-//                      .aspectRatio(contentMode: .fit)
-//                  }
-//                }
-//              }
-//            } else {
-//              ForEach(0..<1, id: \.self) { num in
-//                HStack {
-//                  ForEach(num*3..<num*3+3) { card in
-//                    Image(cards[card])
-//                      .resizable()
-//                      .aspectRatio(contentMode: .fit)
-//                  }
-//                }
-//              }
-//            }
-//          })
-//          return AnyView(cardVStack(cards: cards))
         }
       }
     }
@@ -147,15 +110,19 @@ func cardVStack(cards: [String]) -> some View {
 @ViewBuilder
 func cardHStack(cards: [String], range: Range<Int>) -> some View {
   HStack {
-    ForEach(range, id: \.self) { card in
-      if cards.count <= card {
-        EmptyView()
-      } else {
-        Image(cards[card])
-          .resizable()
-          .aspectRatio(contentMode: .fit)
+    if range.lowerBound < cards.count {
+      ForEach(range, id: \.self) { card in
+        if cards.count <= card {
+          Rectangle()
+            .fill(.clear)
+        } else {
+          Image(cards[card])
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+        }
       }
     }
+    
   }
 }
 
