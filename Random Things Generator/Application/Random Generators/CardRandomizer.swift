@@ -122,7 +122,6 @@ func cardHStack(cards: [String], range: Range<Int>) -> some View {
         }
       }
     }
-    
   }
 }
 
