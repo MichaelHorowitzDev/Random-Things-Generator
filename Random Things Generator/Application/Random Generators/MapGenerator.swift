@@ -11,6 +11,7 @@ import MapKit
 struct MapGenerator: View {
   @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), span: MKCoordinateSpan(latitudeDelta: 30, longitudeDelta: 30))
   @State private var annotations = [MapPoint]()
+  @Environment(\.managedObjectContext) var moc
   var body: some View {
     ZStack {
       RandomGeneratorView("Map") {
@@ -54,12 +55,21 @@ struct MapGenerator: View {
           if placemark.ocean != nil { updateMap(); return }
         }
         updateInterface()
+        func formatDouble(_ num: Double) -> String {
+          let numberFormatter = NumberFormatter()
+          numberFormatter.maximumFractionDigits = 6
+          return numberFormatter.string(from: num as NSNumber) ?? ""
+        }
+        let coreDataItem = Random(context: moc)
+        coreDataItem.timestamp = Date()
+        coreDataItem.randomType = "Map"
+        coreDataItem.value = "\(formatDouble(coordinate.latitude)), \(formatDouble(coordinate.longitude))"
+        try? moc.save()
       }
     func updateInterface() {
       DispatchQueue.main.async {
         annotations = [MapPoint(coordinate: coordinate)]
         region.center = coordinate
-        
       }
     }
   }

@@ -14,6 +14,7 @@ struct DateGenerator: View {
   @State private var animationAmount: CGFloat = 1
   @EnvironmentObject var preferences: UserPreferences
   @Environment(\.colorScheme) var colorScheme
+  @Environment(\.managedObjectContext) var moc
     var body: some View {
       ZStack {
         VStack {
@@ -62,6 +63,19 @@ struct DateGenerator: View {
           formatter.dateFormat = "MMMM dd, y"
           let formattedDate = formatter.string(from: randomDate)
           self.randomDate = formattedDate
+          let coreDataItem = Random(context: moc)
+          coreDataItem.randomType = "Date"
+          coreDataItem.timestamp = Date()
+          coreDataItem.value = self.randomDate
+          try? moc.save()
+        }
+        .formatHistoryValue { value in
+          return AnyView(
+            Text(value)
+              .font(.title2)
+              .lineLimit(1)
+              .minimumScaleFactor(0.3)
+          )
         }
       }
       
