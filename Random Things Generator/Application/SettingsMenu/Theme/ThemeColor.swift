@@ -11,7 +11,7 @@ struct ThemeColor: View {
   let columns = [
     GridItem(.adaptive(minimum: 100), spacing: 20)
   ]
-  let colors: [Color] = [.blue, .green, .red, .orange, .purple, .pink, .brown, .yellow, .mint, Color(uiColor: UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1))]
+  let colors: [Color] = [.html.dodgerBlue, .html.mediumSeaGreen, .html.crimson, .html.darkOrange, .html.mediumPurple, .html.hotPink, .html.rosyBrown, .html.mintBlue]
   var body: some View {
     ScrollView {
       LazyVGrid(columns: columns, spacing: 20) {
@@ -29,7 +29,8 @@ private struct ThemeColorItem: View {
   let color: Color
   @EnvironmentObject var preferences: UserPreferences
   private var selectedColor: Bool {
-    preferences.themeColor.hex == color.hex
+    //color stores components as slightly off when converting to hex so we initalize new color from hex and get the hex from that
+    preferences.themeColor.hex == Color(hex: color.hex).hex
   }
   var body: some View {
     RoundedRectangle(cornerRadius: 15)
