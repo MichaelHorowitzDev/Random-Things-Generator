@@ -29,8 +29,7 @@ private struct ThemeColorItem: View {
   let color: Color
   @EnvironmentObject var preferences: UserPreferences
   private var selectedColor: Bool {
-    //color stores components as slightly off when converting to hex so we initalize new color from hex and get the hex from that
-    preferences.themeColor.hex == Color(hex: color.hex).hex
+    preferences.themeColor.hex == color.hex
   }
   var body: some View {
     RoundedRectangle(cornerRadius: 15)

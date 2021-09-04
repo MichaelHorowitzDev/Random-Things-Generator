@@ -31,7 +31,6 @@ extension Color {
   }
   var hex: Int {
     let components = self.components
-    print(components)
     let r = Int(components.red*255) << 16
     let g = Int(components.green*255) << 8
     let b = Int(components.blue*255)
@@ -50,8 +49,14 @@ extension Color {
       let b = CGFloat((hex & 0x0000ff)) / 255
       self.init(.sRGB, red: r, green: g, blue: b, opacity: 1)
     }
-    
   }
+    var data: Data {
+      try! NSKeyedArchiver.archivedData(withRootObject: UIColor(self), requiringSecureCoding: false)
+    }
+    static func withData(_ data: Data) -> Color? {
+      guard let uiColor = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UIColor else { return nil }
+      return Color(uiColor)
+    }
   enum html {
     static let dodgerBlue = Color(hex: 0x1E90FF)
     static let crimson = Color(hex: 0xDC143C)
@@ -64,5 +69,3 @@ extension Color {
     static let mintBlue = Color(hex: 0x48ABA9)
   }
 }
-
-//Color(hex: Color.blue.hex)

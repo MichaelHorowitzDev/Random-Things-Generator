@@ -9,7 +9,7 @@ import SwiftUI
 
 class UserPreferences: ObservableObject {
   @Published var themeColor: Color = .html.dodgerBlue {
-    didSet { saveUserDefaults(value: themeColor.hex, key: themeColorDefaults) }
+    didSet { saveUserDefaults(value: themeColor.data, key: themeColorDefaults) }
   }
   @Published var showsRandomButton = true {
     didSet { saveUserDefaults(value: showsRandomButton, key: randomButtonDefaults) }
@@ -22,10 +22,15 @@ class UserPreferences: ObservableObject {
     themeColor.isLight ? .black : .white
   }
   func saveUserDefaults(value: Any, key: String) {
+    print(value, key)
     defaults.set(value, forKey: key)
+//    #if DEBUG
+//    let synchronize = defaults.synchronize()
+//    print(synchronize)
+//    #endif
   }
   init() {
-    themeColor = Color(hex: defaults.object(forKey: themeColorDefaults) as? Int ?? Color.html.dodgerBlue.hex)
+    themeColor = Color.withData(defaults.data(forKey: themeColorDefaults) ?? Color.html.dodgerBlue.data) ?? Color.html.dodgerBlue
     showsRandomButton = defaults.object(forKey: randomButtonDefaults) as? Bool ?? true
     hasHapticFeedback = defaults.object(forKey: hapticFeedbackDefaults) as? Bool ?? true
   }
