@@ -13,6 +13,7 @@ struct RandomHistory: View {
   @State private var predicate: NSPredicate
   @State private var timeFrame = "All Time"
   @Environment(\.presentationMode) var presentationMode
+  @EnvironmentObject var preferences: UserPreferences
   
   private var timeFrames = ["7 Days", "30 Days", "90 Days", "All Time"]
   
@@ -26,7 +27,6 @@ struct RandomHistory: View {
   private let formatValue: ((_ value: String) -> AnyView)?
   var body: some View {
     NavigationView {
-//      List {
       RandomHistoryItems(predicate: predicate, timeFrame: $timeFrame, randomType: randomType, formatValue: formatValue)
           .onChange(of: timeFrame) { newValue in
             var compareDate: Date? = Date()
@@ -46,13 +46,13 @@ struct RandomHistory: View {
               self.predicate = NSPredicate(format: "randomType == %@ AND timestamp >= %@", randomType, compareDate! as CVarArg)
             }
           }
-//      }
       .navigationTitle("History")
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
           Button("Cancel") {
             presentationMode.wrappedValue.dismiss()
           }
+          .foregroundColor(preferences.themeColor)
         }
       }
     }
@@ -63,6 +63,7 @@ private struct RandomHistoryItems: View {
   @FetchRequest var history: FetchedResults<Random>
   @Binding var timeFrame: String
   @State private var shareItem: Item?
+  @EnvironmentObject var preferences: UserPreferences
   private var timeFrames = ["7 Days", "30 Days", "90 Days", "All Time"]
   
   init(predicate: NSPredicate, timeFrame: Binding<String>, randomType: String, formatValue: ((_ value: String) -> AnyView)? = nil) {
@@ -128,22 +129,6 @@ private struct RandomHistoryItems: View {
       })
     }
     .toolbar {
-      ToolbarItem(placement: .bottomBar) {
-        Button (action: {
-          let tempDirectory = NSTemporaryDirectory()
-          let tempURL = URL(fileURLWithPath: tempDirectory, isDirectory: true).appendingPathComponent("\(randomType)_\(UUID().uuidString.prefix(8)).csv")
-          print(tempURL)
-          let stream = OutputStream(toFileAtPath: tempURL.path, append: false)!
-          let csv = try! CSVWriter(stream: stream)
-          for item in history {
-            try! csv.write(row: [item.value ?? "Unknown Value", formatDate(date: item.timestamp)])
-          }
-          csv.stream.close()
-          shareItem = Item(url: tempURL)
-        }, label: {
-          Image(systemName: "square.and.arrow.up")
-        })
-      }
       ToolbarItem(placement: .navigationBarTrailing) {
         Button (action: {
           let tempDirectory = NSTemporaryDirectory()
@@ -157,7 +142,7 @@ private struct RandomHistoryItems: View {
           csv.stream.close()
           shareItem = Item(url: tempURL)
         }, label: {
-          Image(systemName: "square.and.arrow.up")
+          Image(systemName: "square.and.arrow.up").foregroundColor(preferences.themeColor)
         })
       }
     }
