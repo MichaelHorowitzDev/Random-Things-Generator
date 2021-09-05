@@ -40,7 +40,7 @@ class UserPreferences: ObservableObject {
 }
 
 struct HomeView: View {
-  let types = ["Number", "Word", "Card", "Coin", "Date", "Map"]
+  let types = ["Number", "Card", "Coin", "Date", "Map", "Lists"]
   @EnvironmentObject var preferences: UserPreferences
   @State private var settingsPresented = false
   var body: some View {
@@ -78,7 +78,7 @@ struct HomeView: View {
     .navigationViewStyle(.stack)
     .accentColor(preferences.themeColor)
   }
-  let typeToView: [String: AnyView] = ["Number": AnyView(NumberGenerator()), "Coin": AnyView(CoinFlipper()), "Card": AnyView(CardRandomizer()), "Date": AnyView(DateGenerator()), "Map": AnyView(MapGenerator())]
+  let typeToView: [String: AnyView] = ["Number": AnyView(NumberGenerator()), "Coin": AnyView(CoinFlipper()), "Card": AnyView(CardRandomizer()), "Date": AnyView(DateGenerator()), "Map": AnyView(MapGenerator()), "Lists": AnyView(GeneratorLists())]
 }
 
 private struct HomeViewItem: View {

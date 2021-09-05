@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19197" systemVersion="21A5506j" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="GeneratorList" representedClassName="GeneratorList" syncable="YES">
+        <attribute name="color" optional="YES" attributeType="Binary"/>
+        <attribute name="dateCreated" attributeType="Date" defaultDateTimeInterval="652506420" usesScalarValueType="NO"/>
+        <attribute name="dateModified" attributeType="Date" defaultDateTimeInterval="652506480" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="title" attributeType="String" defaultValueString=""/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ListItem" inverseName="list" inverseEntity="ListItem"/>
+    </entity>
+    <entity name="ListItem" representedClassName="ListItem" syncable="YES">
+        <attribute name="dateCreated" attributeType="Date" defaultDateTimeInterval="652510500" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="itemName" attributeType="String" defaultValueString=""/>
+        <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GeneratorList" inverseName="items" inverseEntity="GeneratorList"/>
+    </entity>
     <entity name="Random" representedClassName="Random" syncable="YES">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
@@ -9,5 +23,7 @@
     </entity>
     <elements>
         <element name="Random" positionX="-63" positionY="-18" width="128" height="104"/>
+        <element name="GeneratorList" positionX="-63" positionY="18" width="128" height="119"/>
+        <element name="ListItem" positionX="-54" positionY="45" width="128" height="89"/>
     </elements>
 </model>

@@ -1,0 +1,119 @@
+//
+//  Add List.swift
+//  Add List
+//
+//  Created by Michael Horowitz on 9/5/21.
+//
+
+import SwiftUI
+
+struct AddList: View {
+  @State private var titleText = ""
+  @State private var selectedColor = Color.blue
+  @Environment(\.presentationMode) var presentationMode
+  @Environment(\.managedObjectContext) var moc
+  @EnvironmentObject var preferences: UserPreferences
+  var body: some View {
+    NavigationView {
+      ZStack {
+        (Color(.secondarySystemGroupedBackground))
+          .edgesIgnoringSafeArea(.all)
+        VStack(spacing: 0) {
+          VStack(spacing: 0) {
+            Circle()
+              .fill(selectedColor)
+              .frame(width: 110, height: 110)
+              .padding(20)
+            TextField("Set Title", text: $titleText)
+              .font(.title.bold())
+              .multilineTextAlignment(.center)
+              .disableAutocorrection(true)
+              .padding()
+              .background(Color(.systemGray3))
+              .cornerRadius(15.0)
+              .padding([.leading, .trailing, .bottom])
+          }
+          .background(
+            RoundedRectangle(cornerRadius: 15)
+              .fill(Color(.tertiarySystemGroupedBackground)))
+          .padding()
+          VStack {
+            HStack {
+              ColorSelect(color: .red, selectedColor: $selectedColor)
+              ColorSelect(color: .orange, selectedColor: $selectedColor)
+              ColorSelect(color: .yellow, selectedColor: $selectedColor)
+              ColorSelect(color: .green, selectedColor: $selectedColor)
+              ColorSelect(color: .blue, selectedColor: $selectedColor)
+              ColorSelect(color: .pink, selectedColor: $selectedColor)
+              ColorSelect(color: .purple, selectedColor: $selectedColor)
+            }
+            
+            HStack {
+              ColorSelect(color: Color(UIColor.magenta), selectedColor: $selectedColor)
+              ColorSelect(color: Color(UIColor.cyan), selectedColor: $selectedColor)
+              ColorSelect(color: Color(UIColor.brown), selectedColor: $selectedColor)
+              ColorSelect(color: .clear, selectedColor: $selectedColor, isClear: true)
+              ColorSelect(color: .clear, selectedColor: $selectedColor, isClear: true)
+              ColorSelect(color: .clear, selectedColor: $selectedColor, isClear: true)
+              ColorSelect(color: .clear, selectedColor: $selectedColor, isClear: true)
+            }
+          }
+          .padding()
+          .background(
+            RoundedRectangle(cornerRadius: 15)
+              .fill(Color(.tertiarySystemGroupedBackground)))
+          
+          .padding()
+          Spacer()
+        }
+        .navigationBarTitle("Add Item", displayMode: .inline)
+        .toolbar {
+          ToolbarItem(placement: .navigationBarLeading) {
+            Button {
+              presentationMode.wrappedValue.dismiss()
+            } label: {
+              Text("Cancel")
+                .foregroundColor(preferences.themeColor)
+            }
+          }
+          ToolbarItem(placement: .confirmationAction) {
+            Button {
+              let list = GeneratorList(context: self.moc)
+              list.title = titleText
+              list.color = selectedColor.data
+              list.id = UUID()
+              list.dateCreated = Date()
+              list.dateModified = Date()
+              try? self.moc.save()
+              presentationMode.wrappedValue.dismiss()
+            } label: {
+              Text("Done")
+                .fontWeight(.bold)
+                .tint(preferences.themeColor)
+                
+            }
+            .disabled(titleText == "")
+          }
+        }
+      }
+    }
+  }
+}
+private struct ColorSelect: View {
+  let size = CGSize(width: 40, height: 40)
+  let color: Color
+  @Binding var selectedColor: Color
+  var isClear = false
+  var body: some View {
+    Circle()
+      .fill(color)
+      .frame(width: size.width, height: size.height)
+      .padding(3)
+      .frame(maxWidth: .infinity)
+      .onTapGesture {
+        if !isClear {
+          selectedColor = color
+        }
+      }
+  }
+}
