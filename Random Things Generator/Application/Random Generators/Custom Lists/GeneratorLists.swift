@@ -44,11 +44,14 @@ struct GeneratorLists: View {
   }
 }
 struct EditList: View {
-  var items: [ListItem]
+  @FetchRequest var items: FetchedResults<ListItem>
+  let list: GeneratorList
   let title: String
   let color: Color?
   init(list: GeneratorList) {
-    self.items = list.wrappedItems
+    self.list = list
+    let predicate = NSPredicate(format: "list == %@", list)
+    _items = FetchRequest(entity: ListItem.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \ListItem.dateCreated, ascending: false)], predicate: predicate, animation: .default)
     self.title = list.title ?? "Unknown"
     if let data = list.color {
       self.color = Color.withData(data)
@@ -56,24 +59,48 @@ struct EditList: View {
       color = nil
     }
   }
+  @State private var showsTextField = false
+  @State private var textString = ""
+  @Environment(\.managedObjectContext) var moc
   var body: some View {
-    List {
-      ForEach(items, id: \.self) { item in
-        if item.itemName != nil {
-          Text(item.itemName ?? "")
-        } else {
-          Image(systemName: "xmark.circle.fill")
-            .tint(.red)
+    ZStack {
+      if showsTextField {
+        TextFieldAlert(show: $showsTextField, title: "Add Item", message: nil, placeholder: "Name", onSubmit: { string in
+          if string != nil && string != "" {
+            let listItem = ListItem(context: moc)
+            listItem.list = list
+            listItem.itemName = string
+            listItem.dateCreated = Date()
+            listItem.id = UUID()
+            try? moc.save()
+          }
+        })
+      }
+      List {
+        ForEach(items, id: \.self) { item in
+          if item.itemName != nil {
+            Text(item.itemName ?? "")
+          } else {
+            Image(systemName: "xmark.circle.fill")
+              .tint(.red)
+          }
+        }
+        .onDelete { indexSet in
+          for index in indexSet {
+            let item = items[index]
+            moc.delete(item)
+            try? moc.save()
+          }
         }
       }
-    }
-    .navigationTitle(title)
-    .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
-        Button {
-          
-        } label: {
-          Image(systemName: "plus")
+      .navigationTitle(title)
+      .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button {
+            showsTextField = true
+          } label: {
+            Image(systemName: "plus")
+          }
         }
       }
     }

@@ -1,8 +1,8 @@
 //
-//  ListItems+CoreDataClass.swift
-//  ListItems
+//  ListItem+CoreDataClass.swift
+//  ListItem
 //
-//  Created by Michael Horowitz on 9/5/21.
+//  Created by Michael Horowitz on 9/6/21.
 //
 //
 

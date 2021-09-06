@@ -12,6 +12,7 @@
         <attribute name="dateCreated" attributeType="Date" defaultDateTimeInterval="652510500" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="itemName" attributeType="String" defaultValueString=""/>
+        <attribute name="timesShown" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GeneratorList" inverseName="items" inverseEntity="GeneratorList"/>
     </entity>
     <entity name="Random" representedClassName="Random" syncable="YES">
@@ -22,8 +23,8 @@
         <attribute name="value" attributeType="String" defaultValueString=""/>
     </entity>
     <elements>
-        <element name="Random" positionX="-63" positionY="-18" width="128" height="104"/>
         <element name="GeneratorList" positionX="-63" positionY="18" width="128" height="119"/>
-        <element name="ListItem" positionX="-54" positionY="45" width="128" height="89"/>
+        <element name="ListItem" positionX="-54" positionY="45" width="128" height="104"/>
+        <element name="Random" positionX="-63" positionY="-18" width="128" height="104"/>
     </elements>
 </model>

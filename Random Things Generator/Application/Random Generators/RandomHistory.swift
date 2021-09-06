@@ -79,7 +79,7 @@ private struct RandomHistoryItems: View {
       let formatter = DateFormatter()
       formatter.dateFormat = "M/d/yy"
       let dateString = formatter.string(from: date!)
-      formatter.dateFormat = "h:mm:ss a" //s.SSS"
+      formatter.dateFormat = "h:mm:ss a"
       let timeString = formatter.string(from: date!)
       return dateString+"\n"+timeString
     }
