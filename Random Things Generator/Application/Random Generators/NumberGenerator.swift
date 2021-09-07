@@ -42,7 +42,7 @@ struct NumberGenerator: View {
           .font(.system(size: 100))
           .minimumScaleFactor(0.2)
           .lineLimit(1)
-          .foregroundColor(preferences.themeColor.isLight ? .black : .white)
+          .foregroundColor(preferences.textColor)
           .padding()
           .scaleEffect(animationAmount)
       }
