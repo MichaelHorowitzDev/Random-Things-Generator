@@ -11,44 +11,48 @@ struct GeneratorLists: View {
   @FetchRequest(entity: GeneratorList.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \GeneratorList.dateCreated, ascending: false)], predicate: nil, animation: nil) var lists: FetchedResults<GeneratorList>
   @State private var addList = false
   @Environment(\.managedObjectContext) var moc
+  @EnvironmentObject var preferences: UserPreferences
   var body: some View {
-    List {
-      ForEach(lists, id: \.self) { list in
-        NavigationLink {
-          EditList(list: list)
-        } label: {
-          GeometryReader { geo in
-            HStack {
-              Circle()
-                .fill(Color.withData(list.color ?? Color.clear.data)!)
-                .frame(width: geo.size.height, height: geo.size.height)
-              Text(list.title ?? "Unknown")
-              Spacer()
+    NavigationView {
+      List {
+        ForEach(lists, id: \.self) { list in
+          NavigationLink {
+            EditList(list: list)
+          } label: {
+            GeometryReader { geo in
+              HStack {
+                Circle()
+                  .fill(Color.withData(list.color ?? Color.clear.data)!)
+                  .frame(width: geo.size.height, height: geo.size.height)
+                Text(list.title ?? "Unknown")
+                Spacer()
+              }
             }
           }
         }
-      }
-      .onDelete { indexSet in
-        for index in indexSet {
-          let item = lists[index]
-          moc.delete(item)
-          try? moc.save()
+        .onDelete { indexSet in
+          for index in indexSet {
+            let item = lists[index]
+            moc.delete(item)
+            try? moc.save()
+          }
         }
       }
-    }
-    .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
-        Button {
-          addList = true
-        } label: {
-          Image(systemName: "plus")
+      .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button {
+            addList = true
+          } label: {
+            Image(systemName: "plus")
+          }
         }
       }
+      .sheet(isPresented: $addList) {
+        AddList()
+      }
+      .navigationTitle("Lists")
     }
-    .sheet(isPresented: $addList) {
-      AddList()
-    }
-    .navigationTitle("Lists")
+    .accentColor(preferences.themeColor)
   }
 }
 struct EditList: View {

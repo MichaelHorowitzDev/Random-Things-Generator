@@ -67,7 +67,7 @@ struct AddList: View {
           .padding()
           Spacer()
         }
-        .navigationBarTitle("Add Item", displayMode: .inline)
+        .navigationBarTitle("Add List", displayMode: .inline)
         .toolbar {
           ToolbarItem(placement: .navigationBarLeading) {
             Button {

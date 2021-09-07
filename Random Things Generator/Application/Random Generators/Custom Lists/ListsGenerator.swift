@@ -20,6 +20,9 @@ struct ListsGenerator: View {
   }
   @State private var randomItem = "?"
   @State private var scale: CGFloat = 1
+  @State private var showsAlert = false
+  @State private var showsHistory = false
+  @State private var showsSettings = false
   var body: some View {
     RandomGeneratorView(list.first?.title ?? "") {
       Text(randomItem)
@@ -39,6 +42,28 @@ struct ListsGenerator: View {
     .onRandomPressed {
       randomItem = (list.first?.items?.allObjects as? [ListItem])?.randomElement()?.itemName ?? "?"
     }
+    .onSettingsPressed {
+      showsAlert = true
+    }
+    .alert("Select an Action", isPresented: $showsAlert) {
+      Button("History", role: nil) {
+        showsHistory = true
+        print("ok")
+        print("shows history")
+        print(showsHistory)
+      }
+      Button("Settings", role: nil) {
+        showsSettings = true
+      }
+    }
+    .sheet(isPresented: $showsHistory) {
+      RandomHistory(randomType: list.first?.title ?? "", formatValue: nil)
+    }
+    .sheet(isPresented: $showsSettings) {
+      GeneratorLists()
+    }
+
+//    .presentsSettings(true)
   }
 }
 
