@@ -2,7 +2,7 @@
 //  GeneratorList+CoreDataProperties.swift
 //  GeneratorList
 //
-//  Created by Michael Horowitz on 9/5/21.
+//  Created by Michael Horowitz on 9/6/21.
 //
 //
 
@@ -16,16 +16,14 @@ extension GeneratorList {
         return NSFetchRequest<GeneratorList>(entityName: "GeneratorList")
     }
 
-    @NSManaged public var id: UUID?
-    @NSManaged public var title: String?
+    @NSManaged public var color: Data?
     @NSManaged public var dateCreated: Date?
     @NSManaged public var dateModified: Date?
-    @NSManaged public var color: Data?
+    @NSManaged public var id: UUID?
+    @NSManaged public var title: String?
+    @NSManaged public var totalTimes: Int32
     @NSManaged public var items: NSSet?
-  
-  var wrappedItems: [ListItem] {
-    items?.allObjects as? [ListItem] ?? []
-  }
+
 }
 
 // MARK: Generated accessors for items

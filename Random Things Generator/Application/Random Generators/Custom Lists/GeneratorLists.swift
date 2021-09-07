@@ -78,11 +78,15 @@ struct EditList: View {
       }
       List {
         ForEach(items, id: \.self) { item in
-          if item.itemName != nil {
-            Text(item.itemName ?? "")
-          } else {
-            Image(systemName: "xmark.circle.fill")
-              .tint(.red)
+          NavigationLink {
+            ListItemDetail(listItem: item)
+          } label: {
+            if item.itemName != nil {
+              Text(item.itemName ?? "")
+            } else {
+              Image(systemName: "xmark.circle.fill")
+                .tint(.red)
+            }
           }
         }
         .onDelete { indexSet in

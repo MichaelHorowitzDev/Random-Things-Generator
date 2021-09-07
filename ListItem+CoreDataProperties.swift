@@ -20,6 +20,7 @@ extension ListItem {
     @NSManaged public var id: UUID?
     @NSManaged public var itemName: String?
     @NSManaged public var timesShown: Int32
+    @NSManaged public var lastShown: Date?
     @NSManaged public var list: GeneratorList?
 
 }
