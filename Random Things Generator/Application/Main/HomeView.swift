@@ -78,7 +78,7 @@ struct HomeView: View {
     .navigationViewStyle(.stack)
     .accentColor(preferences.themeColor)
   }
-  let typeToView: [String: AnyView] = ["Number": AnyView(NumberGenerator()), "Coin": AnyView(CoinFlipper()), "Card": AnyView(CardRandomizer()), "Date": AnyView(DateGenerator()), "Map": AnyView(MapGenerator()), "Lists": AnyView(ListsGenerator())]
+  let typeToView: [String: AnyView] = ["Number": AnyView(NumberGenerator()), "Coin": AnyView(CoinFlipper()), "Card": AnyView(CardRandomizer()), "Date": AnyView(DateGenerator()), "Map": AnyView(MapGenerator()), "Lists": AnyView(GeneratorLists())]
 }
 
 private struct HomeViewItem: View {

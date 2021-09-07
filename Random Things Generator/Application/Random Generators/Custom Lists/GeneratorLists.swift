@@ -10,6 +10,7 @@ import SwiftUI
 struct GeneratorLists: View {
   @FetchRequest(entity: GeneratorList.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \GeneratorList.dateCreated, ascending: false)], predicate: nil, animation: nil) var lists: FetchedResults<GeneratorList>
   @State private var addList = false
+  @Environment(\.managedObjectContext) var moc
   var body: some View {
     List {
       ForEach(lists, id: \.self) { list in
@@ -25,6 +26,13 @@ struct GeneratorLists: View {
               Spacer()
             }
           }
+        }
+      }
+      .onDelete { indexSet in
+        for index in indexSet {
+          let item = lists[index]
+          moc.delete(item)
+          try? moc.save()
         }
       }
     }
@@ -62,17 +70,22 @@ struct EditList: View {
   @State private var showsTextField = false
   @State private var textString = ""
   @Environment(\.managedObjectContext) var moc
+  @State private var duplicateItem = false
   var body: some View {
     ZStack {
       if showsTextField {
         TextFieldAlert(show: $showsTextField, title: "Add Item", message: nil, placeholder: "Name", onSubmit: { string in
-          if string != nil && string != "" {
-            let listItem = ListItem(context: moc)
-            listItem.list = list
-            listItem.itemName = string
-            listItem.dateCreated = Date()
-            listItem.id = UUID()
-            try? moc.save()
+          if items.contains(where: { $0.itemName == string }) {
+            duplicateItem = true
+          } else {
+            if string != nil && string != "" {
+              let listItem = ListItem(context: moc)
+              listItem.list = list
+              listItem.itemName = string
+              listItem.dateCreated = Date()
+              listItem.id = UUID()
+              try? moc.save()
+            }
           }
         })
       }
@@ -96,6 +109,11 @@ struct EditList: View {
             try? moc.save()
           }
         }
+      }
+      .alert("Error", isPresented: $duplicateItem) {
+        Button("OK", role: .cancel) {}
+      } message: {
+        Text("An Item with this title already exists.")
       }
       .navigationTitle(title)
       .toolbar {

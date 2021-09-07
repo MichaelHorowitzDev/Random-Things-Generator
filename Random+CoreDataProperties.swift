@@ -18,7 +18,6 @@ extension Random {
 
     @NSManaged public var timestamp: Date?
     @NSManaged public var value: String?
-    @NSManaged public var image: Data?
     @NSManaged public var randomType: String?
     @NSManaged public var id: UUID?
 

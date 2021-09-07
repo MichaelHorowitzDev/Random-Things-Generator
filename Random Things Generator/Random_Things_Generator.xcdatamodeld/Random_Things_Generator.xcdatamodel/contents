@@ -19,7 +19,6 @@
     </entity>
     <entity name="Random" representedClassName="Random" syncable="YES">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="randomType" attributeType="String" defaultValueString=""/>
         <attribute name="timestamp" attributeType="Date" defaultDateTimeInterval="652090020" usesScalarValueType="NO"/>
         <attribute name="value" attributeType="String" defaultValueString=""/>
@@ -27,6 +26,6 @@
     <elements>
         <element name="GeneratorList" positionX="-63" positionY="18" width="128" height="134"/>
         <element name="ListItem" positionX="-54" positionY="45" width="128" height="119"/>
-        <element name="Random" positionX="-63" positionY="-18" width="128" height="104"/>
+        <element name="Random" positionX="-63" positionY="-18" width="128" height="89"/>
     </elements>
 </model>

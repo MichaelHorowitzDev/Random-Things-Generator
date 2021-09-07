@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct AddList: View {
   @State private var titleText = ""
@@ -78,26 +79,47 @@ struct AddList: View {
           }
           ToolbarItem(placement: .confirmationAction) {
             Button {
-              let list = GeneratorList(context: self.moc)
-              list.title = titleText
-              list.color = selectedColor.data
-              list.id = UUID()
-              list.dateCreated = Date()
-              list.dateModified = Date()
-              try? self.moc.save()
-              presentationMode.wrappedValue.dismiss()
+              let fetchRequest: NSFetchRequest<GeneratorList> = GeneratorList.fetchRequest()
+              var canAddItem = false
+              do {
+                let results = try moc.fetch(fetchRequest)
+                let containsTitle = results.contains(where: { $0.title == titleText })
+                if !containsTitle {
+                  canAddItem = true
+                }
+              } catch {
+                print(error)
+                canAddItem = true
+              }
+              if !canAddItem {
+                itemTitleExists = true
+              } else {
+                let list = GeneratorList(context: self.moc)
+                list.title = titleText
+                list.color = selectedColor.data
+                list.id = UUID()
+                list.dateCreated = Date()
+                list.dateModified = Date()
+                try? self.moc.save()
+                presentationMode.wrappedValue.dismiss()
+              }
             } label: {
               Text("Done")
                 .fontWeight(.bold)
                 .tint(preferences.themeColor)
-                
             }
             .disabled(titleText == "")
+            .alert("Error", isPresented: $itemTitleExists) {
+              Button("OK", role: .cancel) {}
+            } message: {
+              Text("A List with this title already exists.")
+            }
           }
         }
       }
     }
   }
+  @State private var itemTitleExists = false
 }
 private struct ColorSelect: View {
   let size = CGSize(width: 40, height: 40)
