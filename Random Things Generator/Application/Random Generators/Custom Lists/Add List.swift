@@ -39,7 +39,7 @@ struct AddList: View {
               .fill(Color(.tertiarySystemGroupedBackground)))
           .padding()
           VStack {
-            HStack {
+            HStack(spacing: 0) {
               ColorSelect(color: .red, selectedColor: $selectedColor)
               ColorSelect(color: .orange, selectedColor: $selectedColor)
               ColorSelect(color: .yellow, selectedColor: $selectedColor)
@@ -48,8 +48,7 @@ struct AddList: View {
               ColorSelect(color: .pink, selectedColor: $selectedColor)
               ColorSelect(color: .purple, selectedColor: $selectedColor)
             }
-            
-            HStack {
+            HStack(spacing: 0) {
               ColorSelect(color: Color(UIColor.magenta), selectedColor: $selectedColor)
               ColorSelect(color: Color(UIColor.cyan), selectedColor: $selectedColor)
               ColorSelect(color: Color(UIColor.brown), selectedColor: $selectedColor)
@@ -123,13 +122,14 @@ struct AddList: View {
 }
 private struct ColorSelect: View {
   let size = CGSize(width: 40, height: 40)
+  let minSize = CGSize(width: 30, height: 30)
   let color: Color
   @Binding var selectedColor: Color
   var isClear = false
   var body: some View {
     Circle()
       .fill(color)
-      .frame(width: size.width, height: size.height)
+      .frame(minWidth: minSize.width, idealWidth: size.width, maxWidth: size.width, minHeight: minSize.height, idealHeight: size.height, maxHeight: size.height)
       .padding(3)
       .frame(maxWidth: .infinity)
       .onTapGesture {
