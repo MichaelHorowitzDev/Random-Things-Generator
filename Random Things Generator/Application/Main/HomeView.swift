@@ -24,10 +24,6 @@ class UserPreferences: ObservableObject {
   func saveUserDefaults(value: Any, key: String) {
     print(value, key)
     defaults.set(value, forKey: key)
-//    #if DEBUG
-//    let synchronize = defaults.synchronize()
-//    print(synchronize)
-//    #endif
   }
   init() {
     themeColor = Color.withData(defaults.data(forKey: themeColorDefaults) ?? Color.html.dodgerBlue.data) ?? Color.html.dodgerBlue
@@ -43,20 +39,17 @@ struct HomeView: View {
   let types = ["Number", "Card", "Coin", "Date", "Map", "Lists"]
   @EnvironmentObject var preferences: UserPreferences
   @State private var settingsPresented = false
+  let columns: [GridItem] = [GridItem(.adaptive(minimum: 140))]
   var body: some View {
     NavigationView {
       ScrollView {
-        VStack {
-          ForEach(0..<(types.count+1)/2) { num in
-            HStack(spacing: 20) {
-              HomeViewItem(item: types[num*2], color: preferences.themeColor, destinationView: AnyView(typeToView[types[num*2]]))
-              if num*2+1 < types.count {
-                HomeViewItem(item: types[num*2+1], color: preferences.themeColor, destinationView: AnyView(typeToView[types[num*2+1]]))
-              }
-            }
-            .padding([.leading, .trailing])
+        LazyVGrid(columns: columns, spacing: 10) {
+          ForEach(0..<types.count) { num in
+            HomeViewItem(item: types[num], color: preferences.themeColor, destinationView: AnyView(typeToView[types[num]]))
+              .padding(.horizontal, 5)
           }
         }
+        .padding(.horizontal, 10)
       }
       .navigationBarTitle("Random")
       .toolbar {
