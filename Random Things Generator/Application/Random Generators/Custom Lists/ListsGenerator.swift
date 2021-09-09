@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ListsGenerator: View {
   @EnvironmentObject var preferences: UserPreferences
+  @Environment(\.managedObjectContext) var moc
   @AppStorage("currentList") var currentList: String = UUID().uuidString
   @FetchRequest var list: FetchedResults<GeneratorList>
   init() {
@@ -31,7 +32,7 @@ struct ListsGenerator: View {
         .lineLimit(1)
         .foregroundColor(preferences.textColor)
         .scaleEffect(scale)
-        .padding()
+        .padding(.horizontal, 30)
     }
     .onRandomTouchDown {
       scale = 0.9
@@ -40,7 +41,19 @@ struct ListsGenerator: View {
       scale = 1
     }
     .onRandomPressed {
-      randomItem = (list.first?.items?.allObjects as? [ListItem])?.randomElement()?.itemName ?? "?"
+      guard let title = list.first?.title else { return }
+      guard let item = (list.first?.items?.allObjects as? [ListItem])?.randomElement() else { return }
+      guard let itemName = item.itemName else { return }
+      randomItem = itemName
+      let coreDataItem = Random(context: moc)
+      coreDataItem.id = UUID()
+      coreDataItem.randomType = title
+      coreDataItem.timestamp = Date()
+      coreDataItem.value = itemName
+      item.lastShown = Date()
+      item.timesShown += 1
+      item.list?.totalTimes += 1
+      try? moc.save()
     }
     .onSettingsPressed {
       showsAlert = true
@@ -55,6 +68,7 @@ struct ListsGenerator: View {
       Button("Settings", role: nil) {
         showsSettings = true
       }
+      Button("Cancel", role: .cancel) {}
     }
     .sheet(isPresented: $showsHistory) {
       RandomHistory(randomType: list.first?.title ?? "", formatValue: nil)
@@ -62,8 +76,6 @@ struct ListsGenerator: View {
     .sheet(isPresented: $showsSettings) {
       GeneratorLists()
     }
-
-//    .presentsSettings(true)
   }
 }
 
