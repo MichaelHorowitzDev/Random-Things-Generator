@@ -97,7 +97,7 @@ private struct HomeViewItem: View {
         .frame(maxWidth: .infinity)
     }
     .background(color)
-    .cornerRadius(15)
+    .cornerRadius(10)
   }
 }
 
