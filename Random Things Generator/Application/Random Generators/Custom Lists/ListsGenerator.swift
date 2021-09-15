@@ -11,21 +11,35 @@ struct ListsGenerator: View {
   @EnvironmentObject var preferences: UserPreferences
   @Environment(\.managedObjectContext) var moc
 //  @AppStorage("currentList") var currentList: String = UUID().uuidString
-  @FetchRequest var list: FetchedResults<GeneratorList>
-  init() {
-    if let currentList = UserDefaults.standard.string(forKey: "currentList") {
-      _list = FetchRequest(entity: GeneratorList.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \GeneratorList.dateCreated, ascending: false)], predicate: NSPredicate(format: "title == %@", currentList), animation: .default)
-    } else {
-      _list = FetchRequest(entity: GeneratorList.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \GeneratorList.dateCreated, ascending: false)], predicate: nil, animation: .default)
+  @FetchRequest(entity: GeneratorList.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \GeneratorList.dateCreated, ascending: false)], predicate: nil, animation: nil) var lists: FetchedResults<GeneratorList>
+  var list: GeneratorList? {
+    var list = lists.first { generatorList in
+      generatorList.title == currentList
     }
+    if list == nil {
+      list = lists.first
+      currentList = list?.title ?? ""
+    }
+    return list
   }
+  @AppStorage("currentList") var currentList: String = ""
+//  @FetchRequest var list: FetchedResults<GeneratorList>
+//  init() {
+//    if let currentList = UserDefaults.standard.string(forKey: "currentList") {
+//      _list = FetchRequest(entity: GeneratorList.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \GeneratorList.dateCreated, ascending: false)], predicate: NSPredicate(format: "title == %@", currentList), animation: .default)
+//    } else {
+//      _list = FetchRequest(entity: GeneratorList.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \GeneratorList.dateCreated, ascending: false)], predicate: nil, animation: .default)
+//    }
+//    print("fgdsafdsa")
+//    print(UserDefaults.standard.string(forKey: "currentList"))
+//  }
   @State private var randomItem = "?"
   @State private var scale: CGFloat = 1
   @State private var showsAlert = false
   @State private var showsHistory = false
   @State private var showsSettings = false
   var body: some View {
-    RandomGeneratorView(list.first?.title ?? "") {
+    RandomGeneratorView(list?.title ?? "") {
       Text(randomItem)
         .font(.system(size: 100))
         .minimumScaleFactor(0.2)
@@ -41,8 +55,8 @@ struct ListsGenerator: View {
       scale = 1
     }
     .onRandomPressed {
-      guard let title = list.first?.title else { return }
-      guard let item = (list.first?.items?.allObjects as? [ListItem])?.randomElement() else { return }
+      guard let title = list?.title else { return }
+      guard let item = (list?.items?.allObjects as? [ListItem])?.randomElement() else { return }
       guard let itemName = item.itemName else { return }
       randomItem = itemName
       let coreDataItem = Random(context: moc)
@@ -56,7 +70,8 @@ struct ListsGenerator: View {
       try? moc.save()
     }
     .onSettingsPressed {
-      showsAlert = true
+//      showsAlert = true
+      showsHistory = true
     }
     .alert("Select an Action", isPresented: $showsAlert) {
       Button("History", role: nil) {
@@ -71,16 +86,14 @@ struct ListsGenerator: View {
       Button("Cancel", role: .cancel) {}
     }
     .sheet(isPresented: $showsHistory) {
-      RandomHistory(randomType: list.first?.title ?? "", formatValue: nil)
+      RandomHistory(randomType: list?.title ?? "", formatValue: nil)
         .settings {
           Section {
             NavigationLink {
               GeneratorLists()
-//                .navigationBarHidden(true)
             } label: {
-              Text(list.first?.title ?? "")
+              Text(list?.title ?? "")
             }
-
           } header: {
             Text("Selected List")
           }
