@@ -12,7 +12,7 @@ struct CardRandomizer: View {
   @State private var animationAmount: CGFloat = 1
   @EnvironmentObject var preferences: UserPreferences
   @Environment(\.managedObjectContext) var moc
-  @State private var cardCount = 1
+  @State private var cardCount = 1.0
   var columns: [GridItem] {
     var gridArray = [GridItem]()
     var count = 3
@@ -21,7 +21,7 @@ struct CardRandomizer: View {
       return gridArray
     }
     while gridArray.count == 0 {
-      if cardCount%count == 0 {
+      if Int(cardCount)%count == 0 {
         (0..<count).forEach{_ in gridArray.append(GridItem(.flexible())) }
         break
       }
@@ -34,59 +34,82 @@ struct CardRandomizer: View {
   }
     var body: some View {
       ZStack {
+        preferences.themeColor.ignoresSafeArea(.all, edges: [.horizontal, .bottom])
         VStack {
-          Text("Card Count: \(cardCount)")
-            .font(.system(.title, design: .rounded))
-            .fontWeight(.medium)
-          Stepper("Card Count", value: $cardCount, in: 1...6)
-            .labelsHidden()
-            .padding()
-          Spacer()
-        }
-        .zIndex(1)
-        .foregroundColor(preferences.textColor)
-        .padding(.top, 40)
-        RandomGeneratorView("Card") {
-          LazyVGrid(columns: columns) {
-            ForEach(currentCards, id: \.self) {
-              Image($0.name)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .scaleEffect(animationAmount)
-            }
+          VStack {
+            Text("Card Count: \(Int(cardCount))")
+              .font(.system(.title, design: .rounded))
+              .fontWeight(.medium)
+              .padding(.top)
+            Stepper("", value: $cardCount, in: 1...6)
+              .labelsHidden()
+              .padding(.horizontal)
+              .padding(.bottom)
           }
-          .padding(.horizontal, 40)
-          .onChange(of: cardCount) { newValue in
-            if cardCount > currentCards.count {
-              currentCards.append(CardImage(name: "RED_BACK"))
-            } else if cardCount < currentCards.count {
-              currentCards.removeLast()
-            }
+          .frame(maxWidth: .infinity)
+          .background(
+            RoundedRectangle(cornerRadius: 15)
+              .fill(Color(uiColor: .secondarySystemGroupedBackground))
+          )
+          .padding([.horizontal, .top])
+          RandomGeneratorView("Card") {
+              VStack {
+                HStack {
+                  ForEach(0..<(currentCards.count <= 3 ? currentCards.count : Int(ceil(Double(currentCards.count)/2))), id: \.self) {
+                    Image(currentCards[$0].name)
+                      .resizable()
+                      .scaledToFit()
+                      .aspectRatio(contentMode: .fit)
+                      .scaleEffect(animationAmount)
+                  }
+                }
+                if currentCards.count > 3 {
+                  HStack {
+                    ForEach(Int(ceil(Double(currentCards.count)/2))..<currentCards.count, id: \.self) {
+                      Image(currentCards[$0].name)
+                        .resizable()
+                        .scaledToFit()
+                        .aspectRatio(contentMode: .fit)
+                        .scaleEffect(animationAmount)
+                    }
+                  }
+                }
+              }
+              .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+              .padding(.horizontal, 20)
+              .onChange(of: cardCount) { newValue in
+                if Int(cardCount) > currentCards.count {
+                  currentCards.append(CardImage(name: "RED_BACK"))
+                } else if Int(cardCount) < currentCards.count {
+                  currentCards.removeLast()
+                }
+              }
+          }
+          .onRandomTouchDown {
+            animationAmount = 0.97
+          }
+          .onRandomTouchUp {
+            animationAmount = 1
+          }
+          .onRandomPressed {
+            currentCards = (1...Int(cardCount)).map({_ in
+              let value = "23456789TJQK".randomElement()!
+              let suit = "CHSD".randomElement()!
+              let card = String(value).appending(String(suit))
+              return CardImage(name: card)
+            })
+            let coreDataItem = Random(context: moc)
+            coreDataItem.randomType = "Card"
+            coreDataItem.timestamp = Date()
+            coreDataItem.value = (currentCards.map { $0.name }).joined(separator: "\n")
+            try? moc.save()
+          }
+          .formatHistoryValue { string in
+            let cards = string.split(separator: "\n").map { String($0) }
+            return AnyView(cardVStack(cards: cards))
           }
         }
-        .onRandomTouchDown {
-          animationAmount = 0.97
-        }
-        .onRandomTouchUp {
-          animationAmount = 1
-        }
-        .onRandomPressed {
-          currentCards = (1...cardCount).map({_ in
-            let value = "23456789TJQK".randomElement()!
-            let suit = "CHSD".randomElement()!
-            let card = String(value).appending(String(suit))
-            return CardImage(name: card)
-          })
-          let coreDataItem = Random(context: moc)
-          coreDataItem.randomType = "Card"
-          coreDataItem.timestamp = Date()
-          coreDataItem.value = (currentCards.map { $0.name }).joined(separator: "\n")
-          try? moc.save()
-        }
-        .formatHistoryValue { string in
-          let cards = string.split(separator: "\n").map { String($0) }
-          return AnyView(cardVStack(cards: cards))
-        }
+        
       }
     }
 }

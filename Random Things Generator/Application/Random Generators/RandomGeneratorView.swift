@@ -28,6 +28,7 @@ public struct RandomGeneratorView<Content>: View where Content: View {
   var randomType: String
   private var onSettingsPressed: (() -> Void)?
   private var formatHistoryValue: ((String) -> AnyView)?
+  private var buttonOverContent = false
   private func generateHaptic() {
     if preferences.hasHapticFeedback {
       UIImpactFeedbackGenerator(style: .soft).impactOccurred()
@@ -37,24 +38,49 @@ public struct RandomGeneratorView<Content>: View where Content: View {
       ZStack {
         preferences.themeColor.ignoresSafeArea(.all, edges: [.horizontal, .bottom])
           .zIndex(-1)
-        if preferences.showsRandomButton || overrideShowRandomButton {
           VStack {
-            Spacer()
-            RandomizeButton(randomButtonTitle) {
-              onRandomPressed?()
-              generateHaptic()
-            }
-            .onTouchDown {
-              onTouchDown?()
-            }
-            .onTouchUp {
-              onTouchUp?()
+            if buttonOverContent {
+              if preferences.showsRandomButton || overrideShowRandomButton {
+                VStack {
+                  Spacer()
+                  RandomizeButton(randomButtonTitle) {
+                    onRandomPressed?()
+                    generateHaptic()
+                  }
+                  .onTouchDown {
+                    onTouchDown?()
+                  }
+                  .onTouchUp {
+                    onTouchUp?()
+                  }
+                }
+                .zIndex(2)
+              }
+              content
+            } else {
+              if preferences.showsRandomButton || overrideShowRandomButton {
+                VStack {
+                  Spacer()
+                  content
+                  RandomizeButton(randomButtonTitle) {
+                    onRandomPressed?()
+                    generateHaptic()
+                  }
+                  .onTouchDown {
+                    onTouchDown?()
+                  }
+                  .onTouchUp {
+                    onTouchUp?()
+                  }
+                }
+                .zIndex(2)
+              } else {
+                content
+                  .padding(.bottom)
+              }
             }
           }
           .zIndex(2)
-        }
-          
-        content
       }
       .navigationTitle(randomType)
       .toolbar {
