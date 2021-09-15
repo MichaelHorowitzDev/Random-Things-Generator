@@ -48,6 +48,14 @@ struct DateGenerator: View {
         }
         .padding()
         .zIndex(1)
+        .onChange(of: endingDate) { newValue in
+          print(startingDate)
+          print(newValue)
+          guard let days = Calendar.current.dateComponents([.day], from: startingDate, to: endingDate).day else { return }
+          if days == 0 {
+            startingDate = Calendar.current.date(byAdding: .day, value: -1, to: endingDate)!
+          }
+        }
         RandomGeneratorView("Date") {}
         .onRandomTouchDown {
           animationAmount = 0.97
