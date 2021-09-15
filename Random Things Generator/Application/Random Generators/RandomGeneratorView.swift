@@ -38,7 +38,6 @@ public struct RandomGeneratorView<Content>: View where Content: View {
       ZStack {
         preferences.themeColor.ignoresSafeArea(.all, edges: [.horizontal, .bottom])
           .zIndex(-1)
-          VStack {
             if buttonOverContent {
               if preferences.showsRandomButton || overrideShowRandomButton {
                 VStack {
@@ -79,8 +78,6 @@ public struct RandomGeneratorView<Content>: View where Content: View {
                   .padding(.bottom)
               }
             }
-          }
-          .zIndex(2)
       }
       .navigationTitle(randomType)
       .toolbar {
@@ -189,6 +186,11 @@ extension RandomGeneratorView {
   func formatHistoryValue(_ format: @escaping (String) -> AnyView) -> Self {
     var copy = self
     copy.formatHistoryValue = format
+    return copy
+  }
+  func randomButtonOverContent(_ bool: Bool) -> Self {
+    var copy = self
+    copy.buttonOverContent = bool
     return copy
   }
 }

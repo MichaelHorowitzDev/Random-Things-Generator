@@ -22,6 +22,7 @@ struct MapGenerator: View {
       }
       .showRandomButton(true)
       .disablesGestures(true)
+      .randomButtonOverContent(true)
       .onRandomPressed {
         updateMap()
       }
