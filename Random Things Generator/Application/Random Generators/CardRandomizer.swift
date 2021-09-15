@@ -85,6 +85,7 @@ struct CardRandomizer: View {
                 }
               }
           }
+          .randomButtonOverContent(false)
           .onRandomTouchDown {
             animationAmount = 0.97
           }
