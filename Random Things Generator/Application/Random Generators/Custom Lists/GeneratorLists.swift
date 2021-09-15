@@ -10,6 +10,7 @@ import SwiftUI
 struct GeneratorLists: View {
   @FetchRequest(entity: GeneratorList.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \GeneratorList.dateCreated, ascending: false)], predicate: nil, animation: nil) var lists: FetchedResults<GeneratorList>
   @State private var addList = false
+  @State private var changeSelectedList = false
   @Environment(\.managedObjectContext) var moc
   @EnvironmentObject var preferences: UserPreferences
   
@@ -29,10 +30,10 @@ struct GeneratorLists: View {
     List {
       if selectedList != nil {
         Section {
-          NavigationLink {
-            EditList(list: selectedList!)
-          } label: {
-            ForEach([selectedList!]) {_ in
+          ForEach([selectedList!]) {_ in
+            NavigationLink {
+              EditList(list: selectedList!)
+            } label: {
               GeometryReader { geo in
                 HStack {
                   Circle()
@@ -43,30 +44,50 @@ struct GeneratorLists: View {
                 }
               }
             }
-            .onDelete { indexSet in
-              for index in indexSet {
-                let item = lists[index]
-                moc.delete(item)
-                try? moc.save()
-              }
+            .disabled(changeSelectedList)
+          }
+          .onDelete { indexSet in
+            for index in indexSet {
+              let item = lists[index]
+              moc.delete(item)
+              try? moc.save()
             }
           }
+          
         } header: {
           Text("Selected List")
         }
       }
       ForEach(lists, id: \.self) { list in
         if list != selectedList {
-          NavigationLink {
-            EditList(list: list)
-          } label: {
+          if changeSelectedList {
             GeometryReader { geo in
-              HStack {
-                Circle()
-                  .fill(Color.withData(list.color ?? Color.clear.data)!)
-                  .frame(width: geo.size.height, height: geo.size.height)
-                Text(list.title ?? "Unknown")
-                Spacer()
+              Button {
+                currentList = list.title ?? ""
+                changeSelectedList = false
+              } label: {
+                HStack {
+                  Circle()
+                    .fill(Color.withData(list.color ?? Color.clear.data)!)
+                    .frame(width: geo.size.height, height: geo.size.height)
+                  Text(list.title ?? "Unknown")
+                  Spacer()
+                }
+              }
+            }
+            
+          } else {
+            NavigationLink {
+              EditList(list: list)
+            } label: {
+              GeometryReader { geo in
+                HStack {
+                  Circle()
+                    .fill(Color.withData(list.color ?? Color.clear.data)!)
+                    .frame(width: geo.size.height, height: geo.size.height)
+                  Text(list.title ?? "Unknown")
+                  Spacer()
+                }
               }
             }
           }
@@ -86,6 +107,13 @@ struct GeneratorLists: View {
           addList = true
         } label: {
           Image(systemName: "plus")
+        }
+      }
+      ToolbarItem(placement: .bottomBar) {
+        Button {
+          changeSelectedList.toggle()
+        } label: {
+          Text(changeSelectedList ? "Cancel" : "Change Selected List")
         }
       }
     }
