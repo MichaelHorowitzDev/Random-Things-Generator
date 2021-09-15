@@ -13,7 +13,7 @@ struct GeneratorLists: View {
   @Environment(\.managedObjectContext) var moc
   @EnvironmentObject var preferences: UserPreferences
   var body: some View {
-    NavigationView {
+//    NavigationView {
       List {
         ForEach(lists, id: \.self) { list in
           NavigationLink {
@@ -51,7 +51,7 @@ struct GeneratorLists: View {
         AddList()
       }
       .navigationTitle("Lists")
-    }
+//    }
     .accentColor(preferences.themeColor)
   }
 }

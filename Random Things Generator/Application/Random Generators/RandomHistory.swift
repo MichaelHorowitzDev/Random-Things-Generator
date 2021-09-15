@@ -16,6 +16,7 @@ struct RandomHistory: View {
   @EnvironmentObject var preferences: UserPreferences
   
   private var timeFrames = ["7 Days", "30 Days", "90 Days", "All Time"]
+  private var settings = AnyView(EmptyView())
   
   init(randomType: String, formatValue: ((_ value: String) -> AnyView)? = nil) {
     self._predicate = State(initialValue: NSPredicate(format: "randomType == %@", randomType))
@@ -28,6 +29,9 @@ struct RandomHistory: View {
   var body: some View {
     NavigationView {
       RandomHistoryItems(predicate: predicate, timeFrame: $timeFrame, randomType: randomType, formatValue: formatValue)
+        .settings({
+          settings
+        })
           .onChange(of: timeFrame) { newValue in
             var compareDate: Date? = Date()
             switch newValue {
@@ -56,6 +60,15 @@ struct RandomHistory: View {
         }
       }
     }
+    .accentColor(preferences.themeColor)
+  }
+}
+
+extension RandomHistory {
+  func settings<Content: View>(@ViewBuilder _ settings: () -> Content) -> Self {
+    var copy = self
+    copy.settings = AnyView(settings())
+    return copy
   }
 }
 
@@ -65,6 +78,7 @@ private struct RandomHistoryItems: View {
   @State private var shareItem: Item?
   @EnvironmentObject var preferences: UserPreferences
   private var timeFrames = ["7 Days", "30 Days", "90 Days", "All Time"]
+  private var settings = AnyView(EmptyView())
   
   init(predicate: NSPredicate, timeFrame: Binding<String>, randomType: String, formatValue: ((_ value: String) -> AnyView)? = nil) {
     self._history = FetchRequest(entity: Random.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Random.timestamp, ascending: false)], predicate: predicate, animation: .default)
@@ -88,6 +102,7 @@ private struct RandomHistoryItems: View {
   private let formatValue: ((_ value: String) -> AnyView)?
   var body: some View {
     List {
+      settings
       Section(content: {
         ForEach(history, id: \.self) { item in
           HStack {
@@ -151,6 +166,14 @@ private struct RandomHistoryItems: View {
     }, content: { item in
       ShareSheet(activityItems: [item.url])
     })
+  }
+}
+
+extension RandomHistoryItems {
+  func settings(@ViewBuilder _ settings: () -> AnyView) -> Self {
+    var copy = self
+    copy.settings = settings()
+    return copy
   }
 }
 

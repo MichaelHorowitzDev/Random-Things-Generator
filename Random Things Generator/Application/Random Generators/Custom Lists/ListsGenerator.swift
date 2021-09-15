@@ -72,6 +72,20 @@ struct ListsGenerator: View {
     }
     .sheet(isPresented: $showsHistory) {
       RandomHistory(randomType: list.first?.title ?? "", formatValue: nil)
+        .settings {
+          Section {
+            NavigationLink {
+              GeneratorLists()
+//                .navigationBarHidden(true)
+            } label: {
+              Text(list.first?.title ?? "")
+            }
+
+          } header: {
+            Text("Selected List")
+          }
+
+        }
     }
     .sheet(isPresented: $showsSettings) {
       GeneratorLists()
