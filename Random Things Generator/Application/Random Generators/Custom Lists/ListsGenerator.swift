@@ -10,13 +10,13 @@ import SwiftUI
 struct ListsGenerator: View {
   @EnvironmentObject var preferences: UserPreferences
   @Environment(\.managedObjectContext) var moc
-  @AppStorage("currentList") var currentList: String = UUID().uuidString
+//  @AppStorage("currentList") var currentList: String = UUID().uuidString
   @FetchRequest var list: FetchedResults<GeneratorList>
   init() {
     if let currentList = UserDefaults.standard.string(forKey: "currentList") {
-      _list = FetchRequest(entity: GeneratorList.entity(), sortDescriptors: [], predicate: NSPredicate(format: "title == %@", currentList), animation: .default)
+      _list = FetchRequest(entity: GeneratorList.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \GeneratorList.dateCreated, ascending: false)], predicate: NSPredicate(format: "title == %@", currentList), animation: .default)
     } else {
-      _list = FetchRequest(entity: GeneratorList.entity(), sortDescriptors: [], predicate: nil, animation: .default)
+      _list = FetchRequest(entity: GeneratorList.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \GeneratorList.dateCreated, ascending: false)], predicate: nil, animation: .default)
     }
   }
   @State private var randomItem = "?"

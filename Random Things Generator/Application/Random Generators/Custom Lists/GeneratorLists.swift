@@ -12,10 +12,51 @@ struct GeneratorLists: View {
   @State private var addList = false
   @Environment(\.managedObjectContext) var moc
   @EnvironmentObject var preferences: UserPreferences
+  
+  var selectedList: GeneratorList? {
+    var list = lists.first { generatorList in
+      generatorList.title == currentList
+    }
+    if list == nil {
+      list = lists.first
+      currentList = list?.title ?? ""
+    }
+    return list
+  }
+  @AppStorage("currentList") var currentList: String = ""
+  
   var body: some View {
-//    NavigationView {
-      List {
-        ForEach(lists, id: \.self) { list in
+    List {
+      if selectedList != nil {
+        Section {
+          NavigationLink {
+            EditList(list: selectedList!)
+          } label: {
+            ForEach([selectedList!]) {_ in
+              GeometryReader { geo in
+                HStack {
+                  Circle()
+                    .fill(Color.withData(selectedList!.color ?? Color.clear.data)!)
+                    .frame(width: geo.size.height, height: geo.size.height)
+                  Text(selectedList!.title ?? "Unknown")
+                  Spacer()
+                }
+              }
+            }
+            .onDelete { indexSet in
+              for index in indexSet {
+                let item = lists[index]
+                moc.delete(item)
+                try? moc.save()
+              }
+            }
+          }
+        } header: {
+          Text("Selected List")
+        }
+      }
+      ForEach(lists, id: \.self) { list in
+        if list != selectedList {
           NavigationLink {
             EditList(list: list)
           } label: {
@@ -30,28 +71,28 @@ struct GeneratorLists: View {
             }
           }
         }
-        .onDelete { indexSet in
-          for index in indexSet {
-            let item = lists[index]
-            moc.delete(item)
-            try? moc.save()
-          }
+      }
+      .onDelete { indexSet in
+        for index in indexSet {
+          let item = lists[index]
+          moc.delete(item)
+          try? moc.save()
         }
       }
-      .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          Button {
-            addList = true
-          } label: {
-            Image(systemName: "plus")
-          }
+    }
+    .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        Button {
+          addList = true
+        } label: {
+          Image(systemName: "plus")
         }
       }
-      .sheet(isPresented: $addList) {
-        AddList()
-      }
-      .navigationTitle("Lists")
-//    }
+    }
+    .sheet(isPresented: $addList) {
+      AddList()
+    }
+    .navigationTitle("Lists")
     .accentColor(preferences.themeColor)
   }
 }
