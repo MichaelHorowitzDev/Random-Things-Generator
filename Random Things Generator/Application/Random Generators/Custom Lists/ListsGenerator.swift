@@ -97,7 +97,6 @@ struct ListsGenerator: View {
           } header: {
             Text("Selected List")
           }
-
         }
     }
     .sheet(isPresented: $showsSettings) {

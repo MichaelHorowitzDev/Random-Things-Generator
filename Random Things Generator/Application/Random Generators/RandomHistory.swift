@@ -50,6 +50,24 @@ struct RandomHistory: View {
               self.predicate = NSPredicate(format: "randomType == %@ AND timestamp >= %@", randomType, compareDate! as CVarArg)
             }
           }
+          .onAppear(perform: {
+            var compareDate: Date? = Date()
+            switch timeFrame {
+            case "7 Days":
+              compareDate = Calendar.current.date(byAdding: .day, value: -7, to: compareDate!)!
+            case "30 Days":
+              compareDate = Calendar.current.date(byAdding: .day, value: -30, to: compareDate!)!
+            case "90 Days":
+              compareDate = Calendar.current.date(byAdding: .day, value: -90, to: compareDate!)!
+            default:
+              compareDate = nil
+            }
+            if compareDate == nil {
+              self.predicate = NSPredicate(format: "randomType == %@", randomType)
+            } else {
+              self.predicate = NSPredicate(format: "randomType == %@ AND timestamp >= %@", randomType, compareDate! as CVarArg)
+            }
+          })
       .navigationTitle("History")
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
