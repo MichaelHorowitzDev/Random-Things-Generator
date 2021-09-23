@@ -60,7 +60,7 @@ struct ListsGenerator: View {
       guard let itemName = item.itemName else { return }
       randomItem = itemName
       let coreDataItem = Random(context: moc)
-      coreDataItem.id = UUID()
+      coreDataItem.id = list?.id
       coreDataItem.randomType = title
       coreDataItem.timestamp = Date()
       coreDataItem.value = itemName
@@ -73,6 +73,7 @@ struct ListsGenerator: View {
 //      showsAlert = true
       showsHistory = true
     }
+    
     .alert("Select an Action", isPresented: $showsAlert) {
       Button("History", role: nil) {
         showsHistory = true
@@ -103,10 +104,4 @@ struct ListsGenerator: View {
       GeneratorLists()
     }
   }
-}
-
-struct ListsGenerator_Previews: PreviewProvider {
-    static var previews: some View {
-        ListsGenerator()
-    }
 }

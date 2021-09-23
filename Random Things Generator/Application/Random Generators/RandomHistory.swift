@@ -18,14 +18,54 @@ struct RandomHistory: View {
   private var timeFrames = ["7 Days", "30 Days", "90 Days", "All Time"]
   private var settings = AnyView(EmptyView())
   
-  init(randomType: String, formatValue: ((_ value: String) -> AnyView)? = nil) {
+  init(randomType: String, id: String? = nil, customPredicate: NSPredicate? = nil, formatValue: ((_ value: String) -> AnyView)? = nil) {
     self._predicate = State(initialValue: NSPredicate(format: "randomType == %@", randomType))
     self.formatValue = formatValue
     self.randomType = randomType
+    self.id = id
+    self.customPredicate = customPredicate
   }
   
   private let randomType: String
+  private let id: String?
+  private let customPredicate: NSPredicate?
   private let formatValue: ((_ value: String) -> AnyView)?
+  func setPredicate(timeFrame: String) {
+    var compareDate: Date? = Date()
+    switch timeFrame {
+    case "7 Days":
+      compareDate = Calendar.current.date(byAdding: .day, value: -7, to: compareDate!)!
+    case "30 Days":
+      compareDate = Calendar.current.date(byAdding: .day, value: -30, to: compareDate!)!
+    case "90 Days":
+      compareDate = Calendar.current.date(byAdding: .day, value: -90, to: compareDate!)!
+    default:
+      compareDate = nil
+    }
+    var predicates = [NSPredicate]()
+    predicates.append(NSPredicate(format: "randomType == %@", randomType))
+    if let compareDate = compareDate {
+      predicates.append(NSPredicate(format: "timestamp >= %@", compareDate as CVarArg))
+    }
+    if let id = id {
+      predicates.append(NSPredicate(format: "id == %@", id))
+    }
+    let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+    self.predicate = compoundPredicate
+//    if let id = id {
+//      if compareDate == nil {
+//        self.predicate = NSPredicate(format: "randomType == %@ AND id == %@", randomType, id)
+//      } else {
+//        self.predicate = NSPredicate(format: "randomType == %@ AND id == %@ AND timestamp >= %@", randomType, id, compareDate! as CVarArg)
+//      }
+//    } else {
+//      if compareDate == nil {
+//        self.predicate = NSPredicate(format: "randomType == %@", randomType)
+//      } else {
+//        self.predicate = NSPredicate(format: "randomType == %@ AND timestamp >= %@", randomType, compareDate! as CVarArg)
+//      }
+//    }
+  }
   var body: some View {
     NavigationView {
       RandomHistoryItems(predicate: predicate, timeFrame: $timeFrame, randomType: randomType, formatValue: formatValue)
@@ -33,40 +73,10 @@ struct RandomHistory: View {
           settings
         })
           .onChange(of: timeFrame) { newValue in
-            var compareDate: Date? = Date()
-            switch newValue {
-            case "7 Days":
-              compareDate = Calendar.current.date(byAdding: .day, value: -7, to: compareDate!)!
-            case "30 Days":
-              compareDate = Calendar.current.date(byAdding: .day, value: -30, to: compareDate!)!
-            case "90 Days":
-              compareDate = Calendar.current.date(byAdding: .day, value: -90, to: compareDate!)!
-            default:
-              compareDate = nil
-            }
-            if compareDate == nil {
-              self.predicate = NSPredicate(format: "randomType == %@", randomType)
-            } else {
-              self.predicate = NSPredicate(format: "randomType == %@ AND timestamp >= %@", randomType, compareDate! as CVarArg)
-            }
+            setPredicate(timeFrame: newValue)
           }
           .onAppear(perform: {
-            var compareDate: Date? = Date()
-            switch timeFrame {
-            case "7 Days":
-              compareDate = Calendar.current.date(byAdding: .day, value: -7, to: compareDate!)!
-            case "30 Days":
-              compareDate = Calendar.current.date(byAdding: .day, value: -30, to: compareDate!)!
-            case "90 Days":
-              compareDate = Calendar.current.date(byAdding: .day, value: -90, to: compareDate!)!
-            default:
-              compareDate = nil
-            }
-            if compareDate == nil {
-              self.predicate = NSPredicate(format: "randomType == %@", randomType)
-            } else {
-              self.predicate = NSPredicate(format: "randomType == %@ AND timestamp >= %@", randomType, compareDate! as CVarArg)
-            }
+            setPredicate(timeFrame: timeFrame)
           })
       .navigationTitle("History")
       .toolbar {

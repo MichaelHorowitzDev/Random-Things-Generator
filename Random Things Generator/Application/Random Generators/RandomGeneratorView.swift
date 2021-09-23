@@ -29,6 +29,7 @@ public struct RandomGeneratorView<Content>: View where Content: View {
   private var onSettingsPressed: (() -> Void)?
   private var formatHistoryValue: ((String) -> AnyView)?
   private var buttonOverContent = true
+  private var settingsContent: AnyView?
   private func generateHaptic() {
     if preferences.hasHapticFeedback {
       UIImpactFeedbackGenerator(style: .soft).impactOccurred()
@@ -191,6 +192,11 @@ extension RandomGeneratorView {
   func randomButtonOverContent(_ bool: Bool) -> Self {
     var copy = self
     copy.buttonOverContent = bool
+    return copy
+  }
+  func settingsPresentedContent<Content: View>(@ViewBuilder _ settings: () -> Content) -> Self {
+    var copy = self
+    copy.settingsContent = AnyView(settings())
     return copy
   }
 }

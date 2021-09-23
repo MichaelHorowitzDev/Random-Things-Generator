@@ -108,9 +108,3 @@ private struct NumberEntry: View {
       }
   }
 }
-
-struct NumberGenerator_Previews: PreviewProvider {
-    static var previews: some View {
-        NumberGenerator()
-    }
-}
