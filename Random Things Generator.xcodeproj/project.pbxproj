@@ -35,13 +35,13 @@
 		8B9FEFDE26DE1B3200D24301 /* Random+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9FEFDC26DE1B3200D24301 /* Random+CoreDataClass.swift */; };
 		8B9FEFDF26DE1B3200D24301 /* Random+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9FEFDD26DE1B3200D24301 /* Random+CoreDataProperties.swift */; };
 		8B9FEFE126DE1C9800D24301 /* RandomHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9FEFE026DE1C9800D24301 /* RandomHistory.swift */; };
-		8B9FEFE526DE233500D24301 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9FEFE426DE233500D24301 /* CloudKit.framework */; };
 		8BB2A22E26E4145700C27B0A /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2A22D26E4145700C27B0A /* Color+Extensions.swift */; };
 		8BB2A23226E432E800C27B0A /* ListsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2A23126E432E800C27B0A /* ListsGenerator.swift */; };
 		8BB2A23426E474AC00C27B0A /* GeneratorLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2A23326E474AC00C27B0A /* GeneratorLists.swift */; };
 		8BB2A23726E4760100C27B0A /* GeneratorList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2A23526E4760100C27B0A /* GeneratorList+CoreDataClass.swift */; };
 		8BB2A23826E4760100C27B0A /* GeneratorList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2A23626E4760100C27B0A /* GeneratorList+CoreDataProperties.swift */; };
 		8BB2A23A26E4788300C27B0A /* Add List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2A23926E4788300C27B0A /* Add List.swift */; };
+		8BF761E826FC23740018686F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9FEFE426DE233500D24301 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,7 +73,6 @@
 		8B9FEFDC26DE1B3200D24301 /* Random+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Random+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		8B9FEFDD26DE1B3200D24301 /* Random+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Random+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		8B9FEFE026DE1C9800D24301 /* RandomHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomHistory.swift; sourceTree = "<group>"; };
-		8B9FEFE226DE233100D24301 /* Random Things Generator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Random Things Generator.entitlements"; sourceTree = "<group>"; };
 		8B9FEFE426DE233500D24301 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		8BB2A22D26E4145700C27B0A /* Color+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		8BB2A23126E432E800C27B0A /* ListsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsGenerator.swift; sourceTree = "<group>"; };
@@ -82,6 +81,7 @@
 		8BB2A23626E4760100C27B0A /* GeneratorList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneratorList+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		8BB2A23926E4788300C27B0A /* Add List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Add List.swift"; sourceTree = "<group>"; };
 		8BD23D2426DEDEA8003C5489 /* Random-Things-Generator-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Random-Things-Generator-Info.plist"; sourceTree = SOURCE_ROOT; };
+		8BF761E726FC22C20018686F /* Random Things Generator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Random Things Generator.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,8 +89,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B9FEFE526DE233500D24301 /* CloudKit.framework in Frameworks */,
 				8B7C932126E042F20046032F /* CSV in Frameworks */,
+				8BF761E826FC23740018686F /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,8 +126,8 @@
 		8B74E1C726D6CD1A00886949 /* Random Things Generator */ = {
 			isa = PBXGroup;
 			children = (
+				8BF761E726FC22C20018686F /* Random Things Generator.entitlements */,
 				8BD23D2426DEDEA8003C5489 /* Random-Things-Generator-Info.plist */,
-				8B9FEFE226DE233100D24301 /* Random Things Generator.entitlements */,
 				8B9FEFDB26DE1AF000D24301 /* Core Data Model */,
 				8B74E1DB26D6CDAA00886949 /* Application */,
 				8B74E1DD26D6CDD900886949 /* Common */,
@@ -495,6 +495,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Random Things Generator/Random Things Generator.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Random Things Generator/Preview Content\"";
@@ -515,6 +516,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.michaelhorowitz.Random-Things-Generator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -527,6 +529,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Random Things Generator/Random Things Generator.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Random Things Generator/Preview Content\"";
@@ -547,6 +550,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.michaelhorowitz.Random-Things-Generator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

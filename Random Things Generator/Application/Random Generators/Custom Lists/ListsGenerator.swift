@@ -87,7 +87,7 @@ struct ListsGenerator: View {
       Button("Cancel", role: .cancel) {}
     }
     .sheet(isPresented: $showsHistory) {
-      RandomHistory(randomType: list?.title ?? "", formatValue: nil)
+      RandomHistory(randomType: list?.title ?? "", id: list?.id?.uuidString, formatValue: nil)
         .settings {
           Section {
             NavigationLink {

@@ -78,21 +78,21 @@ struct AddList: View {
           }
           ToolbarItem(placement: .confirmationAction) {
             Button {
-              let fetchRequest: NSFetchRequest<GeneratorList> = GeneratorList.fetchRequest()
-              var canAddItem = false
-              do {
-                let results = try moc.fetch(fetchRequest)
-                let containsTitle = results.contains(where: { $0.title == titleText })
-                if !containsTitle {
-                  canAddItem = true
-                }
-              } catch {
-                print(error)
-                canAddItem = true
-              }
-              if !canAddItem {
-                itemTitleExists = true
-              } else {
+//              let fetchRequest: NSFetchRequest<GeneratorList> = GeneratorList.fetchRequest()
+//              var canAddItem = false
+//              do {
+//                let results = try moc.fetch(fetchRequest)
+//                let containsTitle = results.contains(where: { $0.title == titleText })
+//                if !containsTitle {
+//                  canAddItem = true
+//                }
+//              } catch {
+//                print(error)
+//                canAddItem = true
+//              }
+//              if !canAddItem {
+//                itemTitleExists = true
+//              } else {
                 let list = GeneratorList(context: self.moc)
                 list.title = titleText
                 list.color = selectedColor.data
@@ -101,7 +101,7 @@ struct AddList: View {
                 list.dateModified = Date()
                 try? self.moc.save()
                 presentationMode.wrappedValue.dismiss()
-              }
+//              }
             } label: {
               Text("Done")
                 .fontWeight(.bold)
