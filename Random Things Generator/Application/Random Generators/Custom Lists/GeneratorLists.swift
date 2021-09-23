@@ -8,40 +8,61 @@
 import SwiftUI
 
 struct GeneratorLists: View {
-  @FetchRequest(entity: GeneratorList.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \GeneratorList.dateCreated, ascending: false)], predicate: nil, animation: nil) var lists: FetchedResults<GeneratorList>
+  @FetchRequest(entity: GeneratorList.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \GeneratorList.dateCreated, ascending: false)], predicate: nil, animation: .linear(duration: 0.4)) var lists: FetchedResults<GeneratorList>
   @State private var addList = false
   @State private var changeSelectedList = false
   @Environment(\.managedObjectContext) var moc
   @EnvironmentObject var preferences: UserPreferences
   
-  var selectedList: GeneratorList? {
-    var list = lists.first { generatorList in
-      generatorList.title == currentList
-    }
-    if list == nil {
-      list = lists.first
-      currentList = list?.title ?? ""
-    }
-    return list
+  var selectedLists: [GeneratorList] {
+    let generatorLists = lists.filter({ currentLists.contains($0.id ?? UUID()) })
+    return generatorLists
+    //    var list = lists.first { generatorList in
+    //      generatorList.title == currentList
+    //    }
+    //    if list == nil {
+    //      list = lists.first
+    //      currentList = list?.title ?? ""
+    //    }
+    //    return list
   }
-  @AppStorage("currentList") var currentList: String = ""
+  var unselectedLists: [GeneratorList] {
+    let generatorLists = lists.filter({ !(selectedLists.contains($0)) })
+    return generatorLists
+  }
+  //  @AppStorage(
+  //  @AppStorage("currentList") var currentList: [UUID] = [UUID()]
+  @State var currentLists = [UUID]()
+  @State var deleteList: GeneratorList?
   
   var body: some View {
     List {
-      if selectedList != nil {
+      if selectedLists.count > 0 {
         Section {
-          ForEach([selectedList!]) {_ in
+          ForEach(selectedLists) { selectedList in
             NavigationLink {
-              EditList(list: selectedList!)
+              EditList(list: selectedList)
             } label: {
               GeometryReader { geo in
                 HStack {
                   Circle()
-                    .fill(Color.withData(selectedList!.color ?? Color.clear.data)!)
+                    .fill(Color.withData(selectedList.color ?? Color.clear.data)!)
                     .frame(width: geo.size.height, height: geo.size.height)
-                  Text(selectedList!.title ?? "Unknown")
+                  Text(selectedList.title ?? "Unknown")
                   Spacer()
                 }
+              }
+              .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                Button {
+                  if let id = selectedList.id {
+                    withAnimation {
+                      currentLists = currentLists.filter({ $0 != id })
+                    }
+                  }
+                } label: {
+                  Text("Uncheck")
+                }
+                .tint(.green)
               }
             }
             .disabled(changeSelectedList)
@@ -53,53 +74,61 @@ struct GeneratorLists: View {
               try? moc.save()
             }
           }
-          
         } header: {
-          Text("Selected List")
+          Text("Selected Lists")
         }
       }
-      ForEach(lists, id: \.self) { list in
-        if list != selectedList {
-          if changeSelectedList {
+      Section {
+        ForEach(unselectedLists, id: \.self) { list in
+          NavigationLink {
+            EditList(list: list)
+          } label: {
             GeometryReader { geo in
-              Button {
-                currentList = list.title ?? ""
-                changeSelectedList = false
-              } label: {
-                HStack {
-                  Circle()
-                    .fill(Color.withData(list.color ?? Color.clear.data)!)
-                    .frame(width: geo.size.height, height: geo.size.height)
-                  Text(list.title ?? "Unknown")
-                  Spacer()
-                }
-              }
-            }
-            
-          } else {
-            NavigationLink {
-              EditList(list: list)
-            } label: {
-              GeometryReader { geo in
-                HStack {
-                  Circle()
-                    .fill(Color.withData(list.color ?? Color.clear.data)!)
-                    .frame(width: geo.size.height, height: geo.size.height)
-                  Text(list.title ?? "Unknown")
-                  Spacer()
-                }
+              HStack {
+                Circle()
+                  .fill(Color.withData(list.color ?? Color.clear.data)!)
+                  .frame(width: geo.size.height, height: geo.size.height)
+                Text(list.title ?? "Unknown")
+                Spacer()
               }
             }
           }
+          .swipeActions(edge: .leading, allowsFullSwipe: true) {
+            Button {
+              if let id = list.id {
+                withAnimation {
+                  currentLists.append(id)
+                }
+              }
+            } label: {
+              Text("Select")
+            }
+            .tint(.green)
+          }
+          .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+            Button {
+              deleteList = list
+            } label: {
+              Text("Delete")
+            }
+            .tint(.red)
+          }
         }
+      } footer: {
+        Text("Swipe to the left to select the list. Swipe to the right to delete the list.")
       }
-      .onDelete { indexSet in
-        for index in indexSet {
-          let item = lists[index]
+    }
+    .alert(item: $deleteList) { item in
+      Alert(title: Text("Delete List"), message: Text("Are you sure you want to delete this list?"), primaryButton: Alert.Button.destructive(Text("Delete"), action: {
+        withAnimation {
           moc.delete(item)
           try? moc.save()
         }
-      }
+        
+        
+      }), secondaryButton: Alert.Button.cancel(Text("Cancel"), action: {
+        deleteList = nil
+      }))
     }
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
