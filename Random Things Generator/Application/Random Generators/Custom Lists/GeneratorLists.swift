@@ -147,13 +147,13 @@ struct GeneratorLists: View {
           Image(systemName: "plus")
         }
       }
-      ToolbarItem(placement: .bottomBar) {
-        Button {
-          changeSelectedList.toggle()
-        } label: {
-          Text(changeSelectedList ? "Cancel" : "Change Selected List")
-        }
-      }
+//      ToolbarItem(placement: .bottomBar) {
+//        Button {
+//          changeSelectedList.toggle()
+//        } label: {
+//          Text(changeSelectedList ? "Cancel" : "Change Selected List")
+//        }
+//      }
     }
     .sheet(isPresented: $addList) {
       AddList()

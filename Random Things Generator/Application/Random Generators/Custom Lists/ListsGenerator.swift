@@ -117,7 +117,7 @@ struct ListsGenerator: View {
             NavigationLink {
               GeneratorLists(currentLists: $currentLists)
             } label: {
-              Text("Selected Lists")
+              Text("List")
             }
           } header: {
             Text("Selected List")

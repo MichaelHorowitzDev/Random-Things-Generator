@@ -18,13 +18,14 @@ struct RandomHistory: View {
   private var timeFrames = ["7 Days", "30 Days", "90 Days", "All Time"]
   private var settings = AnyView(EmptyView())
   
-  init(randomType: String, id: String? = nil, customPredicate: NSPredicate? = nil, isCustomList: Bool = false, formatValue: ((_ value: String) -> AnyView)? = nil) {
+  init(randomType: String, generatorList: GeneratorList? = nil, id: String? = nil, customPredicate: NSPredicate? = nil, isCustomList: Bool = false, formatValue: ((_ value: String) -> AnyView)? = nil) {
     self._predicate = State(initialValue: NSPredicate(format: "randomType == %@", randomType))
     self.formatValue = formatValue
     self.randomType = randomType
     self.id = id
     self.customPredicate = customPredicate
     self.isCustomList = isCustomList
+    self.generatorList = generatorList
   }
   
   private let randomType: String
@@ -32,6 +33,7 @@ struct RandomHistory: View {
   private let customPredicate: NSPredicate?
   private let formatValue: ((_ value: String) -> AnyView)?
   private let isCustomList: Bool
+  private let generatorList: GeneratorList?
   func setPredicate(timeFrame: String) {
     var compareDate: Date? = Date()
     switch timeFrame {
@@ -89,7 +91,7 @@ struct RandomHistory: View {
           .onAppear(perform: {
             setPredicate(timeFrame: timeFrame)
           })
-      .navigationTitle("History")
+      .navigationTitle("Options")
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
           Button("Cancel") {
@@ -110,6 +112,26 @@ extension RandomHistory {
     return copy
   }
 }
+private struct RandomGeneratorSettings: View {
+  @State private var nonRepeat = false
+  @Environment(\.managedObjectContext) var moc
+  let generatorList: GeneratorList
+  init(generatorList: GeneratorList) {
+    self.generatorList = generatorList
+  }
+  var body: some View {
+    Section {
+      Toggle("Non Repeating", isOn: $nonRepeat)
+        .onChange(of: nonRepeat) { newValue in
+          generatorList.nonRepeating = newValue
+          try? moc.save()
+        }
+    } header: {
+      Text("Settings")
+    }
+
+  }
+}
 
 private struct RandomHistoryItems: View {
   @FetchRequest var history: FetchedResults<Random>
@@ -119,11 +141,12 @@ private struct RandomHistoryItems: View {
   private var timeFrames = ["7 Days", "30 Days", "90 Days", "All Time"]
   private var settings = AnyView(EmptyView())
   
-  init(predicate: NSPredicate, timeFrame: Binding<String>, randomType: String, formatValue: ((_ value: String) -> AnyView)? = nil) {
+  init(predicate: NSPredicate, timeFrame: Binding<String>, randomType: String, generatorList: GeneratorList? = nil, formatValue: ((_ value: String) -> AnyView)? = nil) {
     self._history = FetchRequest(entity: Random.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Random.timestamp, ascending: false)], predicate: predicate, animation: .default)
     self.formatValue = formatValue
     self._timeFrame = timeFrame
     self.randomType = randomType
+    self.generatorList = generatorList
   }
   func formatDate(date: Date?) -> String {
     if date == nil {
@@ -138,10 +161,14 @@ private struct RandomHistoryItems: View {
     }
   }
   private let randomType: String
+  private let generatorList: GeneratorList?
   private let formatValue: ((_ value: String) -> AnyView)?
   var body: some View {
     List {
       settings
+      if generatorList != nil {
+        RandomGeneratorSettings(generatorList: generatorList!)
+      }
       Section(content: {
         ForEach(history, id: \.self) { item in
           HStack {

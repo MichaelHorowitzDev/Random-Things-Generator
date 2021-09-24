@@ -1,8 +1,8 @@
 //
 //  GeneratorList+CoreDataProperties.swift
-//  GeneratorList
+//  Random Things Generator
 //
-//  Created by Michael Horowitz on 9/6/21.
+//  Created by Michael Horowitz on 9/24/21.
 //
 //
 
@@ -22,6 +22,7 @@ extension GeneratorList {
     @NSManaged public var id: UUID?
     @NSManaged public var title: String?
     @NSManaged public var totalTimes: Int32
+    @NSManaged public var nonRepeating: Bool
     @NSManaged public var items: NSSet?
 
 }
