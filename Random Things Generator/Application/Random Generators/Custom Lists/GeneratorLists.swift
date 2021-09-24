@@ -32,8 +32,14 @@ struct GeneratorLists: View {
   }
   //  @AppStorage(
   //  @AppStorage("currentList") var currentList: [UUID] = [UUID()]
-  @State var currentLists = [UUID]()
+  @Binding var currentLists: [UUID]
   @State var deleteList: GeneratorList?
+  init(currentLists: Binding<[UUID]>) {
+    _currentLists = currentLists
+//    if let currentLists = UserDefaults.standard.array(forKey: "currentLists") as? [UUID] {
+//      self._currentLists = State(initialValue: currentLists)
+//    }
+  }
   
   var body: some View {
     List {
@@ -60,7 +66,7 @@ struct GeneratorLists: View {
                     }
                   }
                 } label: {
-                  Text("Uncheck")
+                  Text("Deselect")
                 }
                 .tint(.green)
               }
@@ -118,6 +124,9 @@ struct GeneratorLists: View {
         Text("Swipe to the left to select the list. Swipe to the right to delete the list.")
       }
     }
+//    .onChange(of: currentLists, perform: { newValue in
+//      UserDefaults.standard.set(currentLists, forKey: "currentLists")
+//    })
     .alert(item: $deleteList) { item in
       Alert(title: Text("Delete List"), message: Text("Are you sure you want to delete this list?"), primaryButton: Alert.Button.destructive(Text("Delete"), action: {
         withAnimation {

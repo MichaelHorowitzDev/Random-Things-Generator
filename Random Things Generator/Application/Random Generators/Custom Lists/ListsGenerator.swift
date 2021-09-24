@@ -12,17 +12,37 @@ struct ListsGenerator: View {
   @Environment(\.managedObjectContext) var moc
 //  @AppStorage("currentList") var currentList: String = UUID().uuidString
   @FetchRequest(entity: GeneratorList.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \GeneratorList.dateCreated, ascending: false)], predicate: nil, animation: nil) var lists: FetchedResults<GeneratorList>
-  var list: GeneratorList? {
-    var list = lists.first { generatorList in
-      generatorList.title == currentList
+//  var list: GeneratorList? {
+//    var list = lists.first { generatorList in
+//      generatorList.title == currentList
+//    }
+//    if list == nil {
+//      list = lists.first
+//      currentList = list?.title ?? ""
+//    }
+//    return list
+//  }
+  var selectedLists: [GeneratorList] {
+    lists.filter { generatorList in
+      if let id = generatorList.id {
+        return currentLists.contains(id)
+      }
+      return false
     }
-    if list == nil {
-      list = lists.first
-      currentList = list?.title ?? ""
-    }
-    return list
   }
-  @AppStorage("currentList") var currentList: String = ""
+//  @AppStorage("currentList") var currentList: String = ""
+  @State var currentLists = [UUID]()
+  init() {
+    if let currentLists = UserDefaults.standard.array(forKey: "currentLists") as? [String] {
+      var uuids = [UUID]()
+      for string in currentLists {
+        if let uuid = UUID(uuidString: string) {
+          uuids.append(uuid)
+        }
+      }
+      self._currentLists = State(initialValue: uuids)
+    }
+  }
 //  @FetchRequest var list: FetchedResults<GeneratorList>
 //  init() {
 //    if let currentList = UserDefaults.standard.string(forKey: "currentList") {
@@ -39,7 +59,7 @@ struct ListsGenerator: View {
   @State private var showsHistory = false
   @State private var showsSettings = false
   var body: some View {
-    RandomGeneratorView(list?.title ?? "") {
+    RandomGeneratorView("Lists") {
       Text(randomItem)
         .font(.system(size: 100))
         .minimumScaleFactor(0.2)
@@ -55,12 +75,13 @@ struct ListsGenerator: View {
       scale = 1
     }
     .onRandomPressed {
-      guard let title = list?.title else { return }
-      guard let item = (list?.items?.allObjects as? [ListItem])?.randomElement() else { return }
+      guard let list = selectedLists.randomElement() else { return }
+      guard let title = list.title else { return }
+      guard let item = (list.items?.allObjects as? [ListItem])?.randomElement() else { return }
       guard let itemName = item.itemName else { return }
       randomItem = itemName
       let coreDataItem = Random(context: moc)
-      coreDataItem.id = list?.id
+      coreDataItem.id = list.id
       coreDataItem.randomType = title
       coreDataItem.timestamp = Date()
       coreDataItem.value = itemName
@@ -73,7 +94,9 @@ struct ListsGenerator: View {
 //      showsAlert = true
       showsHistory = true
     }
-    
+    .onChange(of: currentLists, perform: { newValue in
+      UserDefaults.standard.set(newValue.map({$0.uuidString}), forKey: "currentLists")
+    })
     .alert("Select an Action", isPresented: $showsAlert) {
       Button("History", role: nil) {
         showsHistory = true
@@ -87,13 +110,14 @@ struct ListsGenerator: View {
       Button("Cancel", role: .cancel) {}
     }
     .sheet(isPresented: $showsHistory) {
-      RandomHistory(randomType: list?.title ?? "", id: list?.id?.uuidString, formatValue: nil)
+      
+      RandomHistory(randomType: "Lists", customPredicate: idPredicate, isCustomList: true, formatValue: nil)
         .settings {
           Section {
             NavigationLink {
-              GeneratorLists()
+              GeneratorLists(currentLists: $currentLists)
             } label: {
-              Text(list?.title ?? "")
+              Text("Selected Lists")
             }
           } header: {
             Text("Selected List")
@@ -101,7 +125,25 @@ struct ListsGenerator: View {
         }
     }
     .sheet(isPresented: $showsSettings) {
-      GeneratorLists()
+      GeneratorLists(currentLists: $currentLists)
     }
   }
+  var idPredicate: NSPredicate {
+    var predicates = [NSPredicate]()
+    for id in currentLists {
+      let predicate = NSPredicate(format: "id == %@", id as CVarArg)
+      predicates.append(predicate)
+    }
+    let compoundPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
+    return compoundPredicate
+  }
+//  var selectedListNames: String {
+//    let selectedListNames: [String] = selectedLists.map { generatorList in
+//      if let title = generatorList.title {
+//        return title
+//      }
+//      return "
+//    }
+//    return selectedListNames.joined(separator: "\n")
+//  }
 }

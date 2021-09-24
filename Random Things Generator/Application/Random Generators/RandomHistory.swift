@@ -18,18 +18,20 @@ struct RandomHistory: View {
   private var timeFrames = ["7 Days", "30 Days", "90 Days", "All Time"]
   private var settings = AnyView(EmptyView())
   
-  init(randomType: String, id: String? = nil, customPredicate: NSPredicate? = nil, formatValue: ((_ value: String) -> AnyView)? = nil) {
+  init(randomType: String, id: String? = nil, customPredicate: NSPredicate? = nil, isCustomList: Bool = false, formatValue: ((_ value: String) -> AnyView)? = nil) {
     self._predicate = State(initialValue: NSPredicate(format: "randomType == %@", randomType))
     self.formatValue = formatValue
     self.randomType = randomType
     self.id = id
     self.customPredicate = customPredicate
+    self.isCustomList = isCustomList
   }
   
   private let randomType: String
   private let id: String?
   private let customPredicate: NSPredicate?
   private let formatValue: ((_ value: String) -> AnyView)?
+  private let isCustomList: Bool
   func setPredicate(timeFrame: String) {
     var compareDate: Date? = Date()
     switch timeFrame {
@@ -43,12 +45,21 @@ struct RandomHistory: View {
       compareDate = nil
     }
     var predicates = [NSPredicate]()
-    predicates.append(NSPredicate(format: "randomType == %@", randomType))
+    if !isCustomList {
+      predicates.append(NSPredicate(format: "randomType == %@", randomType))
+      if id == nil {
+        predicates.append(NSPredicate(format: "id = nil"))
+      }
+    }
+    
     if let compareDate = compareDate {
       predicates.append(NSPredicate(format: "timestamp >= %@", compareDate as CVarArg))
     }
     if let id = id {
       predicates.append(NSPredicate(format: "id == %@", id))
+    }
+    if let customPredicate = customPredicate {
+      predicates.append(customPredicate)
     }
     let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
     self.predicate = compoundPredicate
