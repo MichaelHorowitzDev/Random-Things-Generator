@@ -117,16 +117,33 @@ struct ListsGenerator: View {
             NavigationLink {
               GeneratorLists(currentLists: $currentLists)
             } label: {
-              Text("List")
+              Text("Selected List")
+            }
+            NavigationLink {
+              HatPicker(items: allItemsInLists)
+            } label: {
+              Text("Pick from hat")
             }
           } header: {
-            Text("Selected List")
+            Text("Options")
           }
         }
     }
     .sheet(isPresented: $showsSettings) {
       GeneratorLists(currentLists: $currentLists)
     }
+  }
+  var allItemsInLists: [String] {
+    var items = [String]()
+    selectedLists.forEach { generatorList in
+      let list = generatorList.items?.allObjects as? [ListItem]
+      list?.forEach({ listItem in
+        if let itemName = listItem.itemName {
+          items.append(itemName)
+        }
+      })
+    }
+    return items
   }
   var idPredicate: NSPredicate {
     var predicates = [NSPredicate]()
