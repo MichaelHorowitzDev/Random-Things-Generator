@@ -46,33 +46,36 @@ struct MapGenerator: View {
       let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
       let geoCoder = CLGeocoder()
       print(geoCoder)
-      geoCoder.reverseGeocodeLocation(location) { placemarks, error in
-        if error != nil {
-          updateInterface()
-          return
-        }
-        if placemarks?.count == 0 { updateMap(); return }
-        for placemark in placemarks ?? [] {
-          if placemark.ocean != nil { updateMap(); return }
-        }
-        updateInterface()
-        func formatDouble(_ num: Double) -> String {
-          let numberFormatter = NumberFormatter()
-          numberFormatter.maximumFractionDigits = 6
-          return numberFormatter.string(from: num as NSNumber) ?? ""
-        }
-        let coreDataItem = Random(context: moc)
-        coreDataItem.timestamp = Date()
-        coreDataItem.randomType = "Map"
-        coreDataItem.value = "\(formatDouble(coordinate.latitude)), \(formatDouble(coordinate.longitude))"
-        try? moc.save()
-      }
-    func updateInterface() {
-      DispatchQueue.main.async {
-        annotations = [MapPoint(coordinate: coordinate)]
-        region.center = coordinate
-      }
+    annotations = [MapPoint(coordinate: coordinate)]
+    region.center = coordinate
+    func formatDouble(_ num: Double) -> String {
+      let numberFormatter = NumberFormatter()
+      numberFormatter.maximumFractionDigits = 6
+      return numberFormatter.string(from: num as NSNumber) ?? ""
     }
+    let coreDataItem = Random(context: moc)
+    coreDataItem.timestamp = Date()
+    coreDataItem.randomType = "Map"
+    coreDataItem.value = "\(formatDouble(coordinate.latitude)), \(formatDouble(coordinate.longitude))"
+    try? moc.save()
+//      geoCoder.reverseGeocodeLocation(location) { placemarks, error in
+//        if error != nil {
+//          updateInterface()
+//          return
+//        }
+//        if placemarks?.count == 0 { updateMap(); return }
+//        for placemark in placemarks ?? [] {
+//          if placemark.ocean != nil { updateMap(); return }
+//        }
+//        updateInterface()
+//        
+//      }
+//    func updateInterface() {
+//      DispatchQueue.main.async {
+//        annotations = [MapPoint(coordinate: coordinate)]
+//        region.center = coordinate
+//      }
+//    }
   }
 }
 private struct MapPoint: Identifiable {
