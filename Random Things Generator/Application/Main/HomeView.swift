@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-  let types = ["Number", "Card", "Coin", "Date", "Map", "Lists"]
+  let types = ["Number", "Card", "Coin", "Color", "Date", "Lists"]
   @EnvironmentObject var preferences: UserPreferences
   @State private var settingsPresented = false
   let columns: [GridItem] = [GridItem(.adaptive(minimum: 140))]
@@ -43,7 +43,7 @@ struct HomeView: View {
     .navigationViewStyle(.stack)
     .accentColor(preferences.themeColor)
   }
-  let typeToView: [String: AnyView] = ["Number": AnyView(NumberGenerator()), "Coin": AnyView(CoinFlipper()), "Card": AnyView(CardRandomizer()), "Date": AnyView(DateGenerator()), "Map": AnyView(MapGenerator()), "Lists": AnyView(ListsGenerator())]
+  let typeToView: [String: AnyView] = ["Number": AnyView(NumberGenerator()), "Coin": AnyView(CoinFlipper()), "Card": AnyView(CardRandomizer()), "Date": AnyView(DateGenerator()), "Map": AnyView(MapGenerator()), "Lists": AnyView(ListsGenerator()), "Color": AnyView(ColorGenerator())]
 }
 
 private struct HomeViewItem: View {

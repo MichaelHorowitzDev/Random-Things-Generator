@@ -68,4 +68,10 @@ extension Color {
     static let rosyBrown = Color(hex: 0xBC8F8F)
     static let mintBlue = Color(hex: 0x48ABA9)
   }
+  static var random: Color {
+    let r = Double.random(in: 0...1)
+    let g = Double.random(in: 0...1)
+    let b = Double.random(in: 0...1)
+    return Color(.sRGB, red: r, green: g, blue: b, opacity: 1)
+  }
 }
