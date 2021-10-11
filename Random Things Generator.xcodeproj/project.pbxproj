@@ -44,6 +44,12 @@
 		8BCB7459270F33D100EFAE2B /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB7458270F33D100EFAE2B /* UserPreferences.swift */; };
 		8BCB745B270F3E4800EFAE2B /* HatPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB745A270F3E4800EFAE2B /* HatPicker.swift */; };
 		8BF761E826FC23740018686F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9FEFE426DE233500D24301 /* CloudKit.framework */; };
+		8BF98EDB27114C4000DD8AAE /* ColorGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF98EDA27114C4000DD8AAE /* ColorGenerator.swift */; };
+		8BF98EDE2711561400DD8AAE /* GenerateMultipleTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF98EDD2711561400DD8AAE /* GenerateMultipleTimes.swift */; };
+		8BF98EE12712389A00DD8AAE /* SaveCSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF98EE02712389A00DD8AAE /* SaveCSV.swift */; };
+		8BF98EE32713BEF800DD8AAE /* GenerateMultipleTimesStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF98EE22713BEF800DD8AAE /* GenerateMultipleTimesStatistics.swift */; };
+		8BF98EE52713C05800DD8AAE /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF98EE42713C05800DD8AAE /* BarChart.swift */; };
+		8BF98EE72713C0B600DD8AAE /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF98EE62713C0B600DD8AAE /* Array+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +92,12 @@
 		8BCB745A270F3E4800EFAE2B /* HatPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatPicker.swift; sourceTree = "<group>"; };
 		8BD23D2426DEDEA8003C5489 /* Random-Things-Generator-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Random-Things-Generator-Info.plist"; sourceTree = SOURCE_ROOT; };
 		8BF761E726FC22C20018686F /* Random Things Generator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Random Things Generator.entitlements"; sourceTree = "<group>"; };
+		8BF98EDA27114C4000DD8AAE /* ColorGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorGenerator.swift; sourceTree = "<group>"; };
+		8BF98EDD2711561400DD8AAE /* GenerateMultipleTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateMultipleTimes.swift; sourceTree = "<group>"; };
+		8BF98EE02712389A00DD8AAE /* SaveCSV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCSV.swift; sourceTree = "<group>"; };
+		8BF98EE22713BEF800DD8AAE /* GenerateMultipleTimesStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateMultipleTimesStatistics.swift; sourceTree = "<group>"; };
+		8BF98EE42713C05800DD8AAE /* BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
+		8BF98EE62713C0B600DD8AAE /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +145,7 @@
 				8BF761E726FC22C20018686F /* Random Things Generator.entitlements */,
 				8BD23D2426DEDEA8003C5489 /* Random-Things-Generator-Info.plist */,
 				8B9FEFDB26DE1AF000D24301 /* Core Data Model */,
+				8BF98EDF2712388500DD8AAE /* Model */,
 				8B74E1DB26D6CDAA00886949 /* Application */,
 				8B74E1DD26D6CDD900886949 /* Common */,
 				8B74E1DF26D6CDFD00886949 /* Assets */,
@@ -188,6 +201,7 @@
 				8B74E1EF26D89FB900886949 /* Int+Extensions.swift */,
 				8B7E861A26D98AE4004B0011 /* Binding+Extensions.swift */,
 				8B690BBC26DDB83200413FDA /* UIColor+Extensions.swift */,
+				8BF98EE62713C0B600DD8AAE /* Array+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -203,13 +217,13 @@
 		8B74E1E426D75D8A00886949 /* Random Generators */ = {
 			isa = PBXGroup;
 			children = (
+				8BF98EDC271155F300DD8AAE /* Common */,
 				8B74E1E726D75DDD00886949 /* NumberGenerator.swift */,
 				8B7E862726D9ED64004B0011 /* CoinFlipper.swift */,
-				8B7E862926D9EDB7004B0011 /* RandomGeneratorView.swift */,
 				8B61A02C26DAF2CC007DBC50 /* CardRandomizer.swift */,
 				8B29756E26DC7ECF0038CD92 /* DateGenerator.swift */,
 				8B29757026DCAAB20038CD92 /* MapGenerator.swift */,
-				8B9FEFE026DE1C9800D24301 /* RandomHistory.swift */,
+				8BF98EDA27114C4000DD8AAE /* ColorGenerator.swift */,
 				8BB2A23B26E4789600C27B0A /* Custom Lists */,
 			);
 			path = "Random Generators";
@@ -221,6 +235,7 @@
 				8B74E1EA26D760FA00886949 /* RandomizeButton.swift */,
 				8B7C931D26E041450046032F /* ShareSheet.swift */,
 				8B95E5CA26E5600500349D4C /* TextFieldAlert.swift */,
+				8BF98EE42713C05800DD8AAE /* BarChart.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -264,6 +279,25 @@
 				8BCB745A270F3E4800EFAE2B /* HatPicker.swift */,
 			);
 			path = "Custom Lists";
+			sourceTree = "<group>";
+		};
+		8BF98EDC271155F300DD8AAE /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				8B7E862926D9EDB7004B0011 /* RandomGeneratorView.swift */,
+				8B9FEFE026DE1C9800D24301 /* RandomHistory.swift */,
+				8BF98EDD2711561400DD8AAE /* GenerateMultipleTimes.swift */,
+				8BF98EE22713BEF800DD8AAE /* GenerateMultipleTimesStatistics.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		8BF98EDF2712388500DD8AAE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8BF98EE02712389A00DD8AAE /* SaveCSV.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -351,6 +385,7 @@
 				8BB2A22E26E4145700C27B0A /* Color+Extensions.swift in Sources */,
 				8B29756F26DC7ECF0038CD92 /* DateGenerator.swift in Sources */,
 				8B95E5CF26E6B0A200349D4C /* ListItem+CoreDataProperties.swift in Sources */,
+				8BF98EDB27114C4000DD8AAE /* ColorGenerator.swift in Sources */,
 				8B74E1C926D6CD1A00886949 /* Random_Things_GeneratorApp.swift in Sources */,
 				8B9FEFDF26DE1B3200D24301 /* Random+CoreDataProperties.swift in Sources */,
 				8B74E1E126D7093700886949 /* HomeView.swift in Sources */,
@@ -363,18 +398,23 @@
 				8B690BBD26DDB83200413FDA /* UIColor+Extensions.swift in Sources */,
 				8BB2A23826E4760100C27B0A /* GeneratorList+CoreDataProperties.swift in Sources */,
 				8B7E862826D9ED64004B0011 /* CoinFlipper.swift in Sources */,
+				8BF98EE72713C0B600DD8AAE /* Array+Extensions.swift in Sources */,
 				8B74E1EB26D760FA00886949 /* RandomizeButton.swift in Sources */,
 				8B7E861B26D98AE4004B0011 /* Binding+Extensions.swift in Sources */,
 				8B74E1F026D89FB900886949 /* Int+Extensions.swift in Sources */,
 				8B5B4F3E26D98377001994F4 /* SettingsMenu.swift in Sources */,
 				8B61A02D26DAF2CC007DBC50 /* CardRandomizer.swift in Sources */,
+				8BF98EDE2711561400DD8AAE /* GenerateMultipleTimes.swift in Sources */,
 				8BB2A23726E4760100C27B0A /* GeneratorList+CoreDataClass.swift in Sources */,
 				8BB2A23426E474AC00C27B0A /* GeneratorLists.swift in Sources */,
+				8BF98EE52713C05800DD8AAE /* BarChart.swift in Sources */,
 				8B95E5D126E6B2A300349D4C /* ListItemDetail.swift in Sources */,
 				8BB2A23A26E4788300C27B0A /* Add List.swift in Sources */,
+				8BF98EE32713BEF800DD8AAE /* GenerateMultipleTimesStatistics.swift in Sources */,
 				8BB2A23226E432E800C27B0A /* ListsGenerator.swift in Sources */,
 				8B95E5CE26E6B0A200349D4C /* ListItem+CoreDataClass.swift in Sources */,
 				8B7C931E26E041450046032F /* ShareSheet.swift in Sources */,
+				8BF98EE12712389A00DD8AAE /* SaveCSV.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

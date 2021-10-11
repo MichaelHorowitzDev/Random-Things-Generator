@@ -81,38 +81,38 @@ struct RandomHistory: View {
   }
   var body: some View {
     NavigationView {
-      List {
-        settings
-        if generatorList != nil {
-          RandomGeneratorSettings(generatorList: generatorList!)
-        }
-        NavigationLink {
-          RandomHistoryItems(predicate: predicate, timeFrame: $timeFrame, randomType: randomType, formatValue: formatValue)
-            .settings({
-              settings
-            })
-            .navigationTitle("History")
-              .onChange(of: timeFrame) { newValue in
-                setPredicate(timeFrame: newValue)
-              }
-              .onAppear(perform: {
-                setPredicate(timeFrame: timeFrame)
-              })
-        } label: {
-          Text("History")
-        }
-
-      }
-//      RandomHistoryItems(predicate: predicate, timeFrame: $timeFrame, randomType: randomType, formatValue: formatValue)
-//        .settings({
-//          settings
-//        })
-//          .onChange(of: timeFrame) { newValue in
-//            setPredicate(timeFrame: newValue)
-//          }
-//          .onAppear(perform: {
-//            setPredicate(timeFrame: timeFrame)
-//          })
+//      List {
+//        settings
+//        if generatorList != nil {
+//          RandomGeneratorSettings(generatorList: generatorList!)
+//        }
+//        NavigationLink {
+//          RandomHistoryItems(predicate: predicate, timeFrame: $timeFrame, randomType: randomType, formatValue: formatValue)
+//            .settings({
+//              settings
+//            })
+//            .navigationTitle("History")
+//              .onChange(of: timeFrame) { newValue in
+//                setPredicate(timeFrame: newValue)
+//              }
+//              .onAppear(perform: {
+//                setPredicate(timeFrame: timeFrame)
+//              })
+//        } label: {
+//          Text("History")
+//        }
+//
+//      }
+      RandomHistoryItems(predicate: predicate, timeFrame: $timeFrame, randomType: randomType, formatValue: formatValue)
+        .settings({
+          settings
+        })
+          .onChange(of: timeFrame) { newValue in
+            setPredicate(timeFrame: newValue)
+          }
+          .onAppear(perform: {
+            setPredicate(timeFrame: timeFrame)
+          })
       .navigationTitle("Options")
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
@@ -187,10 +187,10 @@ private struct RandomHistoryItems: View {
   private let formatValue: ((_ value: String) -> AnyView)?
   var body: some View {
     List {
-//      settings
-//      if generatorList != nil {
-//        RandomGeneratorSettings(generatorList: generatorList!)
-//      }
+      settings
+      if generatorList != nil {
+        RandomGeneratorSettings(generatorList: generatorList!)
+      }
       Section(content: {
         ForEach(history, id: \.self) { item in
           HStack {

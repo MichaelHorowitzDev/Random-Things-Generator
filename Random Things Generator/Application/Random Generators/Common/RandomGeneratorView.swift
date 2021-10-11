@@ -7,15 +7,23 @@
 
 import SwiftUI
 
+//class RandomGeneratorViewSettings: ObservableObject {
+//  private let randomType: String
+//  private let isCustomList: Bool
+//  @Published var dontRepeat: Bool
+//}
+
 public struct RandomGeneratorView<Content>: View where Content: View {
   @EnvironmentObject var preferences: UserPreferences
   let content: Content
   
-  init(_ randomType: String, @ViewBuilder content: () -> Content) {
+  init(_ randomType: String, _ isCustomList: Bool = false, @ViewBuilder content: () -> Content) {
     self.content = content()
     self.randomType = randomType
+    self.isCustomList = isCustomList
   }
   private var randomButtonTitle = "Randomize"
+  private var isCustomList = false
   private var onRandomPressed: (() -> Void)?
   private var onTap: (() -> Void)?
   private var onTouchDown: (() -> Void)?
@@ -30,6 +38,9 @@ public struct RandomGeneratorView<Content>: View where Content: View {
   private var formatHistoryValue: ((String) -> AnyView)?
   private var buttonOverContent = true
   private var settingsContent: AnyView?
+  private var generateMultipleTimes: (() -> String)?
+//  @EnvironmentObject var preferences: UserPreferences
+//  @State private var dontRepeatToggle = false
   private func generateHaptic() {
     if preferences.hasHapticFeedback {
       UIImpactFeedbackGenerator(style: .soft).impactOccurred()
@@ -98,6 +109,16 @@ public struct RandomGeneratorView<Content>: View where Content: View {
           }
           .sheet(isPresented: $settingsPresented) {
             RandomHistory(randomType: randomType, formatValue: formatHistoryValue)
+              .settings {
+                if generateMultipleTimes != nil {
+                  NavigationLink {
+                    GenerateMultipleTimes(generateMultipleTimes!, formatValue: formatHistoryValue)
+                  } label: {
+                    Text("Generate Multiple Times")
+                  }
+                }
+                settingsContent
+              }
           }
         }
       }
@@ -198,5 +219,14 @@ extension RandomGeneratorView {
     var copy = self
     copy.settingsContent = AnyView(settings())
     return copy
+  }
+  func generateMultipleTimes(_ function: () -> (() -> String)?) -> Self {
+    if function() == nil {
+      return self
+    } else {
+      var copy = self
+      copy.generateMultipleTimes = function()
+      return copy
+    }
   }
 }
