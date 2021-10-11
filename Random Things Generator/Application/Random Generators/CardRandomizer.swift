@@ -94,7 +94,7 @@ struct CardRandomizer: View {
           }
           .onRandomPressed {
             currentCards = (1...Int(cardCount)).map({_ in
-              let value = "23456789TJQK".randomElement()!
+              let value = "A23456789TJQK".randomElement()!
               let suit = "CHSD".randomElement()!
               let card = String(value).appending(String(suit))
               return CardImage(name: card)
@@ -108,7 +108,7 @@ struct CardRandomizer: View {
           .generateMultipleTimes({
             return {
               let cards: [String] = (1...Int(cardCount)).map({_ in
-                let value = "23456789TJQK".randomElement()!
+                let value = "A23456789TJQK".randomElement()!
                 let suit = "CHSD".randomElement()!
                 let card = String(value).appending(String(suit))
                 return card
