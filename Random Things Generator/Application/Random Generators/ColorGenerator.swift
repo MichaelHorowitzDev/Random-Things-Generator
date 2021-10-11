@@ -43,6 +43,11 @@ struct ColorGenerator: View {
         coreDataItem.value = hex
         try? moc.save()
       }
+      .generateMultipleTimes({
+        return {
+          "#" + String(Color.random.hex, radix: 16, uppercase: true)
+        }
+      })
       .formatHistoryValue { value in
         if let hex = Int(value.filter {$0 != "#"}, radix: 16) {
           let color = Color(hex: hex)
@@ -55,7 +60,7 @@ struct ColorGenerator: View {
                 Text(value)
                   .font(.title2)
                   .padding(.leading)
-                Spacer()
+//                Spacer()
               }
             })
           )

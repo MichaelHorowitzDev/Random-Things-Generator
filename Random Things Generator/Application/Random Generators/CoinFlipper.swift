@@ -46,6 +46,11 @@ struct CoinFlipper: View {
       .onRandomTouchUp {
         animationAmount = 1
       }
+      .generateMultipleTimes({
+        return {
+          Bool.random() ? "Heads" : "Tails"
+        }
+      })
       .formatHistoryValue { string in
         if string == "Heads" {
           return AnyView(Image(Coins.halfDollarObverse)
