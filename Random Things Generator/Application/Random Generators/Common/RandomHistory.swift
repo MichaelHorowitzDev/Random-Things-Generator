@@ -8,7 +8,7 @@
 import SwiftUI
 import CSV
 
-struct RandomHistory: View {
+struct RandomHistory<Format:View, Settings: View>: View {
   @Environment(\.managedObjectContext) var managedObjectContext
   @State private var predicate: NSPredicate
   @State private var timeFrame = "All Time"
@@ -16,9 +16,9 @@ struct RandomHistory: View {
   @EnvironmentObject var preferences: UserPreferences
   
   private var timeFrames = ["7 Days", "30 Days", "90 Days", "All Time"]
-  private var settings = AnyView(EmptyView())
+  private var settings: Settings?
   
-  init(randomType: String, generatorList: GeneratorList? = nil, id: String? = nil, customPredicate: NSPredicate? = nil, isCustomList: Bool = false, formatValue: ((_ value: String) -> AnyView)? = nil) {
+  init(randomType: String, generatorList: GeneratorList? = nil, id: String? = nil, customPredicate: NSPredicate? = nil, isCustomList: Bool = false, formatValue: ((_ value: String) -> Format)? = nil) {
     self._predicate = State(initialValue: NSPredicate(format: "randomType == %@", randomType))
     self.formatValue = formatValue
     self.randomType = randomType
@@ -31,7 +31,7 @@ struct RandomHistory: View {
   private let randomType: String
   private let id: String?
   private let customPredicate: NSPredicate?
-  private let formatValue: ((_ value: String) -> AnyView)?
+  private let formatValue: ((_ value: String) -> Format)?
   private let isCustomList: Bool
   private let generatorList: GeneratorList?
   func setPredicate(timeFrame: String) {
@@ -128,9 +128,9 @@ struct RandomHistory: View {
 }
 
 extension RandomHistory {
-  func settings<Content: View>(@ViewBuilder _ settings: () -> Content) -> Self {
+  func settings(@ViewBuilder _ settings: () -> Settings) -> Self {
     var copy = self
-    copy.settings = AnyView(settings())
+    copy.settings = settings()
     return copy
   }
 }
@@ -155,15 +155,15 @@ private struct RandomGeneratorSettings: View {
   }
 }
 
-private struct RandomHistoryItems: View {
+private struct RandomHistoryItems<Format: View, Settings: View>: View {
   @FetchRequest var history: FetchedResults<Random>
   @Binding var timeFrame: String
   @State private var shareItem: Item?
   @EnvironmentObject var preferences: UserPreferences
   private var timeFrames = ["7 Days", "30 Days", "90 Days", "All Time"]
-  private var settings = AnyView(EmptyView())
+  private var settings: Settings?
   
-  init(predicate: NSPredicate, timeFrame: Binding<String>, randomType: String, generatorList: GeneratorList? = nil, formatValue: ((_ value: String) -> AnyView)? = nil) {
+  init(predicate: NSPredicate, timeFrame: Binding<String>, randomType: String, generatorList: GeneratorList? = nil, formatValue: ((_ value: String) -> Format)? = nil) {
     self._history = FetchRequest(entity: Random.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Random.timestamp, ascending: false)], predicate: predicate, animation: .default)
     self.formatValue = formatValue
     self._timeFrame = timeFrame
@@ -184,7 +184,7 @@ private struct RandomHistoryItems: View {
   }
   private let randomType: String
   private let generatorList: GeneratorList?
-  private let formatValue: ((_ value: String) -> AnyView)?
+  private let formatValue: ((_ value: String) -> Format)?
   var body: some View {
     List {
       settings
@@ -258,7 +258,7 @@ private struct RandomHistoryItems: View {
 }
 
 extension RandomHistoryItems {
-  func settings(@ViewBuilder _ settings: () -> AnyView) -> Self {
+  func settings(@ViewBuilder _ settings: () -> Settings) -> Self {
     var copy = self
     copy.settings = settings()
     return copy

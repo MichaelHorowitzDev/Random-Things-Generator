@@ -111,7 +111,7 @@ struct ListsGenerator: View {
     }
     .sheet(isPresented: $showsHistory) {
       
-      RandomHistory(randomType: "Lists", customPredicate: idPredicate, isCustomList: true, formatValue: nil)
+      RandomHistory(randomType: "Lists", customPredicate: idPredicate, isCustomList: true, formatValue: { Text($0) })
         .settings {
           Section {
             NavigationLink {
