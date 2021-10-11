@@ -8,11 +8,11 @@
 import SwiftUI
 import Combine
 
-struct GenerateMultipleTimes: View {
+struct GenerateMultipleTimes<Format: View>: View {
   @State private var showsAlert = false
   let function: () -> String
-  let formatValue: ((String) -> AnyView)?
-  init(_ function: @escaping () -> String, formatValue: ((_ value: String) -> AnyView)? = nil) {
+  let formatValue: ((String) -> Format)?
+  init(_ function: @escaping () -> String, formatValue: ((_ value: String) -> Format)? = nil) {
     self.function = function
     self.formatValue = formatValue
   }

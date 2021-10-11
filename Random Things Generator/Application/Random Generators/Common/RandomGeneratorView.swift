@@ -13,7 +13,7 @@ import SwiftUI
 //  @Published var dontRepeat: Bool
 //}
 
-public struct RandomGeneratorView<Content>: View where Content: View {
+public struct RandomGeneratorView<Content: View>: View {
   @EnvironmentObject var preferences: UserPreferences
   let content: Content
   
@@ -205,7 +205,7 @@ extension RandomGeneratorView {
     copy.gestureDisabled = disabled
     return copy
   }
-  func formatHistoryValue(_ format: @escaping (String) -> AnyView) -> Self {
+  func formatHistoryValue(@ViewBuilder _ format: @escaping (String) -> AnyView) -> Self {
     var copy = self
     copy.formatHistoryValue = format
     return copy
