@@ -59,6 +59,14 @@ struct NumberGenerator: View {
         coreDataItem.value = randomNumber
         try? moc.save()
       }
+      .generateMultipleTimes({
+        guard let num1 = Int(firstNumber) else { return nil }
+        guard let num2 = Int(secondNumber) else { return nil }
+        return {
+          let randNum = Int.random(in: num1...num2)
+          return randNum.description
+        }
+      })
       .onTap {
         isFocused = false
       }

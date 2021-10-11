@@ -105,6 +105,17 @@ struct CardRandomizer: View {
             coreDataItem.value = (currentCards.map { $0.name }).joined(separator: "\n")
             try? moc.save()
           }
+          .generateMultipleTimes({
+            return {
+              let cards: [String] = (1...Int(cardCount)).map({_ in
+                let value = "23456789TJQK".randomElement()!
+                let suit = "CHSD".randomElement()!
+                let card = String(value).appending(String(suit))
+                return card
+              })
+              return cards.joined(separator: "\n")
+            }
+          })
           .formatHistoryValue { string in
             let cards = string.split(separator: "\n").map { String($0) }
             return AnyView(cardVStack(cards: cards))
