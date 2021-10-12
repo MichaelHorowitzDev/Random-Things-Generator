@@ -71,6 +71,8 @@ public struct RandomGeneratorView<Content: View>: View {
   private var isCustomList = false
   private var uuid: UUID?
   private var onRandomPressed: (() -> Void)?
+  private var onRandomSuccess: ((String) -> Void)?
+  private var generateRandom: (() -> String)?
   private var onTap: (() -> Void)?
   private var onTouchDown: (() -> Void)?
   private var onTouchUp: (() -> Void)?
@@ -86,20 +88,12 @@ public struct RandomGeneratorView<Content: View>: View {
   private var settingsContent: AnyView?
   private var generateMultipleTimes: (() -> String)?
   private var customHistoryPredicate: NSPredicate?
-//  @EnvironmentObject var preferences: UserPreferences
-//  @State private var dontRepeatToggle = false
+  @State private var randomizedValue = ""
   private func generateHaptic() {
     if preferences.hasHapticFeedback {
       UIImpactFeedbackGenerator(style: .soft).impactOccurred()
     }
   }
-//  var generatorPreferences: GeneratorPreferences {
-//    if let uuid = uuid {
-//      return preferences.generatorViewPreferences.first(where: { $0.uuid == uuid }) ?? GeneratorPreferences(uuid: uuid)
-//    } else {
-//      return preferences.generatorViewPreferences.first(where: { $0.randomType == randomType }) ?? GeneratorPreferences(randomType: randomType)
-//    }
-//  }
   public var body: some View {
       ZStack {
         preferences.themeColor.ignoresSafeArea(.all, edges: [.horizontal, .bottom])
@@ -110,6 +104,16 @@ public struct RandomGeneratorView<Content: View>: View {
                   Spacer()
                   RandomizeButton(randomButtonTitle) {
                     onRandomPressed?()
+                    if let generateRandom = generateRandom {
+                      var randomValue = generateRandom()
+                      if generatorSettings.preferences.dontRepeat {
+                        while randomValue == randomizedValue {
+                          randomValue = generateRandom()
+                        }
+                      }
+                      randomizedValue = randomValue
+                      onRandomSuccess?(randomValue)
+                    }
                     generateHaptic()
                   }
                   .onTouchDown {
@@ -296,5 +300,21 @@ extension RandomGeneratorView {
     var copy = self
     copy.customHistoryPredicate = predicate
     return copy
+  }
+  func onRandomSuccess(_ onSuccess: @escaping (String) -> Void) -> Self {
+    var copy = self
+    copy.onRandomSuccess = onSuccess
+    return copy
+  }
+  func generateRandom(_ generate: @escaping () -> (() -> String)?) -> Self {
+    if generate() == nil {
+      return self
+    } else {
+      var copy = self
+      if !isCustomList {
+        copy.generateRandom = generate()
+      }
+      return copy
+    }
   }
 }
