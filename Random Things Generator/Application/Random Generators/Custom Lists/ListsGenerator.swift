@@ -85,6 +85,16 @@ struct ListsGenerator: View {
         Text("Options")
       }
     })
+    .generateMultipleTimes({
+      let allItems = allItemsInLists
+      if allItems.isEmpty {
+        return nil
+      } else {
+        return {
+          allItems.randomElement()!
+        }
+      }
+    })
     .onChange(of: currentLists, perform: { newValue in
       UserDefaults.standard.set(newValue.map({$0.uuidString}), forKey: "currentLists")
     })
