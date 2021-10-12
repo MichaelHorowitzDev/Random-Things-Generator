@@ -17,9 +17,6 @@ class UserPreferences: ObservableObject {
   @Published var hasHapticFeedback = true {
     didSet { saveUserDefaults(value: hasHapticFeedback, key: hapticFeedbackDefaults) }
   }
-  @Published var generatorViewPreferences: [GeneratorPreferences] = [] {
-    didSet { saveUserDefaults(value: generatorViewPreferences, key: generatorPreferencesDefaults)}
-  }
   let defaults = UserDefaults.standard
   var textColor: Color {
     themeColor.isLight ? .black : .white
@@ -37,19 +34,4 @@ class UserPreferences: ObservableObject {
   private var randomButtonDefaults = "shows_random_button"
   private var hapticFeedbackDefaults = "has_haptic_feedback"
   private var generatorPreferencesDefaults = "generator_view_preferences"
-}
-
-struct GeneratorPreferences {
-  let isCustomList: Bool
-  let uuid: UUID?
-  var dontRepeat: Bool = false
-  
-  init(uuid: UUID) {
-    self.uuid = uuid
-    self.isCustomList = true
-  }
-  init() {
-    self.uuid = nil
-    self.isCustomList = false
-  }
 }
