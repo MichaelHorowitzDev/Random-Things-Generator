@@ -98,56 +98,41 @@ public struct RandomGeneratorView<Content: View>: View {
       ZStack {
         preferences.themeColor.ignoresSafeArea(.all, edges: [.horizontal, .bottom])
           .zIndex(-1)
-            if buttonOverContent {
-              if preferences.showsRandomButton || overrideShowRandomButton {
-                VStack {
-                  Spacer()
-                  RandomizeButton(randomButtonTitle) {
-                    onRandomPressed?()
-                    if let generateRandom = generateRandom {
-                      var randomValue = generateRandom()
-                      if generatorSettings.preferences.dontRepeat {
-                        while randomValue == randomizedValue {
-                          randomValue = generateRandom()
-                        }
-                      }
-                      randomizedValue = randomValue
-                      onRandomSuccess?(randomValue)
-                    }
-                    generateHaptic()
-                  }
-                  .onTouchDown {
-                    onTouchDown?()
-                  }
-                  .onTouchUp {
-                    onTouchUp?()
-                  }
-                }
-                .zIndex(2)
-              }
+        if preferences.showsRandomButton || overrideShowRandomButton {
+          VStack {
+            Spacer()
+            if !buttonOverContent {
               content
-            } else {
-              if preferences.showsRandomButton || overrideShowRandomButton {
-                VStack {
-                  Spacer()
-                  content
-                  RandomizeButton(randomButtonTitle) {
-                    onRandomPressed?()
-                    generateHaptic()
-                  }
-                  .onTouchDown {
-                    onTouchDown?()
-                  }
-                  .onTouchUp {
-                    onTouchUp?()
+            }
+            RandomizeButton(randomButtonTitle) {
+              onRandomPressed?()
+              if let generateRandom = generateRandom {
+                var randomValue = generateRandom()
+                if generatorSettings.preferences.dontRepeat {
+                  while randomValue == randomizedValue {
+                    randomValue = generateRandom()
                   }
                 }
-                .zIndex(2)
-              } else {
-                content
-                  .padding(.bottom)
+                randomizedValue = randomValue
+                onRandomSuccess?(randomValue)
               }
+              generateHaptic()
             }
+            .onTouchDown {
+              onTouchDown?()
+            }
+            .onTouchUp {
+              onTouchUp?()
+            }
+          }
+          .zIndex(2)
+        } else if !buttonOverContent {
+          content
+            .padding(.bottom)
+        }
+        if buttonOverContent {
+          content
+        }
       }
       .navigationTitle(randomType)
       .toolbar {
