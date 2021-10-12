@@ -77,6 +77,17 @@ struct DateGenerator: View {
           coreDataItem.value = self.randomDate
           try? moc.save()
         }
+        .generateMultipleTimes({
+          guard let days = Calendar.current.dateComponents([.day], from: startingDate, to: endingDate).day else { return nil }
+          return {
+            let randomDay = Int.random(in: 0...days)
+            let randomDate = Calendar.current.date(byAdding: .day, value: randomDay, to: startingDate)!
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MMMM dd, y"
+            let formattedDate = formatter.string(from: randomDate)
+            return formattedDate
+          }
+        })
         .formatHistoryValue { value in
           return AnyView(
             Text(value)
@@ -87,11 +98,5 @@ struct DateGenerator: View {
         }
       }
       
-    }
-}
-
-struct DateGenerator_Previews: PreviewProvider {
-    static var previews: some View {
-        DateGenerator()
     }
 }
