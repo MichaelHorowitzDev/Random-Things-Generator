@@ -10,6 +10,12 @@
         <attribute name="totalTimes" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ListItem" inverseName="list" inverseEntity="ListItem"/>
     </entity>
+    <entity name="GeneratorPreferences" representedClassName="GeneratorPreferences" syncable="YES">
+        <attribute name="dontRepeat" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="isCustomList" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="randomType" optional="YES" attributeType="String"/>
+        <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+    </entity>
     <entity name="ListItem" representedClassName="ListItem" syncable="YES">
         <attribute name="dateCreated" attributeType="Date" defaultDateTimeInterval="652510500" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
@@ -28,5 +34,6 @@
         <element name="GeneratorList" positionX="-63" positionY="18" width="128" height="149"/>
         <element name="ListItem" positionX="-54" positionY="45" width="128" height="119"/>
         <element name="Random" positionX="-63" positionY="-18" width="128" height="89"/>
+        <element name="GeneratorPreferences" positionX="-54" positionY="72" width="128" height="89"/>
     </elements>
 </model>
