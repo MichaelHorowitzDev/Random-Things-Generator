@@ -34,9 +34,32 @@ extension Array where Element: Hashable {
     }
     return sorted
   }
+  func removingDuplicates() -> Self {
+    return Array(Set(self))
+  }
 }
 
 struct Common<T: Hashable>: Hashable {
   let item: T
   let num: Int
+}
+
+extension Array where Element: NSCoding {
+  func archiveArray() -> Data {
+    do {
+      try NSKeyedArchiver.archivedData(withRootObject: self, requiringSecureCoding: false)
+    } catch {
+      return Data()
+    }
+    return Data()
+  }
+}
+
+extension Array {
+  static func unarchive(data: Data) -> Any? {
+    if let unarchived = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) {
+      return unarchived
+    }
+    return nil
+  }
 }
