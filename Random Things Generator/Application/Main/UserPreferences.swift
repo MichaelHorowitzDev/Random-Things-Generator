@@ -44,8 +44,12 @@ struct GeneratorPreferences {
   let uuid: UUID?
   var dontRepeat: Bool = false
   
-  init(uuid: UUID?) {
+  init(uuid: UUID) {
     self.uuid = uuid
-    self.isCustomList = !(self.uuid == nil)
+    self.isCustomList = true
+  }
+  init() {
+    self.uuid = nil
+    self.isCustomList = false
   }
 }
