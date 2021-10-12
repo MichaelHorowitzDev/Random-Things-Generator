@@ -169,9 +169,9 @@ public struct RandomGeneratorView<Content: View>: View {
             RandomHistory(randomType: randomType, customPredicate: customHistoryPredicate, isCustomList: isCustomList, formatValue: formatHistoryValue)
               .settings {
                 settingsContent
-                if generateMultipleTimes != nil {
+                if let generateRandom = generateRandom {
                   NavigationLink {
-                    GenerateMultipleTimes(generateMultipleTimes!, formatValue: formatHistoryValue)
+                    GenerateMultipleTimes(generateRandom, formatValue: formatHistoryValue)
                   } label: {
                     Text("Generate Multiple Times")
                   }
@@ -287,15 +287,15 @@ extension RandomGeneratorView {
     copy.settingsContent = AnyView(settings())
     return copy
   }
-  func generateMultipleTimes(_ function: () -> (() -> String)?) -> Self {
-    if function() == nil {
-      return self
-    } else {
-      var copy = self
-      copy.generateMultipleTimes = function()
-      return copy
-    }
-  }
+//  func generateMultipleTimes(_ function: () -> (() -> String)?) -> Self {
+//    if function() == nil {
+//      return self
+//    } else {
+//      var copy = self
+//      copy.generateMultipleTimes = function()
+//      return copy
+//    }
+//  }
   func customHistoryPredicate(_ predicate: NSPredicate) -> Self {
     var copy = self
     copy.customHistoryPredicate = predicate
@@ -316,5 +316,10 @@ extension RandomGeneratorView {
       }
       return copy
     }
+  }
+  func defaultValue(_ value: String) -> Self {
+    var copy = self
+    copy._randomizedValue = State(wrappedValue: value)
+    return copy
   }
 }
