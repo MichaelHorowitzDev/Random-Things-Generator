@@ -10,18 +10,7 @@ import SwiftUI
 struct ListsGenerator: View {
   @EnvironmentObject var preferences: UserPreferences
   @Environment(\.managedObjectContext) var moc
-//  @AppStorage("currentList") var currentList: String = UUID().uuidString
   @FetchRequest(entity: GeneratorList.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \GeneratorList.dateCreated, ascending: false)], predicate: nil, animation: nil) var lists: FetchedResults<GeneratorList>
-//  var list: GeneratorList? {
-//    var list = lists.first { generatorList in
-//      generatorList.title == currentList
-//    }
-//    if list == nil {
-//      list = lists.first
-//      currentList = list?.title ?? ""
-//    }
-//    return list
-//  }
   var selectedLists: [GeneratorList] {
     lists.filter { generatorList in
       if let id = generatorList.id {
@@ -30,7 +19,6 @@ struct ListsGenerator: View {
       return false
     }
   }
-//  @AppStorage("currentList") var currentList: String = ""
   @State var currentLists = [UUID]()
   init() {
     if let currentLists = UserDefaults.standard.array(forKey: "currentLists") as? [String] {
@@ -43,16 +31,6 @@ struct ListsGenerator: View {
       self._currentLists = State(initialValue: uuids)
     }
   }
-//  @FetchRequest var list: FetchedResults<GeneratorList>
-//  init() {
-//    if let currentList = UserDefaults.standard.string(forKey: "currentList") {
-//      _list = FetchRequest(entity: GeneratorList.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \GeneratorList.dateCreated, ascending: false)], predicate: NSPredicate(format: "title == %@", currentList), animation: .default)
-//    } else {
-//      _list = FetchRequest(entity: GeneratorList.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \GeneratorList.dateCreated, ascending: false)], predicate: nil, animation: .default)
-//    }
-//    print("fgdsafdsa")
-//    print(UserDefaults.standard.string(forKey: "currentList"))
-//  }
   @State private var randomItem = "?"
   @State private var scale: CGFloat = 1
   @State private var showsAlert = false
@@ -154,13 +132,4 @@ struct ListsGenerator: View {
     let compoundPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
     return compoundPredicate
   }
-//  var selectedListNames: String {
-//    let selectedListNames: [String] = selectedLists.map { generatorList in
-//      if let title = generatorList.title {
-//        return title
-//      }
-//      return "
-//    }
-//    return selectedListNames.joined(separator: "\n")
-//  }
 }
