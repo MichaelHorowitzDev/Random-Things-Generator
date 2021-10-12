@@ -21,6 +21,7 @@ struct GenerateMultipleTimes<Format: View>: View {
   @State private var numberOfTimes = ""
   @State private var generateStatistics = false
   @State private var shareItem: ShareItem?
+  @FocusState private var focused: Bool
   @EnvironmentObject var preferences: UserPreferences
     var body: some View {
 //      NavigationView {
@@ -36,6 +37,7 @@ struct GenerateMultipleTimes<Format: View>: View {
               }
               .keyboardType(.numberPad)
               .textFieldStyle(.roundedBorder)
+              .focused($focused)
             Button {
               if let number = Int(numberOfTimes) {
                 if number > 0 {
@@ -43,6 +45,7 @@ struct GenerateMultipleTimes<Format: View>: View {
                     function()
                   }
                   self.results = results
+                  focused = false
                 }
               }
             } label: {
