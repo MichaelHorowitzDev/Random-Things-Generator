@@ -33,19 +33,31 @@ struct ColorGenerator: View {
       .onRandomTouchUp {
         scale = 1
       }
-      .onRandomPressed {
-        currentColor = .random
-        let hex = "#" + String(currentColor.hex, radix: 16, uppercase: true)
-        self.hex = hex
-        let coreDataItem = Random(context: moc)
-        coreDataItem.randomType = "Color"
-        coreDataItem.timestamp = Date()
-        coreDataItem.value = hex
-        try? moc.save()
-      }
-      .generateMultipleTimes({
+//      .onRandomPressed {
+//        currentColor = .random
+//        let hex = "#" + String(currentColor.hex, radix: 16, uppercase: true)
+//        self.hex = hex
+//        let coreDataItem = Random(context: moc)
+//        coreDataItem.randomType = "Color"
+//        coreDataItem.timestamp = Date()
+//        coreDataItem.value = hex
+//        try? moc.save()
+//      }
+      .generateRandom({
         return {
           "#" + String(Color.random.hex, radix: 16, uppercase: true)
+        }
+      })
+      .onRandomSuccess({ result in
+        if let hex = Int(result.filter { $0 != "#" }, radix: 16) {
+          let color = Color(hex: hex)
+          self.currentColor = color
+          self.hex = result
+          let coreDataItem = Random(context: moc)
+          coreDataItem.randomType = "Color"
+          coreDataItem.timestamp = Date()
+          coreDataItem.value = result
+          try? moc.save()
         }
       })
       .formatHistoryValue { value in
@@ -69,11 +81,5 @@ struct ColorGenerator: View {
         }
         return AnyView(Color.clear)
       }
-    }
-}
-
-struct ColorGenerator_Previews: PreviewProvider {
-    static var previews: some View {
-        ColorGenerator()
     }
 }

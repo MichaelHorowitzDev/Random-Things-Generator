@@ -63,21 +63,21 @@ struct DateGenerator: View {
         .onRandomTouchUp {
           animationAmount = 1
         }
-        .onRandomPressed {
-          guard let days = Calendar.current.dateComponents([.day], from: startingDate, to: endingDate).day else { return }
-          let randomDay = Int.random(in: 0...days)
-          let randomDate = Calendar.current.date(byAdding: .day, value: randomDay, to: startingDate)!
-          let formatter = DateFormatter()
-          formatter.dateFormat = "MMMM dd, y"
-          let formattedDate = formatter.string(from: randomDate)
-          self.randomDate = formattedDate
-          let coreDataItem = Random(context: moc)
-          coreDataItem.randomType = "Date"
-          coreDataItem.timestamp = Date()
-          coreDataItem.value = self.randomDate
-          try? moc.save()
-        }
-        .generateMultipleTimes({
+//        .onRandomPressed {
+//          guard let days = Calendar.current.dateComponents([.day], from: startingDate, to: endingDate).day else { return }
+//          let randomDay = Int.random(in: 0...days)
+//          let randomDate = Calendar.current.date(byAdding: .day, value: randomDay, to: startingDate)!
+//          let formatter = DateFormatter()
+//          formatter.dateFormat = "MMMM dd, y"
+//          let formattedDate = formatter.string(from: randomDate)
+//          self.randomDate = formattedDate
+//          let coreDataItem = Random(context: moc)
+//          coreDataItem.randomType = "Date"
+//          coreDataItem.timestamp = Date()
+//          coreDataItem.value = self.randomDate
+//          try? moc.save()
+//        }
+        .generateRandom({
           guard let days = Calendar.current.dateComponents([.day], from: startingDate, to: endingDate).day else { return nil }
           return {
             let randomDay = Int.random(in: 0...days)
@@ -87,6 +87,14 @@ struct DateGenerator: View {
             let formattedDate = formatter.string(from: randomDate)
             return formattedDate
           }
+        })
+        .onRandomSuccess({ result in
+          self.randomDate = result
+          let coreDataItem = Random(context: moc)
+          coreDataItem.randomType = "Date"
+          coreDataItem.timestamp = Date()
+          coreDataItem.value = self.randomDate
+          try? moc.save()
         })
         .formatHistoryValue { value in
           return AnyView(

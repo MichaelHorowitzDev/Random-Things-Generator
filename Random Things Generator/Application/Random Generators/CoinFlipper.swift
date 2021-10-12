@@ -32,24 +32,33 @@ struct CoinFlipper: View {
           .scaleEffect(animationAmount)
       }
       .randomButtonTitle("Flip")
-      .onRandomPressed {
-        heads = Bool.random()
-        let coreDataItem = Random(context: moc)
-        coreDataItem.randomType = "Coin"
-        coreDataItem.timestamp = Date()
-        coreDataItem.value = heads ? "Heads" : "Tails"
-        try? moc.save()
-      }
+//      .onRandomPressed {
+//        heads = Bool.random()
+//        let coreDataItem = Random(context: moc)
+//        coreDataItem.randomType = "Coin"
+//        coreDataItem.timestamp = Date()
+//        coreDataItem.value = heads ? "Heads" : "Tails"
+//        try? moc.save()
+//      }
       .onRandomTouchDown {
         animationAmount = 0.97
       }
       .onRandomTouchUp {
         animationAmount = 1
       }
-      .generateMultipleTimes({
+      .generateRandom({
         return {
           Bool.random() ? "Heads" : "Tails"
         }
+      })
+      .defaultValue("Heads")
+      .onRandomSuccess({ result in
+        heads = result == "Heads"
+        let coreDataItem = Random(context: moc)
+        coreDataItem.randomType = "Coin"
+        coreDataItem.timestamp = Date()
+        coreDataItem.value = heads ? "Heads" : "Tails"
+        try? moc.save()
       })
       .formatHistoryValue { string in
         if string == "Heads" {
@@ -69,10 +78,4 @@ struct CoinFlipper: View {
 private struct Coins {
   static var halfDollarObverse = "half_dollar_obverse"
   static var halfDollarReverse = "half_dollar_reverse"
-}
-
-struct CoinFlipper_Previews: PreviewProvider {
-    static var previews: some View {
-        CoinFlipper()
-    }
 }

@@ -49,17 +49,17 @@ struct NumberGenerator: View {
       .onRandomPressed {
         isFocused = false
         setNumbers()
-        guard let num1 = Int(firstNumber) else { return }
-        guard let num2 = Int(secondNumber) else { return }
-        let randNum = Int.random(in: num1...num2)
-        randomNumber = String(randNum)
-        let coreDataItem = Random(context: moc)
-        coreDataItem.randomType = "Number"
-        coreDataItem.timestamp = Date()
-        coreDataItem.value = randomNumber
-        try? moc.save()
+//        guard let num1 = Int(firstNumber) else { return }
+//        guard let num2 = Int(secondNumber) else { return }
+//        let randNum = Int.random(in: num1...num2)
+//        randomNumber = String(randNum)
+//        let coreDataItem = Random(context: moc)
+//        coreDataItem.randomType = "Number"
+//        coreDataItem.timestamp = Date()
+//        coreDataItem.value = randomNumber
+//        try? moc.save()
       }
-      .generateMultipleTimes({
+      .generateRandom({
         guard let num1 = Int(firstNumber) else { return nil }
         guard let num2 = Int(secondNumber) else { return nil }
         if num1 > num2 { return nil }
@@ -68,6 +68,23 @@ struct NumberGenerator: View {
           return randNum.description
         }
       })
+      .onRandomSuccess({ result in
+        randomNumber = result
+        let coreDataItem = Random(context: moc)
+        coreDataItem.randomType = "Number"
+        coreDataItem.timestamp = Date()
+        coreDataItem.value = randomNumber
+        try? moc.save()
+      })
+//      .generateMultipleTimes({
+//        guard let num1 = Int(firstNumber) else { return nil }
+//        guard let num2 = Int(secondNumber) else { return nil }
+//        if num1 > num2 { return nil }
+//        return {
+//          let randNum = Int.random(in: num1...num2)
+//          return randNum.description
+//        }
+//      })
       .onTap {
         isFocused = false
       }

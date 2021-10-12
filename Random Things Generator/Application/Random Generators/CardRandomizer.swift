@@ -92,20 +92,20 @@ struct CardRandomizer: View {
           .onRandomTouchUp {
             animationAmount = 1
           }
-          .onRandomPressed {
-            currentCards = (1...Int(cardCount)).map({_ in
-              let value = "A23456789TJQK".randomElement()!
-              let suit = "CHSD".randomElement()!
-              let card = String(value).appending(String(suit))
-              return CardImage(name: card)
-            })
-            let coreDataItem = Random(context: moc)
-            coreDataItem.randomType = "Card"
-            coreDataItem.timestamp = Date()
-            coreDataItem.value = (currentCards.map { $0.name }).joined(separator: "\n")
-            try? moc.save()
-          }
-          .generateMultipleTimes({
+//          .onRandomPressed {
+//            currentCards = (1...Int(cardCount)).map({_ in
+//              let value = "A23456789TJQK".randomElement()!
+//              let suit = "CHSD".randomElement()!
+//              let card = String(value).appending(String(suit))
+//              return CardImage(name: card)
+//            })
+//            let coreDataItem = Random(context: moc)
+//            coreDataItem.randomType = "Card"
+//            coreDataItem.timestamp = Date()
+//            coreDataItem.value = (currentCards.map { $0.name }).joined(separator: "\n")
+//            try? moc.save()
+//          }
+          .generateRandom({
             return {
               let cards: [String] = (1...Int(cardCount)).map({_ in
                 let value = "A23456789TJQK".randomElement()!
@@ -115,6 +115,16 @@ struct CardRandomizer: View {
               })
               return cards.joined(separator: "\n")
             }
+          })
+          .onRandomSuccess({ result in
+            self.currentCards = result.split(separator: "\n").map({ element in
+              CardImage(name: String(element))
+            })
+            let coreDataItem = Random(context: moc)
+            coreDataItem.randomType = "Card"
+            coreDataItem.timestamp = Date()
+            coreDataItem.value = (currentCards.map { $0.name }).joined(separator: "\n")
+            try? moc.save()
           })
           .formatHistoryValue { string in
             let cards = string.split(separator: "\n").map { String($0) }
