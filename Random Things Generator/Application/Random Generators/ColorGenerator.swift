@@ -52,17 +52,17 @@ struct ColorGenerator: View {
         if let hex = Int(value.filter {$0 != "#"}, radix: 16) {
           let color = Color(hex: hex)
           return AnyView(
-            GeometryReader(content: { geo in
-              HStack {
+            HStack {
+              GeometryReader { geo in
                 Circle()
                   .fill(color)
                   .frame(width: geo.size.height, height: geo.size.height)
-                Text(value)
-                  .font(.title2)
-                  .padding(.leading)
-//                Spacer()
               }
-            })
+              .fixedSize(horizontal: true, vertical: false)
+              Text(value)
+                .font(.title2)
+                .padding(.leading, 35)
+            }
           )
         }
         return AnyView(Color.clear)
