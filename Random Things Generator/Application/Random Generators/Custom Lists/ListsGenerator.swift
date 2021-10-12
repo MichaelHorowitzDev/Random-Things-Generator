@@ -76,10 +76,13 @@ struct ListsGenerator: View {
         } label: {
           Text("Selected List")
         }
-        NavigationLink {
-          HatPicker(items: allItemsInLists)
-        } label: {
-          Text("Pick from hat")
+        let allItems = allItemsInLists
+        if !allItems.isEmpty {
+          NavigationLink {
+            HatPicker(items: allItems)
+          } label: {
+            Text("Pick from hat")
+          }
         }
       } header: {
         Text("Options")
