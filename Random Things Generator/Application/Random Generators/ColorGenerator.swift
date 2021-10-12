@@ -59,7 +59,9 @@ struct ColorGenerator: View {
                   .frame(width: geo.size.height, height: geo.size.height)
               }
               .fixedSize(horizontal: true, vertical: false)
+              Spacer()
               Text(value)
+                .lineLimit(1)
                 .font(.title2)
                 .padding(.leading, 35)
             }
