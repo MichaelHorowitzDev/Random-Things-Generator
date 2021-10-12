@@ -39,6 +39,7 @@ public struct RandomGeneratorView<Content: View>: View {
   private var buttonOverContent = true
   private var settingsContent: AnyView?
   private var generateMultipleTimes: (() -> String)?
+  private var customHistoryPredicate: NSPredicate?
 //  @EnvironmentObject var preferences: UserPreferences
 //  @State private var dontRepeatToggle = false
   private func generateHaptic() {
@@ -108,7 +109,7 @@ public struct RandomGeneratorView<Content: View>: View {
               .foregroundColor(preferences.themeColor)
           }
           .sheet(isPresented: $settingsPresented) {
-            RandomHistory(randomType: randomType, formatValue: formatHistoryValue)
+            RandomHistory(randomType: randomType, customPredicate: customHistoryPredicate, isCustomList: isCustomList, formatValue: formatHistoryValue)
               .settings {
                 if generateMultipleTimes != nil {
                   NavigationLink {
@@ -228,5 +229,10 @@ extension RandomGeneratorView {
       copy.generateMultipleTimes = function()
       return copy
     }
+  }
+  func customHistoryPredicate(_ predicate: NSPredicate) -> Self {
+    var copy = self
+    copy.customHistoryPredicate = predicate
+    return copy
   }
 }
