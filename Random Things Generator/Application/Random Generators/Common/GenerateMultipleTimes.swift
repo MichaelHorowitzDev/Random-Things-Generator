@@ -56,8 +56,8 @@ struct GenerateMultipleTimes<Format: View>: View {
           .padding(.horizontal)
           List(0..<results.count, id: \.self) { num in
             HStack {
-//              Text("\(num+1). ")
-//                .font(.title)
+              Text("\(num+1). ")
+                .font(.title)
               Spacer()
               if formatValue != nil {
                 formatValue!(results[num])
