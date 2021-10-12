@@ -27,6 +27,7 @@ struct GenerateMultipleTimesStatistics: View {
               Text(sortedItems[num].item)
                 .font(.title)
                 .bold()
+                .minimumScaleFactor(0.1)
                 .padding(.trailing)
               Text("\(sortedItems[num].num)")
                 .font(.title2)
