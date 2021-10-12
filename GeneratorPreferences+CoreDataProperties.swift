@@ -20,22 +20,22 @@ extension GeneratorPreferences {
     @NSManaged public var uuid: UUID?
     @NSManaged public var randomType: String?
     @NSManaged public var dontRepeat: Bool
-}
-
-class GeneratorViewPreferences {
-  init(context: NSManagedObjectContext, uuid: UUID) throws {
+  
+  static func initialize(context: NSManagedObjectContext, uuid: UUID) throws -> GeneratorPreferences {
     let preferences = GeneratorPreferences(context: context)
     preferences.uuid = uuid
     preferences.isCustomList = true
     preferences.randomType = nil
     try context.save()
+    return preferences
   }
-  init(context: NSManagedObjectContext, randomType: String) throws {
+  static func initialize(context: NSManagedObjectContext, randomType: String) throws -> GeneratorPreferences {
     let preferences = GeneratorPreferences(context: context)
     preferences.uuid = nil
     preferences.isCustomList = false
     preferences.randomType = randomType
     try context.save()
+    return preferences
   }
 }
 

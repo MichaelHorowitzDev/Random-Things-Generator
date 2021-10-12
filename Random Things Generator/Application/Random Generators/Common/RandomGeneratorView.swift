@@ -12,6 +12,7 @@ class RandomGeneratorViewSettings: ObservableObject {
   @Published var preferences: GeneratorPreferences {
     didSet { try? viewContext.save() }
   }
+  @Published private(set) var preferencesError: Bool = false
   let viewContext = PersistenceController.shared.container.viewContext
   
   init(uuid: UUID) {
@@ -22,22 +23,29 @@ class RandomGeneratorViewSettings: ObservableObject {
     if let generatorPreference = fetched?.first {
       self.preferences = generatorPreference
     } else {
-      let generatorPreference = GeneratorPreferences(context: viewContext)
-      self.preferences = generatorPreference
-      try? viewContext.save()
+      if let generatorPreferences = try? GeneratorPreferences.initialize(context: viewContext, uuid: uuid) {
+        self.preferences = generatorPreferences
+      } else {
+        self.preferences = GeneratorPreferences()
+        preferencesError = true
+      }
     }
   }
   init(randomType: String) {
     let request = NSFetchRequest<GeneratorPreferences>(entityName: "GeneratorPreferences")
     request.predicate = NSPredicate(format: "randomType == %@", randomType as CVarArg)
     request.fetchLimit = 1
+    
     let fetched = try? viewContext.fetch(request)
     if let generatorPreference = fetched?.first {
       self.preferences = generatorPreference
     } else {
-      let generatorPreference = GeneratorPreferences(context: viewContext)
-      self.preferences = generatorPreference
-      try? viewContext.save()
+      if let generatorPreferences = try? GeneratorPreferences.initialize(context: viewContext, randomType: randomType) {
+        self.preferences = generatorPreferences
+      } else {
+        self.preferences = GeneratorPreferences()
+        preferencesError = true
+      }
     }
   }
 }
@@ -164,15 +172,14 @@ public struct RandomGeneratorView<Content: View>: View {
                     Text("Generate Multiple Times")
                   }
                 }
-                Section {
-//                  Toggle(isOn: $generatorSettings.preferences.dontRepeat) {
-//                    Text("Don't Repeat")
-//                  }
-//                  .onChange(of: generatorSettings.preferences.dontRepeat) { newValue in
-////                    preferences.generatorViewPreferences.append(generatorSettings.preferences)
-//                  }
-                } header: {
-                  Text("Preferences")
+                if !generatorSettings.preferencesError {
+                  Section {
+                    Toggle(isOn: $generatorSettings.preferences.dontRepeat) {
+                      Text("Don't Repeat")
+                    }
+                  } header: {
+                    Text("Preferences")
+                  }
                 }
               }
           }
