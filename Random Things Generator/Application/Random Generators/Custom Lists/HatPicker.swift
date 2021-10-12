@@ -89,6 +89,7 @@ struct HatPicker: View {
               } label: {
                 Text("Done")
                   .bold()
+                  .foregroundColor(preferences.themeColor)
               }
 
             }
