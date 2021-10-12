@@ -17,7 +17,7 @@ public struct RandomGeneratorView<Content: View>: View {
   @EnvironmentObject var preferences: UserPreferences
   let content: Content
   
-  init(_ randomType: String, _ isCustomList: Bool = false, @ViewBuilder content: () -> Content) {
+  init(_ randomType: String, isCustomList: Bool = false, @ViewBuilder content: () -> Content) {
     self.content = content()
     self.randomType = randomType
     self.isCustomList = isCustomList
