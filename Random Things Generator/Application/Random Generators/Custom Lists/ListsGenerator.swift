@@ -37,7 +37,7 @@ struct ListsGenerator: View {
   @State private var showsHistory = false
   @State private var showsSettings = false
   var body: some View {
-    RandomGeneratorView("Lists") {
+    RandomGeneratorView("Lists", isCustomList: true) {
       Text(randomItem)
         .font(.system(size: 100))
         .minimumScaleFactor(0.2)
@@ -68,48 +68,65 @@ struct ListsGenerator: View {
       item.list?.totalTimes += 1
       try? moc.save()
     }
-    .onSettingsPressed {
-//      showsAlert = true
-      showsHistory = true
-    }
+    .customHistoryPredicate(idPredicate)
+    .settingsPresentedContent({
+      Section {
+        NavigationLink {
+          GeneratorLists(currentLists: $currentLists)
+        } label: {
+          Text("Selected List")
+        }
+        NavigationLink {
+          HatPicker(items: allItemsInLists)
+        } label: {
+          Text("Pick from hat")
+        }
+      } header: {
+        Text("Options")
+      }
+    })
+//    .onSettingsPressed {
+////      showsAlert = true
+//      showsHistory = true
+//    }
     .onChange(of: currentLists, perform: { newValue in
       UserDefaults.standard.set(newValue.map({$0.uuidString}), forKey: "currentLists")
     })
-    .alert("Select an Action", isPresented: $showsAlert) {
-      Button("History", role: nil) {
-        showsHistory = true
-        print("ok")
-        print("shows history")
-        print(showsHistory)
-      }
-      Button("Settings", role: nil) {
-        showsSettings = true
-      }
-      Button("Cancel", role: .cancel) {}
-    }
-    .sheet(isPresented: $showsHistory) {
-      
-      RandomHistory(randomType: "Lists", customPredicate: idPredicate, isCustomList: true, formatValue: { Text($0) })
-        .settings {
-          Section {
-            NavigationLink {
-              GeneratorLists(currentLists: $currentLists)
-            } label: {
-              Text("Selected List")
-            }
-            NavigationLink {
-              HatPicker(items: allItemsInLists)
-            } label: {
-              Text("Pick from hat")
-            }
-          } header: {
-            Text("Options")
-          }
-        }
-    }
-    .sheet(isPresented: $showsSettings) {
-      GeneratorLists(currentLists: $currentLists)
-    }
+//    .alert("Select an Action", isPresented: $showsAlert) {
+//      Button("History", role: nil) {
+//        showsHistory = true
+//        print("ok")
+//        print("shows history")
+//        print(showsHistory)
+//      }
+//      Button("Settings", role: nil) {
+//        showsSettings = true
+//      }
+//      Button("Cancel", role: .cancel) {}
+//    }
+//    .sheet(isPresented: $showsHistory) {
+//
+//      RandomHistory(randomType: "Lists", customPredicate: idPredicate, isCustomList: true, formatValue: { Text($0) })
+//        .settings {
+//          Section {
+//            NavigationLink {
+//              GeneratorLists(currentLists: $currentLists)
+//            } label: {
+//              Text("Selected List")
+//            }
+//            NavigationLink {
+//              HatPicker(items: allItemsInLists)
+//            } label: {
+//              Text("Pick from hat")
+//            }
+//          } header: {
+//            Text("Options")
+//          }
+//        }
+//    }
+//    .sheet(isPresented: $showsSettings) {
+//      GeneratorLists(currentLists: $currentLists)
+//    }
   }
   var allItemsInLists: [String] {
     var items = [String]()
