@@ -111,6 +111,7 @@ public struct RandomGeneratorView<Content: View>: View {
           .sheet(isPresented: $settingsPresented) {
             RandomHistory(randomType: randomType, customPredicate: customHistoryPredicate, isCustomList: isCustomList, formatValue: formatHistoryValue)
               .settings {
+                settingsContent
                 if generateMultipleTimes != nil {
                   NavigationLink {
                     GenerateMultipleTimes(generateMultipleTimes!, formatValue: formatHistoryValue)
@@ -118,7 +119,7 @@ public struct RandomGeneratorView<Content: View>: View {
                     Text("Generate Multiple Times")
                   }
                 }
-                settingsContent
+                
               }
           }
         }
