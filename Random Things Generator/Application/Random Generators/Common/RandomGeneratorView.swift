@@ -6,24 +6,62 @@
 //
 
 import SwiftUI
+import CoreData
 
-//class RandomGeneratorViewSettings: ObservableObject {
-//  private let randomType: String
-//  private let isCustomList: Bool
-//  @Published var dontRepeat: Bool
-//}
+class RandomGeneratorViewSettings: ObservableObject {
+  @Published var preferences: GeneratorPreferences {
+    didSet { try? viewContext.save() }
+  }
+  let viewContext = PersistenceController.shared.container.viewContext
+  
+  init(uuid: UUID) {
+    let request = NSFetchRequest<GeneratorPreferences>(entityName: "GeneratorPreferences")
+    request.predicate = NSPredicate(format: "uuid == %@", uuid as CVarArg)
+    request.fetchLimit = 1
+    let fetched = try? viewContext.fetch(request)
+    if let generatorPreference = fetched?.first {
+      self.preferences = generatorPreference
+    } else {
+      let generatorPreference = GeneratorPreferences(context: viewContext)
+      self.preferences = generatorPreference
+      try? viewContext.save()
+    }
+  }
+  init(randomType: String) {
+    let request = NSFetchRequest<GeneratorPreferences>(entityName: "GeneratorPreferences")
+    request.predicate = NSPredicate(format: "randomType == %@", randomType as CVarArg)
+    request.fetchLimit = 1
+    let fetched = try? viewContext.fetch(request)
+    if let generatorPreference = fetched?.first {
+      self.preferences = generatorPreference
+    } else {
+      let generatorPreference = GeneratorPreferences(context: viewContext)
+      self.preferences = generatorPreference
+      try? viewContext.save()
+    }
+  }
+}
 
 public struct RandomGeneratorView<Content: View>: View {
   @EnvironmentObject var preferences: UserPreferences
+  @Environment(\.managedObjectContext) var moc
+  @StateObject private var generatorSettings: RandomGeneratorViewSettings
   let content: Content
   
-  init(_ randomType: String, isCustomList: Bool = false, @ViewBuilder content: () -> Content) {
+  init(_ randomType: String, isCustomList: Bool = false, uuid: UUID? = nil, @ViewBuilder content: () -> Content) {
     self.content = content()
     self.randomType = randomType
+    self.uuid = uuid
     self.isCustomList = isCustomList
+    if let uuid = uuid {
+      _generatorSettings = StateObject(wrappedValue: RandomGeneratorViewSettings(uuid: uuid))
+    } else {
+      _generatorSettings = StateObject(wrappedValue: RandomGeneratorViewSettings(randomType: randomType))
+    }
   }
   private var randomButtonTitle = "Randomize"
   private var isCustomList = false
+  private var uuid: UUID?
   private var onRandomPressed: (() -> Void)?
   private var onTap: (() -> Void)?
   private var onTouchDown: (() -> Void)?
@@ -47,6 +85,13 @@ public struct RandomGeneratorView<Content: View>: View {
       UIImpactFeedbackGenerator(style: .soft).impactOccurred()
     }
   }
+//  var generatorPreferences: GeneratorPreferences {
+//    if let uuid = uuid {
+//      return preferences.generatorViewPreferences.first(where: { $0.uuid == uuid }) ?? GeneratorPreferences(uuid: uuid)
+//    } else {
+//      return preferences.generatorViewPreferences.first(where: { $0.randomType == randomType }) ?? GeneratorPreferences(randomType: randomType)
+//    }
+//  }
   public var body: some View {
       ZStack {
         preferences.themeColor.ignoresSafeArea(.all, edges: [.horizontal, .bottom])
@@ -119,7 +164,16 @@ public struct RandomGeneratorView<Content: View>: View {
                     Text("Generate Multiple Times")
                   }
                 }
-                
+                Section {
+//                  Toggle(isOn: $generatorSettings.preferences.dontRepeat) {
+//                    Text("Don't Repeat")
+//                  }
+//                  .onChange(of: generatorSettings.preferences.dontRepeat) { newValue in
+////                    preferences.generatorViewPreferences.append(generatorSettings.preferences)
+//                  }
+                } header: {
+                  Text("Preferences")
+                }
               }
           }
         }

@@ -41,7 +41,6 @@
 		8BB2A23726E4760100C27B0A /* GeneratorList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2A23526E4760100C27B0A /* GeneratorList+CoreDataClass.swift */; };
 		8BB2A23826E4760100C27B0A /* GeneratorList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2A23626E4760100C27B0A /* GeneratorList+CoreDataProperties.swift */; };
 		8BB2A23A26E4788300C27B0A /* Add List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2A23926E4788300C27B0A /* Add List.swift */; };
-		8BBC19642715C0E8002FEB5C /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBC19632715C0E8002FEB5C /* UserDefaults+Extensions.swift */; };
 		8BBC19672715C462002FEB5C /* GeneratorPreferences+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBC19652715C462002FEB5C /* GeneratorPreferences+CoreDataClass.swift */; };
 		8BBC19682715C462002FEB5C /* GeneratorPreferences+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBC19662715C462002FEB5C /* GeneratorPreferences+CoreDataProperties.swift */; };
 		8BCB7459270F33D100EFAE2B /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB7458270F33D100EFAE2B /* UserPreferences.swift */; };
@@ -91,7 +90,6 @@
 		8BB2A23526E4760100C27B0A /* GeneratorList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneratorList+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		8BB2A23626E4760100C27B0A /* GeneratorList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneratorList+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		8BB2A23926E4788300C27B0A /* Add List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Add List.swift"; sourceTree = "<group>"; };
-		8BBC19632715C0E8002FEB5C /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		8BBC19652715C462002FEB5C /* GeneratorPreferences+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneratorPreferences+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		8BBC19662715C462002FEB5C /* GeneratorPreferences+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneratorPreferences+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		8BCB7458270F33D100EFAE2B /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
@@ -208,7 +206,6 @@
 				8B7E861A26D98AE4004B0011 /* Binding+Extensions.swift */,
 				8B690BBC26DDB83200413FDA /* UIColor+Extensions.swift */,
 				8BF98EE62713C0B600DD8AAE /* Array+Extensions.swift */,
-				8BBC19632715C0E8002FEB5C /* UserDefaults+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -404,7 +401,6 @@
 				8B74E1D526D6CD1B00886949 /* Random_Things_Generator.xcdatamodeld in Sources */,
 				8B9FEFE126DE1C9800D24301 /* RandomHistory.swift in Sources */,
 				8B74E1E826D75DDD00886949 /* NumberGenerator.swift in Sources */,
-				8BBC19642715C0E8002FEB5C /* UserDefaults+Extensions.swift in Sources */,
 				8B29757126DCAAB20038CD92 /* MapGenerator.swift in Sources */,
 				8B690BBD26DDB83200413FDA /* UIColor+Extensions.swift in Sources */,
 				8BB2A23826E4760100C27B0A /* GeneratorList+CoreDataProperties.swift in Sources */,
