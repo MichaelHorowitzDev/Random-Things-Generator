@@ -48,6 +48,7 @@ struct SettingsMenu: View {
           }
         }
       }
+      .accentColor(preferences.themeColor)
     }
 }
 
