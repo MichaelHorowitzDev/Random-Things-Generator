@@ -73,6 +73,7 @@ public struct RandomGeneratorView<Content: View>: View {
   private var onRandomPressed: (() -> Void)?
   private var onRandomSuccess: ((String) -> Void)?
   private var generateRandom: (() -> String)?
+  private var generateRandomArray: (() -> [String])?
   private var onTap: (() -> Void)?
   private var onTouchDown: (() -> Void)?
   private var onTouchUp: (() -> Void)?
@@ -106,7 +107,28 @@ public struct RandomGeneratorView<Content: View>: View {
             }
             RandomizeButton(randomButtonTitle) {
               onRandomPressed?()
-              if let generateRandom = generateRandom {
+              if let generateRandomArray = generateRandomArray {
+                let array = generateRandomArray()
+                if !array.isEmpty {
+                  var randomValue = array.randomElement()!
+                  if generatorSettings.preferences.dontRepeat {
+                    if randomValue == randomizedValue {
+                      let filtered = array.filter({ $0 != randomValue })
+                      if !filtered.isEmpty {
+                        randomValue = filtered.randomElement()!
+                        randomizedValue = randomValue
+                        onRandomSuccess?(randomValue)
+                      }
+                    } else {
+                      randomizedValue = randomValue
+                      onRandomSuccess?(randomValue)
+                    }
+                  } else {
+                    randomizedValue = randomValue
+                    onRandomSuccess?(randomValue)
+                  }
+                }
+              } else if let generateRandom = generateRandom {
                 var randomValue = generateRandom()
                 if generatorSettings.preferences.dontRepeat {
                   while randomValue == randomizedValue {
@@ -296,9 +318,18 @@ extension RandomGeneratorView {
       return self
     } else {
       var copy = self
-      if !isCustomList {
+//      if !isCustomList {
         copy.generateRandom = generate()
-      }
+//      }
+      return copy
+    }
+  }
+  func generateRandomArray(_ generate: @escaping () -> (() -> [String])?) -> Self {
+    if generate() == nil {
+      return self
+    } else {
+      var copy = self
+      copy.generateRandomArray = generate()
       return copy
     }
   }
