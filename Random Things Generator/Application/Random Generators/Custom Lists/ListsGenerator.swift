@@ -52,22 +52,22 @@ struct ListsGenerator: View {
     .onRandomTouchUp {
       scale = 1
     }
-    .onRandomPressed {
-      guard let list = selectedLists.randomElement() else { return }
-      guard let title = list.title else { return }
-      guard let item = (list.items?.allObjects as? [ListItem])?.randomElement() else { return }
-      guard let itemName = item.itemName else { return }
-      randomItem = itemName
-      let coreDataItem = Random(context: moc)
-      coreDataItem.id = list.id
-      coreDataItem.randomType = title
-      coreDataItem.timestamp = Date()
-      coreDataItem.value = itemName
-      item.lastShown = Date()
-      item.timesShown += 1
-      item.list?.totalTimes += 1
-      try? moc.save()
-    }
+//    .onRandomPressed {
+//      guard let list = selectedLists.randomElement() else { return }
+//      guard let title = list.title else { return }
+//      guard let item = (list.items?.allObjects as? [ListItem])?.randomElement() else { return }
+//      guard let itemName = item.itemName else { return }
+//      randomItem = itemName
+//      let coreDataItem = Random(context: moc)
+//      coreDataItem.id = list.id
+//      coreDataItem.randomType = title
+//      coreDataItem.timestamp = Date()
+//      coreDataItem.value = itemName
+//      item.lastShown = Date()
+//      item.timesShown += 1
+//      item.list?.totalTimes += 1
+//      try? moc.save()
+//    }
     .customHistoryPredicate(idPredicate)
     .settingsPresentedContent({
       Section {
@@ -88,7 +88,7 @@ struct ListsGenerator: View {
         Text("Options")
       }
     })
-    .generateMultipleTimes({
+    .generateRandom({
       let allItems = allItemsInLists
       if allItems.isEmpty {
         return nil
@@ -98,9 +98,52 @@ struct ListsGenerator: View {
         }
       }
     })
+    .generateRandomArray({
+      return { allItemsInLists }
+    })
+    .onRandomSuccess({ result in
+      let allItems = allItemsWithParent
+      let filteredLists = allItems.filter({ $0.0 == result })
+      guard let list = filteredLists.randomElement()?.1 else { return }
+      guard let title = list.title else { return }
+      guard let item = (list.items?.allObjects as? [ListItem])?.first(where: { $0.itemName == result }) else { return }
+      guard let itemName = item.itemName else { return }
+      randomItem = itemName
+      let coreDataItem = Random(context: moc)
+      coreDataItem.id = list.id
+      coreDataItem.randomType = title
+      coreDataItem.timestamp = Date()
+      coreDataItem.value = itemName
+      item.lastShown = Date()
+      item.timesShown += 1
+      item.list?.totalTimes += 1
+      try? moc.save()
+    })
     .onChange(of: currentLists, perform: { newValue in
       UserDefaults.standard.set(newValue.map({$0.uuidString}), forKey: "currentLists")
     })
+  }
+  var allItemsWithParent: [(String, GeneratorList)] {
+    var items = [(String, GeneratorList)]()
+    selectedLists.forEach { generatorList in
+      let list = generatorList.items?.allObjects as? [ListItem]
+      list?.forEach({ listItem in
+        guard let itemName = listItem.itemName else { return }
+        guard let parentList = listItem.list else { return }
+        items.append((itemName, parentList))
+      })
+    }
+    return items
+//    selectedLists.compactMap { list in
+//      (list.items?.allObjects as? [ListItem])?.compactMap({ listItem in
+//        return (listItem.itemName ?? "", listItem.list ?? GeneratorList())
+//      })
+//        listItemArray.map { listItem in
+//          if let itemName = listItem.itemName {
+//            return (itemName, itemName.parent)
+//          }
+//        }
+//    }
   }
   var allItemsInLists: [String] {
     var items = [String]()
