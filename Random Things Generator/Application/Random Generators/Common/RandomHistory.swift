@@ -116,7 +116,7 @@ struct RandomHistory<Format:View, Settings: View>: View {
       .navigationTitle("Options")
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
-          Button("Cancel") {
+          Button("Done") {
             presentationMode.wrappedValue.dismiss()
           }
           .foregroundColor(preferences.themeColor)
