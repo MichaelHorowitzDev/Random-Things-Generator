@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import MessageUI
 
 struct SettingsMenu: View {
   @EnvironmentObject var preferences: UserPreferences
   @Environment(\.presentationMode) var presentationMode
+  @State private var showsMail = false
+  @State private var result: Result<MFMailComposeResult, Error>? = nil
     var body: some View {
       NavigationView {
         List {
@@ -26,12 +29,27 @@ struct SettingsMenu: View {
             }
           }
           Section("Customization") {
-            HStack {
+            NavigationLink {
+              ThemeColor()
+            } label: {
               Image(systemName: "paintbrush.fill")
-              Spacer()
-              NavigationLink("Theme") {
-                ThemeColor()
+              Text("Theme")
+            }
+          }
+          Section("Support") {
+            Button("Send Email") {
+              if MFMailComposeViewController.canSendMail() {
+                showsMail = true
               }
+            }
+            .sheet(isPresented: $showsMail) {
+              let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"]! as! String
+              MailView { result in
+                print(result)
+              }
+              .setToRecipients(["michaelhorowitzdev@gmail.com"])
+              .setMessageBody("<p><br><br><br><br>Version \(version)</p>", isHTML: true)
+              .setSubject("Random Things Generator")
             }
           }
         }
