@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B0AF9E82716664E009142BB /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0AF9E72716664E009142BB /* MailView.swift */; };
 		8B29756F26DC7ECF0038CD92 /* DateGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B29756E26DC7ECF0038CD92 /* DateGenerator.swift */; };
 		8B29757126DCAAB20038CD92 /* MapGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B29757026DCAAB20038CD92 /* MapGenerator.swift */; };
 		8B5B4F3E26D98377001994F4 /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5B4F3D26D98377001994F4 /* SettingsMenu.swift */; };
@@ -55,6 +56,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8B0AF9E72716664E009142BB /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		8B29756E26DC7ECF0038CD92 /* DateGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateGenerator.swift; sourceTree = "<group>"; };
 		8B29757026DCAAB20038CD92 /* MapGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapGenerator.swift; sourceTree = "<group>"; };
 		8B5B4F3D26D98377001994F4 /* SettingsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				8B7C931D26E041450046032F /* ShareSheet.swift */,
 				8B95E5CA26E5600500349D4C /* TextFieldAlert.swift */,
 				8BF98EE42713C05800DD8AAE /* BarChart.swift */,
+				8B0AF9E72716664E009142BB /* MailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				8B74E1D526D6CD1B00886949 /* Random_Things_Generator.xcdatamodeld in Sources */,
 				8B9FEFE126DE1C9800D24301 /* RandomHistory.swift in Sources */,
 				8B74E1E826D75DDD00886949 /* NumberGenerator.swift in Sources */,
+				8B0AF9E82716664E009142BB /* MailView.swift in Sources */,
 				8B29757126DCAAB20038CD92 /* MapGenerator.swift in Sources */,
 				8B690BBD26DDB83200413FDA /* UIColor+Extensions.swift in Sources */,
 				8BB2A23826E4760100C27B0A /* GeneratorList+CoreDataProperties.swift in Sources */,
@@ -550,6 +554,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "Random Things Generator/Random Things Generator.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -559,6 +564,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Random-Things-Generator-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Random;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -569,7 +575,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.michaelhorowitz.Random-Things-Generator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -584,6 +590,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "Random Things Generator/Random Things Generator.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -593,6 +600,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Random-Things-Generator-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Random;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -603,7 +611,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.michaelhorowitz.Random-Things-Generator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
