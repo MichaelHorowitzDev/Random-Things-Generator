@@ -13,6 +13,7 @@ struct SettingsMenu: View {
   @Environment(\.presentationMode) var presentationMode
   @State private var showsMail = false
   @State private var result: Result<MFMailComposeResult, Error>? = nil
+  @State private var emailCopied = false
     var body: some View {
       NavigationView {
         List {
@@ -35,13 +36,28 @@ struct SettingsMenu: View {
               Image(systemName: "paintbrush.fill")
               Text("Theme")
             }
+            NavigationLink {
+              AppIcon()
+            } label: {
+              Image(systemName: "arrow.2.squarepath")
+              Text("App Icon")
+            }
+
           }
           Section("Support") {
             Button("Send Email") {
               if MFMailComposeViewController.canSendMail() {
                 showsMail = true
+              } else {
+                UIPasteboard.general.string = "michaelhorowitzdev@gmail.com"
+                emailCopied = true
               }
             }
+            .alert("Email Copied", isPresented: $emailCopied, actions: {
+              Button("OK", role: .cancel) {}
+            }, message: {
+              Text("You can now paste it wherever needed.")
+            })
             .sheet(isPresented: $showsMail) {
               let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"]! as! String
               MailView { result in
