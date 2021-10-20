@@ -36,13 +36,14 @@ struct SettingsMenu: View {
               Image(systemName: "paintbrush.fill")
               Text("Theme")
             }
-            NavigationLink {
-              AppIcon()
-            } label: {
-              Image(systemName: "arrow.2.squarepath")
-              Text("App Icon")
+            if UIApplication.shared.supportsAlternateIcons {
+              NavigationLink {
+                AppIcon()
+              } label: {
+                Image(systemName: "plus.square.dashed")
+                Text("App Icon")
+              }
             }
-
           }
           Section("Support") {
             Button("Send Email") {
