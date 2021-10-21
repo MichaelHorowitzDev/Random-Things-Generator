@@ -59,6 +59,7 @@
 		8BB2A23A26E4788300C27B0A /* Add List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2A23926E4788300C27B0A /* Add List.swift */; };
 		8BBC19672715C462002FEB5C /* GeneratorPreferences+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBC19652715C462002FEB5C /* GeneratorPreferences+CoreDataClass.swift */; };
 		8BBC19682715C462002FEB5C /* GeneratorPreferences+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBC19662715C462002FEB5C /* GeneratorPreferences+CoreDataProperties.swift */; };
+		8BCABA582720CD3C0006E4D6 /* DiceRandomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCABA572720CD3C0006E4D6 /* DiceRandomizer.swift */; };
 		8BCB7459270F33D100EFAE2B /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB7458270F33D100EFAE2B /* UserPreferences.swift */; };
 		8BCB745B270F3E4800EFAE2B /* HatPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB745A270F3E4800EFAE2B /* HatPicker.swift */; };
 		8BF761E826FC23740018686F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9FEFE426DE233500D24301 /* CloudKit.framework */; };
@@ -124,6 +125,7 @@
 		8BB2A23926E4788300C27B0A /* Add List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Add List.swift"; sourceTree = "<group>"; };
 		8BBC19652715C462002FEB5C /* GeneratorPreferences+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneratorPreferences+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		8BBC19662715C462002FEB5C /* GeneratorPreferences+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneratorPreferences+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		8BCABA572720CD3C0006E4D6 /* DiceRandomizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceRandomizer.swift; sourceTree = "<group>"; };
 		8BCB7458270F33D100EFAE2B /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		8BCB745A270F3E4800EFAE2B /* HatPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatPicker.swift; sourceTree = "<group>"; };
 		8BD23D2426DEDEA8003C5489 /* Random-Things-Generator-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Random-Things-Generator-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -288,6 +290,7 @@
 				8B74E1E726D75DDD00886949 /* NumberGenerator.swift */,
 				8B7E862726D9ED64004B0011 /* CoinFlipper.swift */,
 				8B61A02C26DAF2CC007DBC50 /* CardRandomizer.swift */,
+				8BCABA572720CD3C0006E4D6 /* DiceRandomizer.swift */,
 				8B29756E26DC7ECF0038CD92 /* DateGenerator.swift */,
 				8B29757026DCAAB20038CD92 /* MapGenerator.swift */,
 				8BF98EDA27114C4000DD8AAE /* ColorGenerator.swift */,
@@ -471,6 +474,7 @@
 				8BB2A22E26E4145700C27B0A /* Color+Extensions.swift in Sources */,
 				8B29756F26DC7ECF0038CD92 /* DateGenerator.swift in Sources */,
 				8B95E5CF26E6B0A200349D4C /* ListItem+CoreDataProperties.swift in Sources */,
+				8BCABA582720CD3C0006E4D6 /* DiceRandomizer.swift in Sources */,
 				8BF98EDB27114C4000DD8AAE /* ColorGenerator.swift in Sources */,
 				8B74E1C926D6CD1A00886949 /* Random_Things_GeneratorApp.swift in Sources */,
 				8B9FEFDF26DE1B3200D24301 /* Random+CoreDataProperties.swift in Sources */,
