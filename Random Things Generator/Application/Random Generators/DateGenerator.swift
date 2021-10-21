@@ -10,7 +10,7 @@ import SwiftUI
 struct DateGenerator: View {
   @State private var startingDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
   @State private var endingDate = Date()
-  @State private var randomDate = ""
+  @State private var randomDate = "?"
   @State private var animationAmount: CGFloat = 1
   @EnvironmentObject var preferences: UserPreferences
   @Environment(\.colorScheme) var colorScheme
@@ -63,20 +63,6 @@ struct DateGenerator: View {
         .onRandomTouchUp {
           animationAmount = 1
         }
-//        .onRandomPressed {
-//          guard let days = Calendar.current.dateComponents([.day], from: startingDate, to: endingDate).day else { return }
-//          let randomDay = Int.random(in: 0...days)
-//          let randomDate = Calendar.current.date(byAdding: .day, value: randomDay, to: startingDate)!
-//          let formatter = DateFormatter()
-//          formatter.dateFormat = "MMMM dd, y"
-//          let formattedDate = formatter.string(from: randomDate)
-//          self.randomDate = formattedDate
-//          let coreDataItem = Random(context: moc)
-//          coreDataItem.randomType = "Date"
-//          coreDataItem.timestamp = Date()
-//          coreDataItem.value = self.randomDate
-//          try? moc.save()
-//        }
         .generateRandom({
           guard let days = Calendar.current.dateComponents([.day], from: startingDate, to: endingDate).day else { return nil }
           return {
