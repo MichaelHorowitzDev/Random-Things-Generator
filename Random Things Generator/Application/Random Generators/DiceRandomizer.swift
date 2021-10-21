@@ -38,22 +38,13 @@ struct DiceRandomizer: View {
               HStack {
                 ForEach(0..<(currentDice.count <= 3 ? currentDice.count : Int(ceil(Double(currentDice.count)/2))), id: \.self) {
                   DiceImage(diceName: currentDice[$0].numberImage)
-//                  Image(systemName: currentDice[$0].numberImage)
-//                    .resizable()
-//                    .scaledToFit()
-//                    .aspectRatio(contentMode: .fit)
-//                    .foregroundColor(.white)
-//                    .scaleEffect(animationAmount)
+                    .scaleEffect(animationAmount)
                 }
               }
               if currentDice.count > 3 {
                 HStack {
                   ForEach(Int(ceil(Double(currentDice.count)/2))..<currentDice.count, id: \.self) {
-                    Image(systemName: currentDice[$0].numberImage)
-                      .resizable()
-                      .scaledToFit()
-                      .aspectRatio(contentMode: .fit)
-                      .foregroundColor(.white)
+                    DiceImage(diceName: currentDice[$0].numberImage)
                       .scaleEffect(animationAmount)
                   }
                 }
@@ -68,8 +59,6 @@ struct DiceRandomizer: View {
                 currentDice.removeLast()
               }
             }
-//            Image(systemName: "questionmark.app.fill")
-//              .font(.largeTitle)
           }
           .randomButtonOverContent(false)
           .onRandomTouchDown {
@@ -106,21 +95,12 @@ struct DiceRandomizer: View {
                 HStack {
                   ForEach(0..<(formatDice.count <= 3 ? formatDice.count : Int(ceil(Double(formatDice.count)/2))), id: \.self) {
                     DiceImage(diceName: formatDice[$0].numberImage)
-//                    Image(systemName: formatDice[$0].numberImage)
-//                      .resizable()
-//                      .scaledToFit()
-//                      .aspectRatio(contentMode: .fit)
-//                      .foregroundColor(.white)
                   }
                 }
                 if formatDice.count > 3 {
                   HStack {
                     ForEach(Int(ceil(Double(formatDice.count)/2))..<formatDice.count, id: \.self) {
-                      Image(systemName: formatDice[$0].numberImage)
-                        .resizable()
-                        .scaledToFit()
-                        .aspectRatio(contentMode: .fit)
-                        .foregroundColor(.white)
+                      DiceImage(diceName: formatDice[$0].numberImage)
                     }
                   }
                 }
@@ -132,12 +112,6 @@ struct DiceRandomizer: View {
     }
 }
 
-struct DiceRandomizer_Previews: PreviewProvider {
-    static var previews: some View {
-        DiceRandomizer()
-    }
-}
-
 private struct DiceImage: View {
   let diceName: String
   var body: some View {
@@ -145,12 +119,6 @@ private struct DiceImage: View {
       .resizable()
       .scaledToFit()
       .aspectRatio(contentMode: .fit)
-//      .foregroundColor(.white)
-//      .padding(-10)
-//      .background(.black)
-//      .background(.black)
-//      .clipped()
-//      .border(.black)
   }
 }
 
@@ -162,20 +130,18 @@ private struct DiceItem: Identifiable, Hashable {
     switch number {
     case 1:
       return "dice 1"
-    case 1:
-      return "die.face.1.fill"
     case 2:
-      return "die.face.2.fill"
+      return "dice 2"
     case 3:
-      return "die.face.3.fill"
+      return "dice 3"
     case 4:
-      return "die.face.4.fill"
+      return "dice 4"
     case 5:
-      return "die.face.5.fill"
+      return "dice 5"
     case 6:
-      return "die.face.6.fill"
+      return "dice 6"
     default:
-      return "questionmark.app.fill"
+      return "dice question"
     }
   }
 }
