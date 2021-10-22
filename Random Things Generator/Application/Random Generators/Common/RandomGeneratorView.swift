@@ -253,7 +253,7 @@ extension RandomGeneratorView {
     copy.onTouchUp = closure
     return copy
   }
-  func showRandomButton(_ shows: Bool) -> Self {
+  func overrideShowRandomButton(_ shows: Bool) -> Self {
     var copy = self
     copy.overrideShowRandomButton = shows
     return copy
