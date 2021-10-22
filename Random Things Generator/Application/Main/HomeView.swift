@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-  let types = ["Number", "Card", "Dice", "Coin", "Color", "Date", "Lists"]
+  let types = ["Number", "Card", "Dice", "Coin", "Color", "Date", "Map", "Lists"]
   @EnvironmentObject var preferences: UserPreferences
   @State private var settingsPresented = false
   let columns: [GridItem] = [GridItem(.adaptive(minimum: 140))]
