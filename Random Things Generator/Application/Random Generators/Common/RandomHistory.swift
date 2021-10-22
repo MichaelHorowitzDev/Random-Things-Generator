@@ -162,6 +162,7 @@ private struct RandomHistoryItems<Format: View, Settings: View>: View {
   @EnvironmentObject var preferences: UserPreferences
   private var timeFrames = ["7 Days", "30 Days", "90 Days", "All Time"]
   private var settings: Settings?
+  @State private var copiedText = false
   
   init(predicate: NSPredicate, timeFrame: Binding<String>, randomType: String, generatorList: GeneratorList? = nil, formatValue: ((_ value: String) -> Format)? = nil) {
     self._history = FetchRequest(entity: Random.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Random.timestamp, ascending: false)], predicate: predicate, animation: .default)
@@ -193,21 +194,37 @@ private struct RandomHistoryItems<Format: View, Settings: View>: View {
       }
       Section(content: {
         ForEach(history, id: \.self) { item in
-          HStack {
+          Button {
             if let value = item.value {
-              if formatValue != nil {
-                formatValue!(value)
-              } else {
-                Text(value)
-                  .font(.title)
-              }
-            } else {
-              Text("Unknown")
+              UIPasteboard.general.string = value
+              copiedText = true
             }
-            Spacer(minLength: 50)
-            Text(formatDate(date: item.timestamp))
+            print("fs")
+          } label: {
+            HStack {
+              if let value = item.value {
+                if formatValue != nil {
+                  formatValue!(value)
+                } else {
+                  Text(value)
+                    .font(.title)
+                }
+              } else {
+                Text("Unknown")
+              }
+              Spacer(minLength: 50)
+              Text(formatDate(date: item.timestamp))
+            }
+            .padding(.vertical, 5)
           }
-          .padding(.vertical, 5)
+          .buttonStyle(DefaultButtonStyle())
+          .foregroundColor(.primary)
+          .alert("Copied", isPresented: $copiedText) {
+            Button("OK", role: .cancel) {}
+          } message: {
+            Text("Text has been copied.")
+          }
+
         }
       }, header: {
         HStack {
