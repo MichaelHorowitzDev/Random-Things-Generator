@@ -67,12 +67,23 @@ private struct HomeViewItem<Content: View>: View {
     NavigationLink {
       destinationView
     } label: {
-      Text(item)
-        .font(.title)
-        .fontWeight(.semibold)
-        .foregroundColor(color.isLight ? .black : .white)
-        .frame(height: 100)
-        .frame(maxWidth: .infinity)
+      ZStack {
+//        VStack {
+//          HStack {
+//            Spacer()
+//            Image(systemName: symbol)
+//              .font(.title2)
+//          }
+//          Spacer()
+//        }
+//        .padding([.trailing, .top], 5)
+        Text(item)
+          .font(.title)
+          .fontWeight(.semibold)
+      }
+      .foregroundColor(color.isLight ? .black : .white)
+      .frame(height: 100)
+      .frame(maxWidth: .infinity)
     }
     .background(color)
     .cornerRadius(10)
