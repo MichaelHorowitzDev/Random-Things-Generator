@@ -22,11 +22,13 @@ struct SettingsMenu: View {
               Image(systemName: "waveform")
               Spacer()
               Toggle("Haptics", isOn: $preferences.hasHapticFeedback)
+                .tint(preferences.themeColor)
             }
             HStack {
               Image(systemName: "hand.tap.fill")
               Spacer()
               Toggle("Tap to Randomize", isOn: !$preferences.showsRandomButton)
+                .tint(preferences.themeColor)
             }
           }
           Section("Customization") {
