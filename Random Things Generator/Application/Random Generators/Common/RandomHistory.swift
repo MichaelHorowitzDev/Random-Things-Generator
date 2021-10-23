@@ -17,6 +17,7 @@ struct RandomHistory<Format:View, Settings: View>: View {
   
   private var timeFrames = ["7 Days", "30 Days", "90 Days", "All Time"]
   private var settings: Settings?
+  private var customTapFunction: ((String) -> Void)?
   
   init(randomType: String, generatorList: GeneratorList? = nil, id: String? = nil, customPredicate: NSPredicate? = nil, isCustomList: Bool = false, formatValue: ((_ value: String) -> Format)? = nil) {
     self._predicate = State(initialValue: NSPredicate(format: "randomType == %@", randomType))
@@ -107,6 +108,7 @@ struct RandomHistory<Format:View, Settings: View>: View {
         .settings({
           settings
         })
+        .customTapFunction(customTapFunction)
           .onChange(of: timeFrame) { newValue in
             setPredicate(timeFrame: newValue)
           }
@@ -131,6 +133,11 @@ extension RandomHistory {
   func settings(@ViewBuilder _ settings: () -> Settings) -> Self {
     var copy = self
     copy.settings = settings()
+    return copy
+  }
+  func customTapFunction(_ function: ((String) -> Void)?) -> Self {
+    var copy = self
+    copy.customTapFunction = function
     return copy
   }
 }
@@ -163,6 +170,7 @@ private struct RandomHistoryItems<Format: View, Settings: View>: View {
   private var timeFrames = ["7 Days", "30 Days", "90 Days", "All Time"]
   private var settings: Settings?
   @State private var copiedText = false
+  private var customTapFunction: ((String) -> Void)?
   
   init(predicate: NSPredicate, timeFrame: Binding<String>, randomType: String, generatorList: GeneratorList? = nil, formatValue: ((_ value: String) -> Format)? = nil) {
     self._history = FetchRequest(entity: Random.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Random.timestamp, ascending: false)], predicate: predicate, animation: .default)
@@ -196,10 +204,14 @@ private struct RandomHistoryItems<Format: View, Settings: View>: View {
         ForEach(history, id: \.self) { item in
           Button {
             if let value = item.value {
-              UIPasteboard.general.string = value
-              copiedText = true
+              print(customTapFunction)
+              if customTapFunction != nil {
+                customTapFunction!(value)
+              } else {
+                UIPasteboard.general.string = value
+                copiedText = true
+              }
             }
-            print("fs")
           } label: {
             HStack {
               if let value = item.value {
@@ -278,6 +290,11 @@ extension RandomHistoryItems {
   func settings(@ViewBuilder _ settings: () -> Settings) -> Self {
     var copy = self
     copy.settings = settings()
+    return copy
+  }
+  func customTapFunction(_ function: ((String) -> Void)?) -> Self {
+    var copy = self
+    copy.customTapFunction = function
     return copy
   }
 }

@@ -69,6 +69,23 @@ struct MapGenerator: View {
         coreDataItem.value = "\(latitudeString), \(longitudeString)"
         try? moc.save()
       }
+//      .onHistoryItemTap { item in
+//        print(item)
+//        let baseURL = "http://maps.apple.com/"
+//        let coordinates = item.replacingOccurrences(of: ", ", with: "\n").split(separator: "\n")
+//        print(coordinates)
+//        if coordinates.count != 2 { return }
+//        let latitude = coordinates[0]
+//        let longitude = coordinates[1]
+//        let query = "?ll=\(latitude),\(longitude)"
+//        let zoom = "&z=6"
+//        let urlString = baseURL+query+zoom
+//        if let url = URL(string: urlString) {
+//          UIApplication.shared.open(url)
+//        } else {
+//          print("error")
+//        }
+//      }
     }
   }
 }

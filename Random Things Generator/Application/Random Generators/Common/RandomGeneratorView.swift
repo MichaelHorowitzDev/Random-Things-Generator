@@ -84,6 +84,7 @@ public struct RandomGeneratorView<Content: View>: View {
   private var canPresentSettings = true
   var randomType: String
   private var onSettingsPressed: (() -> Void)?
+  private var onHistoryItemTap: ((String) -> Void)?
   private var formatHistoryValue: ((String) -> AnyView)?
   private var buttonOverContent = true
   private var settingsContent: AnyView?
@@ -193,6 +194,7 @@ public struct RandomGeneratorView<Content: View>: View {
                   }
                 }
               }
+              .customTapFunction(onHistoryItemTap)
           }
         }
       }
@@ -306,6 +308,11 @@ extension RandomGeneratorView {
   func customHistoryPredicate(_ predicate: NSPredicate) -> Self {
     var copy = self
     copy.customHistoryPredicate = predicate
+    return copy
+  }
+  func onHistoryItemTap(_ function: @escaping (String) -> Void) -> Self {
+    var copy = self
+    copy.onHistoryItemTap = function
     return copy
   }
   func onRandomSuccess(_ onSuccess: @escaping (String) -> Void) -> Self {
