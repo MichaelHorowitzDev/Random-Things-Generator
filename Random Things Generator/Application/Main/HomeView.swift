@@ -17,7 +17,7 @@ struct HomeView: View {
       ScrollView {
         LazyVGrid(columns: columns, spacing: 10) {
           ForEach(0..<types.count) { num in
-            HomeViewItem(item: types[num], color: preferences.themeColor, destinationView: AnyView(typeToView[types[num]]))
+            HomeViewItem(item: types[num], color: preferences.themeColor, destinationView: typeToView(types[num]))
               .padding(.horizontal, 5)
           }
         }
@@ -43,22 +43,26 @@ struct HomeView: View {
     .navigationViewStyle(.stack)
     .accentColor(preferences.themeColor)
   }
-  let typeToView: [String: AnyView] = [
-    "Number": AnyView(NumberGenerator()),
-    "Coin": AnyView(CoinFlipper()),
-    "Card": AnyView(CardRandomizer()),
-    "Date": AnyView(DateGenerator()),
-    "Map": AnyView(MapGenerator()),
-    "Lists": AnyView(ListsGenerator()),
-    "Color": AnyView(ColorGenerator()),
-    "Dice": AnyView(DiceRandomizer())
-  ]
+  @ViewBuilder
+  func typeToView(_ type: String) -> some View {
+    switch type {
+    case "Number": NumberGenerator()
+    case "Coin": CoinFlipper()
+    case "Card": CardRandomizer()
+    case "Date": DateGenerator()
+    case "Map": MapGenerator()
+    case "Lists": ListsGenerator()
+    case "Color": ColorGenerator()
+    case "Dice": DiceRandomizer()
+    default: EmptyView()
+    }
+  }
 }
 
-private struct HomeViewItem: View {
+private struct HomeViewItem<Content: View>: View {
   let item: String
   let color: Color
-  let destinationView: AnyView
+  let destinationView: Content
   var body: some View {
     NavigationLink {
       destinationView
