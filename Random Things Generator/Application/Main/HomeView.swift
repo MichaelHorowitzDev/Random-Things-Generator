@@ -19,7 +19,7 @@ struct HomeView: View {
       ScrollView {
         LazyVGrid(columns: columns, spacing: 10) {
           ForEach(preferences.onTypes) {
-            HomeViewItem(item: $0.type, color: preferences.themeColor, destinationView: typeToView($0.type))
+            HomeViewItem(item: $0.type, symbol: typesToSymbol[$0.type] ?? "", color: preferences.themeColor, destinationView: typeToView($0.type))
               .padding(.horizontal, 5)
           }
         }
@@ -59,10 +59,21 @@ struct HomeView: View {
     default: EmptyView()
     }
   }
+  let typesToSymbol = [
+    "Number": "number.square.fill",
+    "Coin": "dollarsign.square.fill",
+    "Card": "questionmark.square.fill",
+    "Date": "calendar.badge.clock",
+    "Map": "map.fill",
+    "Lists": "list.bullet.rectangle.fill",
+    "Color": "eyedropper.full",
+    "Dice": "dice.fill"
+  ]
 }
 
 private struct HomeViewItem<Content: View>: View {
   let item: String
+  let symbol: String
   let color: Color
   let destinationView: Content
   var body: some View {
@@ -70,15 +81,15 @@ private struct HomeViewItem<Content: View>: View {
       destinationView
     } label: {
       ZStack {
-//        VStack {
-//          HStack {
-//            Spacer()
-//            Image(systemName: symbol)
-//              .font(.title2)
-//          }
-//          Spacer()
-//        }
-//        .padding([.trailing, .top], 5)
+        VStack {
+          HStack {
+            Spacer()
+            Image(systemName: symbol)
+              .font(.title2)
+          }
+          Spacer()
+        }
+        .padding([.trailing, .top], 5)
         Text(item)
           .font(.title)
           .fontWeight(.semibold)
