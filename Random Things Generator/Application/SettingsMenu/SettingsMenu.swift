@@ -83,9 +83,9 @@ struct SettingsMenu: View {
               .setMessageBody("<p><br><br><br><br>Version \(version)</p>", isHTML: true)
               .setSubject("Random Things Generator")
             }
-            if let url = URL(string: "https://itunes.apple.com/us/app/random-things-generator/id1460779766"), UIApplication.shared.canOpenURL(url) {
+            if let url = URL(string: "https://itunes.apple.com/us/app/random-things-generator/id1460779766?action=write-review"), UIApplication.shared.canOpenURL(url) {
               Button {
-                UIApplication.shared.open(url.appendingPathComponent("?action=write-review"))
+                UIApplication.shared.open(url)
               } label: {
                 HStack {
                   Text("Rate App")
@@ -93,6 +93,8 @@ struct SettingsMenu: View {
                   Image(systemName: "star")
                 }
               }
+            }
+            if let url = URL(string: "https://itunes.apple.com/us/app/random-things-generator/id1460779766"), UIApplication.shared.canOpenURL(url) {
               Button {
                 showsShareSheet = true
               } label: {
