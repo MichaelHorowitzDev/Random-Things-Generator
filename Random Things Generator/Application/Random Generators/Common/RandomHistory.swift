@@ -242,7 +242,7 @@ private struct RandomHistoryItems<Format: View, Settings: View>: View {
           Text("Total \(history.count)")
           Spacer()
           Text("Time Range")
-          Picker("Time Range", selection: $timeFrame) {
+          Picker("", selection: $timeFrame) {
             ForEach(timeFrames, id: \.self) {
               Text($0)
             }
