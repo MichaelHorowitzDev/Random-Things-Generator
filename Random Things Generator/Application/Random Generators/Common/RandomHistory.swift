@@ -204,7 +204,6 @@ private struct RandomHistoryItems<Format: View, Settings: View>: View {
         ForEach(history, id: \.self) { item in
           Button {
             if let value = item.value {
-              print(customTapFunction)
               if customTapFunction != nil {
                 customTapFunction!(value)
               } else {
