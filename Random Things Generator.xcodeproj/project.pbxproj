@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		8B0AF9E82716664E009142BB /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0AF9E72716664E009142BB /* MailView.swift */; };
+		8B1D97A427251C6200236E96 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D97A327251C6200236E96 /* ImagePickerView.swift */; };
+		8B1D97A627251CD600236E96 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D97A527251CD600236E96 /* Collection+Extensions.swift */; };
+		8B1D97AD27252E7E00236E96 /* ReorganizeGenorators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D97AC27252E7E00236E96 /* ReorganizeGenorators.swift */; };
 		8B29756F26DC7ECF0038CD92 /* DateGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B29756E26DC7ECF0038CD92 /* DateGenerator.swift */; };
 		8B29757126DCAAB20038CD92 /* MapGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B29757026DCAAB20038CD92 /* MapGenerator.swift */; };
 		8B52DB0A271F11A100A8EF70 /* purple@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B52DB03271F11A100A8EF70 /* purple@3x.png */; };
@@ -75,6 +78,9 @@
 
 /* Begin PBXFileReference section */
 		8B0AF9E72716664E009142BB /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
+		8B1D97A327251C6200236E96 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
+		8B1D97A527251CD600236E96 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
+		8B1D97AC27252E7E00236E96 /* ReorganizeGenorators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReorganizeGenorators.swift; sourceTree = "<group>"; };
 		8B29756E26DC7ECF0038CD92 /* DateGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateGenerator.swift; sourceTree = "<group>"; };
 		8B29757026DCAAB20038CD92 /* MapGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapGenerator.swift; sourceTree = "<group>"; };
 		8B52DB03271F11A100A8EF70 /* purple@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "purple@3x.png"; sourceTree = "<group>"; };
@@ -155,6 +161,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B1D97AB27252E5C00236E96 /* Reorganize Generators */ = {
+			isa = PBXGroup;
+			children = (
+				8B1D97AC27252E7E00236E96 /* ReorganizeGenorators.swift */,
+			);
+			path = "Reorganize Generators";
+			sourceTree = "<group>";
+		};
 		8B52DB02271F119500A8EF70 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +201,7 @@
 		8B5B4F3F26D9837C001994F4 /* SettingsMenu */ = {
 			isa = PBXGroup;
 			children = (
+				8B1D97AB27252E5C00236E96 /* Reorganize Generators */,
 				8B7E861C26D99552004B0011 /* Theme */,
 				8B52DB212720591E00A8EF70 /* App Icon */,
 				8B5B4F3D26D98377001994F4 /* SettingsMenu.swift */,
@@ -276,6 +291,7 @@
 				8BF98EE62713C0B600DD8AAE /* Array+Extensions.swift */,
 				8BCABA5927222A720006E4D6 /* Double+Extensions.swift */,
 				8BCABA5B272278D50006E4D6 /* String+Extensions.swift */,
+				8B1D97A527251CD600236E96 /* Collection+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -313,6 +329,7 @@
 				8B95E5CA26E5600500349D4C /* TextFieldAlert.swift */,
 				8BF98EE42713C05800DD8AAE /* BarChart.swift */,
 				8B0AF9E72716664E009142BB /* MailView.swift */,
+				8B1D97A327251C6200236E96 /* ImagePickerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -498,12 +515,15 @@
 				8B7E862826D9ED64004B0011 /* CoinFlipper.swift in Sources */,
 				8BF98EE72713C0B600DD8AAE /* Array+Extensions.swift in Sources */,
 				8B74E1EB26D760FA00886949 /* RandomizeButton.swift in Sources */,
+				8B1D97A627251CD600236E96 /* Collection+Extensions.swift in Sources */,
 				8B7E861B26D98AE4004B0011 /* Binding+Extensions.swift in Sources */,
+				8B1D97AD27252E7E00236E96 /* ReorganizeGenorators.swift in Sources */,
 				8B74E1F026D89FB900886949 /* Int+Extensions.swift in Sources */,
 				8B5B4F3E26D98377001994F4 /* SettingsMenu.swift in Sources */,
 				8B61A02D26DAF2CC007DBC50 /* CardRandomizer.swift in Sources */,
 				8BF98EDE2711561400DD8AAE /* GenerateMultipleTimes.swift in Sources */,
 				8BB2A23726E4760100C27B0A /* GeneratorList+CoreDataClass.swift in Sources */,
+				8B1D97A427251C6200236E96 /* ImagePickerView.swift in Sources */,
 				8BB2A23426E474AC00C27B0A /* GeneratorLists.swift in Sources */,
 				8BF98EE52713C05800DD8AAE /* BarChart.swift in Sources */,
 				8B95E5D126E6B2A300349D4C /* ListItemDetail.swift in Sources */,
