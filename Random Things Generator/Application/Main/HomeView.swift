@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct HomeView: View {
-  let types = ["Number", "Card", "Dice", "Coin", "Color", "Date", "Map", "Lists"]
   @EnvironmentObject var preferences: UserPreferences
   @State private var settingsPresented = false
   let columns: [GridItem] = [GridItem(.adaptive(minimum: 140))]
@@ -16,8 +15,8 @@ struct HomeView: View {
     NavigationView {
       ScrollView {
         LazyVGrid(columns: columns, spacing: 10) {
-          ForEach(0..<types.count) { num in
-            HomeViewItem(item: types[num], color: preferences.themeColor, destinationView: typeToView(types[num]))
+          ForEach(0..<preferences.types.count) { num in
+            HomeViewItem(item: preferences.types[num], color: preferences.themeColor, destinationView: typeToView(preferences.types[num]))
               .padding(.horizontal, 5)
           }
         }

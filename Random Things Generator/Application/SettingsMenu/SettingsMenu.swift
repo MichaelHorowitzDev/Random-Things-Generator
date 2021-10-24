@@ -47,6 +47,12 @@ struct SettingsMenu: View {
                 Text("App Icon")
               }
             }
+            NavigationLink {
+              ReorganizeGenorators()
+            } label: {
+              Image(systemName: "arrow.up.arrow.down.square")
+              Text("Reorganize")
+            }
           }
           Section("Support") {
             Button {
