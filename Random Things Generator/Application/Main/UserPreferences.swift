@@ -23,10 +23,18 @@ class UserPreferences: ObservableObject {
     didSet { saveUserDefaults(value: hasHapticFeedback, key: hapticFeedbackDefaults) }
   }
   @Published var types: [String] {
-    didSet { saveUserDefaults(value: types, key: typesDefaults) }
+    didSet { updateOnTypes(); saveUserDefaults(value: types, key: typesDefaults) }
   }
   @Published var typesOn: [String : Bool] {
-    didSet { saveUserDefaults(value: typesOn, key: typesOnDefaults) }
+    didSet { updateOnTypes(); saveUserDefaults(value: typesOn, key: typesOnDefaults) }
+  }
+  @Published var onTypes: [OnTypes]
+  struct OnTypes: Identifiable {
+    var id = UUID()
+    let type: String
+  }
+  func updateOnTypes() {
+    onTypes = types.filter({ typesOn[$0] == true }).map { OnTypes(type: $0) }
   }
   let defaults = UserDefaults.standard
   var textColor: Color {
@@ -40,8 +48,11 @@ class UserPreferences: ObservableObject {
     themeColor = Color.withData(defaults.data(forKey: themeColorDefaults) ?? Color.html.dodgerBlue.data) ?? Color.html.dodgerBlue
     showsRandomButton = defaults.object(forKey: randomButtonDefaults) as? Bool ?? true
     hasHapticFeedback = defaults.object(forKey: hapticFeedbackDefaults) as? Bool ?? true
-    types = defaults.stringArray(forKey: typesDefaults) ?? defaultTypes
-    typesOn = defaults.dictionary(forKey: typesOnDefaults) as? [String : Bool] ?? defaultTypesOn
+    let initTypes = defaults.stringArray(forKey: typesDefaults) ?? defaultTypes
+    let initTypesOn = defaults.dictionary(forKey: typesOnDefaults) as? [String : Bool] ?? defaultTypesOn
+    types = initTypes
+    typesOn = initTypesOn
+    self.onTypes = initTypes.filter({ initTypesOn[$0] == true }).map { OnTypes(type: $0) }
   }
   private var themeColorDefaults = "theme_color"
   private var randomButtonDefaults = "shows_random_button"

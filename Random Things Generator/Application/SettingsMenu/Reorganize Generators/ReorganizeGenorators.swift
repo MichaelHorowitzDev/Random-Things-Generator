@@ -11,11 +11,11 @@ struct ReorganizeGenorators: View {
   @EnvironmentObject var preferences: UserPreferences
     var body: some View {
       List {
-        ForEach(0..<preferences.types.count, id: \.self) { num in
+        ForEach(preferences.types, id: \.self) { string in
           HStack {
-            Text(preferences.types[num])
+            Text(string)
             Spacer()
-            ReorganizeGeneratorsToggle(typesOn: $preferences.typesOn, type: preferences.types[num])
+            ReorganizeGeneratorsToggle(typesOn: preferences.typesOn, type: string)
           }
         }
         .onMove { indexSet, int in
@@ -28,19 +28,18 @@ struct ReorganizeGenorators: View {
 }
 
 struct ReorganizeGeneratorsToggle: View {
-  @Binding private var typesOn: [String : Bool]
+  @EnvironmentObject var preferences: UserPreferences
   private var type: String
   @State private var typeBool: Bool
-  init(typesOn: Binding<[String : Bool]>, type: String) {
-    _typesOn = typesOn
+  init(typesOn: [String : Bool], type: String) {
     self.type = type
-    let bool = typesOn[type].wrappedValue ?? true
+    let bool = typesOn[type] ?? true
     _typeBool = State(initialValue: bool)
   }
   var body: some View {
     Toggle("", isOn: $typeBool)
       .onChange(of: typeBool) { newValue in
-        typesOn[type] = typeBool
+        preferences.typesOn[type] = typeBool
       }
   }
 }

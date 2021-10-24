@@ -11,12 +11,15 @@ struct HomeView: View {
   @EnvironmentObject var preferences: UserPreferences
   @State private var settingsPresented = false
   let columns: [GridItem] = [GridItem(.adaptive(minimum: 140))]
+  var onTypes: [String] {
+    preferences.types.filter { preferences.typesOn[$0] == true }
+  }
   var body: some View {
     NavigationView {
       ScrollView {
         LazyVGrid(columns: columns, spacing: 10) {
-          ForEach(0..<preferences.types.count) { num in
-            HomeViewItem(item: preferences.types[num], color: preferences.themeColor, destinationView: typeToView(preferences.types[num]))
+          ForEach(preferences.onTypes) {
+            HomeViewItem(item: $0.type, color: preferences.themeColor, destinationView: typeToView($0.type))
               .padding(.horizontal, 5)
           }
         }
