@@ -12,7 +12,7 @@ struct RandomizeButton: View {
   let buttonPressed: () -> ()
   private var onTouchDown: (() -> Void)?
   private var onTouchUp: (() -> Void)?
-  @State private var isPressingDown = false
+  @GestureState private var isPressingDown = false
   @EnvironmentObject var preferences: UserPreferences
   init(_ buttonTitle: String, _ buttonPressed: @escaping () -> ()) {
     self.buttonTitle = buttonTitle
@@ -37,14 +37,14 @@ struct RandomizeButton: View {
     .padding()
     .padding([.leading, .trailing, .bottom, .top], isPressingDown ? 2.5 : 0)
     .simultaneousGesture(
-      DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({_ in
-        isPressingDown = true
-        onTouchDown?()
-      }).onEnded({_ in 
-        isPressingDown = false
-        onTouchUp?()
-      })
+      DragGesture(minimumDistance: 0, coordinateSpace: .local)
+        .updating($isPressingDown, body: { value, state, transaction in
+          state = true
+        })
     )
+    .onChange(of: isPressingDown) { newValue in
+      newValue ? onTouchDown?() : onTouchUp?()
+    }
   }
 }
 
