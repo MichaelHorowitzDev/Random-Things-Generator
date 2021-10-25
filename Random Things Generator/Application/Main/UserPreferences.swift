@@ -22,6 +22,9 @@ class UserPreferences: ObservableObject {
   @Published var hasHapticFeedback = true {
     didSet { saveUserDefaults(value: hasHapticFeedback, key: hapticFeedbackDefaults) }
   }
+  @Published var hasShakeToGenerate = false {
+    didSet { saveUserDefaults(value: hasShakeToGenerate, key: shakeDefaults) }
+  }
   @Published var types: [String] {
     didSet { updateOnTypes(); saveUserDefaults(value: types, key: typesDefaults) }
   }
@@ -57,6 +60,7 @@ class UserPreferences: ObservableObject {
   private var themeColorDefaults = "theme_color"
   private var randomButtonDefaults = "shows_random_button"
   private var hapticFeedbackDefaults = "has_haptic_feedback"
+  private var shakeDefaults = "can_shake"
   private var generatorPreferencesDefaults = "generator_view_preferences"
   private var typesDefaults = "types_defaults"
   private var typesOnDefaults = "types_on_defaults"

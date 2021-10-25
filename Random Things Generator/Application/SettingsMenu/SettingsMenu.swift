@@ -31,6 +31,12 @@ struct SettingsMenu: View {
               Toggle("Tap to Randomize", isOn: !$preferences.showsRandomButton)
                 .tint(preferences.themeColor)
             }
+            HStack {
+              Image(systemName: "iphone.radiowaves.left.and.right")
+              Spacer()
+              Toggle("Shake to Randomize", isOn: $preferences.hasShakeToGenerate)
+                .tint(preferences.themeColor)
+            }
           }
           Section("Customization") {
             NavigationLink {

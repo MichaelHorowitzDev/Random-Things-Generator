@@ -160,6 +160,11 @@ public struct RandomGeneratorView<Content: View>: View {
           content
         }
       }
+      .onShake {
+        if preferences.hasShakeToGenerate {
+          generateRandomValue()
+        }
+      }
       .navigationTitle(randomType)
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {

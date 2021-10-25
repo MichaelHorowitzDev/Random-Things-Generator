@@ -67,6 +67,7 @@
 		8BCABA5C272278D50006E4D6 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCABA5B272278D50006E4D6 /* String+Extensions.swift */; };
 		8BCB7459270F33D100EFAE2B /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB7458270F33D100EFAE2B /* UserPreferences.swift */; };
 		8BCB745B270F3E4800EFAE2B /* HatPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB745A270F3E4800EFAE2B /* HatPicker.swift */; };
+		8BEAABB42726FB7400F0BE70 /* DetectShake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEAABB32726FB7400F0BE70 /* DetectShake.swift */; };
 		8BF761E826FC23740018686F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9FEFE426DE233500D24301 /* CloudKit.framework */; };
 		8BF98EDB27114C4000DD8AAE /* ColorGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF98EDA27114C4000DD8AAE /* ColorGenerator.swift */; };
 		8BF98EDE2711561400DD8AAE /* GenerateMultipleTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF98EDD2711561400DD8AAE /* GenerateMultipleTimes.swift */; };
@@ -139,6 +140,7 @@
 		8BCB7458270F33D100EFAE2B /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		8BCB745A270F3E4800EFAE2B /* HatPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatPicker.swift; sourceTree = "<group>"; };
 		8BD23D2426DEDEA8003C5489 /* Random-Things-Generator-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Random-Things-Generator-Info.plist"; sourceTree = SOURCE_ROOT; };
+		8BEAABB32726FB7400F0BE70 /* DetectShake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectShake.swift; sourceTree = "<group>"; };
 		8BF761E726FC22C20018686F /* Random Things Generator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Random Things Generator.entitlements"; sourceTree = "<group>"; };
 		8BF98EDA27114C4000DD8AAE /* ColorGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorGenerator.swift; sourceTree = "<group>"; };
 		8BF98EDD2711561400DD8AAE /* GenerateMultipleTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateMultipleTimes.swift; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 				8BCABA5927222A720006E4D6 /* Double+Extensions.swift */,
 				8BCABA5B272278D50006E4D6 /* String+Extensions.swift */,
 				8B1D97A527251CD600236E96 /* Collection+Extensions.swift */,
+				8BEAABB32726FB7400F0BE70 /* DetectShake.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -493,6 +496,7 @@
 				8B74E1CB26D6CD1A00886949 /* ContentView.swift in Sources */,
 				8B9FEFDE26DE1B3200D24301 /* Random+CoreDataClass.swift in Sources */,
 				8BBC19682715C462002FEB5C /* GeneratorPreferences+CoreDataProperties.swift in Sources */,
+				8BEAABB42726FB7400F0BE70 /* DetectShake.swift in Sources */,
 				8B52DB232720592E00A8EF70 /* AppIcon.swift in Sources */,
 				8BB2A22E26E4145700C27B0A /* Color+Extensions.swift in Sources */,
 				8B29756F26DC7ECF0038CD92 /* DateGenerator.swift in Sources */,
