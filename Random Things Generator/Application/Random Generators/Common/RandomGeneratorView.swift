@@ -202,18 +202,15 @@ public struct RandomGeneratorView<Content: View>: View {
         }
       }
       .navigationBarTitleDisplayMode(.inline)
-      .gesture(gestureDisabled ? nil : DragGesture(minimumDistance: 0, coordinateSpace: .local).onChanged({_ in
+      .onChange(of: isPressed, perform: { value in
         if canTap {
           if !preferences.showsRandomButton {
-            onTouchDown?()
+            value ? onTouchDown?() : onTouchUp?()
           }
         }
-      }).onEnded({_ in
-        if canTap {
-          if !preferences.showsRandomButton {
-            onTouchUp?()
-          }
-        }
+      })
+      .gesture(gestureDisabled ? nil : DragGesture(minimumDistance: 0, coordinateSpace: .local).updating($isPressed, body: { value, state, transaction in
+        state = true
       }).sequenced(before: TapGesture().onEnded({_ in
         onTap?()
         if canTap {
@@ -225,6 +222,7 @@ public struct RandomGeneratorView<Content: View>: View {
         }
       })))
     }
+  @GestureState private var isPressed = false
 }
 extension RandomGeneratorView {
   func randomButtonTitle(_ title: String) -> Self {
