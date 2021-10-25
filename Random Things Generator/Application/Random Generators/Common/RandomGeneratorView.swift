@@ -97,6 +97,7 @@ public struct RandomGeneratorView<Content: View>: View {
     }
   }
   private func generateRandomValue() {
+    onRandomPressed?()
     if let generateRandomArray = generateRandomArray {
       let array = generateRandomArray()
       if !array.isEmpty {
@@ -128,6 +129,7 @@ public struct RandomGeneratorView<Content: View>: View {
       randomizedValue = randomValue
       onRandomSuccess?(randomValue)
     }
+    generateHaptic()
   }
   public var body: some View {
       ZStack {
@@ -140,9 +142,7 @@ public struct RandomGeneratorView<Content: View>: View {
               content
             }
             RandomizeButton(randomButtonTitle) {
-              onRandomPressed?()
               generateRandomValue()
-              generateHaptic()
             }
             .onTouchDown {
               onTouchDown?()
@@ -220,9 +220,7 @@ public struct RandomGeneratorView<Content: View>: View {
         onTap?()
         if canTap {
           if !preferences.showsRandomButton {
-            onRandomPressed?()
             generateRandomValue()
-            generateHaptic()
           }
         }
       })))
