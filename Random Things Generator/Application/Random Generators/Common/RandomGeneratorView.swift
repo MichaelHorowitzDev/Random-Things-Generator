@@ -96,6 +96,39 @@ public struct RandomGeneratorView<Content: View>: View {
       UIImpactFeedbackGenerator(style: .soft).impactOccurred()
     }
   }
+  private func generateRandomValue() {
+    if let generateRandomArray = generateRandomArray {
+      let array = generateRandomArray()
+      if !array.isEmpty {
+        var randomValue = array.randomElement()!
+        if generatorSettings.preferences.dontRepeat {
+          if randomValue == randomizedValue {
+            let filtered = array.filter({ $0 != randomValue })
+            if !filtered.isEmpty {
+              randomValue = filtered.randomElement()!
+              randomizedValue = randomValue
+              onRandomSuccess?(randomValue)
+            }
+          } else {
+            randomizedValue = randomValue
+            onRandomSuccess?(randomValue)
+          }
+        } else {
+          randomizedValue = randomValue
+          onRandomSuccess?(randomValue)
+        }
+      }
+    } else if let generateRandom = generateRandom {
+      var randomValue = generateRandom()
+      if generatorSettings.preferences.dontRepeat {
+        while randomValue == randomizedValue {
+          randomValue = generateRandom()
+        }
+      }
+      randomizedValue = randomValue
+      onRandomSuccess?(randomValue)
+    }
+  }
   public var body: some View {
       ZStack {
         preferences.themeColor.ignoresSafeArea(.all, edges: [.horizontal, .bottom])
@@ -108,37 +141,7 @@ public struct RandomGeneratorView<Content: View>: View {
             }
             RandomizeButton(randomButtonTitle) {
               onRandomPressed?()
-              if let generateRandomArray = generateRandomArray {
-                let array = generateRandomArray()
-                if !array.isEmpty {
-                  var randomValue = array.randomElement()!
-                  if generatorSettings.preferences.dontRepeat {
-                    if randomValue == randomizedValue {
-                      let filtered = array.filter({ $0 != randomValue })
-                      if !filtered.isEmpty {
-                        randomValue = filtered.randomElement()!
-                        randomizedValue = randomValue
-                        onRandomSuccess?(randomValue)
-                      }
-                    } else {
-                      randomizedValue = randomValue
-                      onRandomSuccess?(randomValue)
-                    }
-                  } else {
-                    randomizedValue = randomValue
-                    onRandomSuccess?(randomValue)
-                  }
-                }
-              } else if let generateRandom = generateRandom {
-                var randomValue = generateRandom()
-                if generatorSettings.preferences.dontRepeat {
-                  while randomValue == randomizedValue {
-                    randomValue = generateRandom()
-                  }
-                }
-                randomizedValue = randomValue
-                onRandomSuccess?(randomValue)
-              }
+              generateRandomValue()
               generateHaptic()
             }
             .onTouchDown {
@@ -216,6 +219,7 @@ public struct RandomGeneratorView<Content: View>: View {
         if canTap {
           if !preferences.showsRandomButton {
             onRandomPressed?()
+            generateRandomValue()
             generateHaptic()
           }
         }
