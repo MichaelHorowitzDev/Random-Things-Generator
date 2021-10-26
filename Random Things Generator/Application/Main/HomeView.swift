@@ -72,7 +72,7 @@ struct HomeView: View {
   let typesToSymbol = [
     "Number": "number.square.fill",
     "Coin": "dollarsign.square.fill",
-    "Card": "questionmark.square.fill",
+    "Card": "suit.spade.fill",
     "Date": "calendar.badge.clock",
     "Map": "mappin.and.ellipse",
     "Lists": "list.bullet.rectangle.fill",
