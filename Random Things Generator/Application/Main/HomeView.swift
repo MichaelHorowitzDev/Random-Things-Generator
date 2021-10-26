@@ -14,16 +14,25 @@ struct HomeView: View {
   var onTypes: [String] {
     preferences.types.filter { preferences.typesOn[$0] == true }
   }
+  @State private var searchText = ""
+  func filterTypes(_ types: [UserPreferences.OnTypes]) -> [UserPreferences.OnTypes] {
+    if searchText == "" {
+      return types
+    } else {
+      return types.filter { $0.type.lowercased().contains(searchText.lowercased()) }
+    }
+  }
   var body: some View {
     NavigationView {
       ScrollView {
         LazyVGrid(columns: columns, spacing: 10) {
-          ForEach(preferences.onTypes) {
+          ForEach(filterTypes(preferences.onTypes)) {
             HomeViewItem(item: $0.type, symbol: typesToSymbol[$0.type] ?? "", color: preferences.themeColor, destinationView: typeToView($0.type))
               .padding(.horizontal, 5)
           }
         }
         .padding(.horizontal, 10)
+        .searchable(text: $searchText)
       }
       .navigationBarTitle("Random")
       .toolbar {

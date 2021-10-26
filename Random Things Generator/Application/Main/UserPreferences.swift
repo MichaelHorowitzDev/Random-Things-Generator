@@ -67,7 +67,10 @@ class UserPreferences: ObservableObject {
     hasHapticFeedback = defaults.object(forKey: hapticFeedbackDefaults) as? Bool ?? true
     var initTypes = defaults.stringArray(forKey: typesDefaults) ?? defaultTypes.map { $0.0 }
     initTypes.append(contentsOf: Set(initTypes).symmetricDifference(Set(defaultTypes.map { $0.0 })))
-    let initTypesOn = defaults.dictionary(forKey: typesOnDefaults) as? [String : Bool] ?? defaultTypesOn
+    var initTypesOn = defaults.dictionary(forKey: typesOnDefaults) as? [String : Bool] ?? defaultTypesOn
+    defaultTypes.forEach { tuple in
+      initTypesOn[tuple.0] = initTypesOn[tuple.0] ?? tuple.1
+    }
     types = initTypes
 //    types = defaultTypes.filter { type in initTypesOn.contains(where: { $0.key == type }) }
     typesOn = initTypesOn
