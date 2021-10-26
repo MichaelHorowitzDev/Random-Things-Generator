@@ -7,10 +7,24 @@
 
 import SwiftUI
 
-private let defaultTypes = ["Number", "Card", "Dice", "Coin", "Color", "Date", "Map", "Lists"]
-private let defaultTypesOn = Dictionary(uniqueKeysWithValues: defaultTypes.map({ type in
-  (type, true)
-}))
+//private let defaultTypes = ["Number", "Card", "Dice", "Coin", "Color", "Date", "Map", "Letter", "Lists"]
+//private let defaultTypesOn = Dictionary(uniqueKeysWithValues: defaultTypes.map({ type in
+//  (type, true)
+//}))
+private let defaultTypes = [
+  ("Number", true),
+  ("Card", true),
+  ("Dice", true),
+  ("Coin", true),
+  ("Color", true),
+  ("Date", true),
+  ("Map", true),
+  ("Letter", false),
+  ("Lists", true)
+]
+var defaultTypesOn: [String : Bool] {
+  Dictionary(uniqueKeysWithValues: defaultTypes)
+}
 
 class UserPreferences: ObservableObject {
   @Published var themeColor: Color = .html.dodgerBlue {
@@ -51,9 +65,11 @@ class UserPreferences: ObservableObject {
     themeColor = Color.withData(defaults.data(forKey: themeColorDefaults) ?? Color.html.dodgerBlue.data) ?? Color.html.dodgerBlue
     showsRandomButton = defaults.object(forKey: randomButtonDefaults) as? Bool ?? true
     hasHapticFeedback = defaults.object(forKey: hapticFeedbackDefaults) as? Bool ?? true
-    let initTypes = defaults.stringArray(forKey: typesDefaults) ?? defaultTypes
+    var initTypes = defaults.stringArray(forKey: typesDefaults) ?? defaultTypes.map { $0.0 }
+    initTypes.append(contentsOf: Set(initTypes).symmetricDifference(Set(defaultTypes.map { $0.0 })))
     let initTypesOn = defaults.dictionary(forKey: typesOnDefaults) as? [String : Bool] ?? defaultTypesOn
     types = initTypes
+//    types = defaultTypes.filter { type in initTypesOn.contains(where: { $0.key == type }) }
     typesOn = initTypesOn
     self.onTypes = initTypes.filter({ initTypesOn[$0] == true }).map { OnTypes(type: $0) }
   }

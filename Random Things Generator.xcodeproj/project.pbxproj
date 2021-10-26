@@ -68,6 +68,7 @@
 		8BCB7459270F33D100EFAE2B /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB7458270F33D100EFAE2B /* UserPreferences.swift */; };
 		8BCB745B270F3E4800EFAE2B /* HatPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB745A270F3E4800EFAE2B /* HatPicker.swift */; };
 		8BEAABB42726FB7400F0BE70 /* DetectShake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEAABB32726FB7400F0BE70 /* DetectShake.swift */; };
+		8BEAABB62727C6A300F0BE70 /* LetterGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEAABB52727C6A300F0BE70 /* LetterGenerator.swift */; };
 		8BF761E826FC23740018686F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9FEFE426DE233500D24301 /* CloudKit.framework */; };
 		8BF98EDB27114C4000DD8AAE /* ColorGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF98EDA27114C4000DD8AAE /* ColorGenerator.swift */; };
 		8BF98EDE2711561400DD8AAE /* GenerateMultipleTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF98EDD2711561400DD8AAE /* GenerateMultipleTimes.swift */; };
@@ -141,6 +142,7 @@
 		8BCB745A270F3E4800EFAE2B /* HatPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatPicker.swift; sourceTree = "<group>"; };
 		8BD23D2426DEDEA8003C5489 /* Random-Things-Generator-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Random-Things-Generator-Info.plist"; sourceTree = SOURCE_ROOT; };
 		8BEAABB32726FB7400F0BE70 /* DetectShake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectShake.swift; sourceTree = "<group>"; };
+		8BEAABB52727C6A300F0BE70 /* LetterGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterGenerator.swift; sourceTree = "<group>"; };
 		8BF761E726FC22C20018686F /* Random Things Generator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Random Things Generator.entitlements"; sourceTree = "<group>"; };
 		8BF98EDA27114C4000DD8AAE /* ColorGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorGenerator.swift; sourceTree = "<group>"; };
 		8BF98EDD2711561400DD8AAE /* GenerateMultipleTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateMultipleTimes.swift; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 				8B29757026DCAAB20038CD92 /* MapGenerator.swift */,
 				8BF98EDA27114C4000DD8AAE /* ColorGenerator.swift */,
 				8BB2A23B26E4789600C27B0A /* Custom Lists */,
+				8BEAABB52727C6A300F0BE70 /* LetterGenerator.swift */,
 			);
 			path = "Random Generators";
 			sourceTree = "<group>";
@@ -513,6 +516,7 @@
 				8B74E1E826D75DDD00886949 /* NumberGenerator.swift in Sources */,
 				8B0AF9E82716664E009142BB /* MailView.swift in Sources */,
 				8B29757126DCAAB20038CD92 /* MapGenerator.swift in Sources */,
+				8BEAABB62727C6A300F0BE70 /* LetterGenerator.swift in Sources */,
 				8B690BBD26DDB83200413FDA /* UIColor+Extensions.swift in Sources */,
 				8BB2A23826E4760100C27B0A /* GeneratorList+CoreDataProperties.swift in Sources */,
 				8BBC19672715C462002FEB5C /* GeneratorPreferences+CoreDataClass.swift in Sources */,
