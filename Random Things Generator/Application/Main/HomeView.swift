@@ -65,7 +65,7 @@ struct HomeView: View {
     "Coin": "dollarsign.square.fill",
     "Card": "questionmark.square.fill",
     "Date": "calendar.badge.clock",
-    "Map": "map.fill",
+    "Map": "mappin.and.ellipse",
     "Lists": "list.bullet.rectangle.fill",
     "Color": "eyedropper.full",
     "Dice": "dice.fill",
@@ -91,7 +91,7 @@ private struct HomeViewItem<Content: View>: View {
           }
           Spacer()
         }
-        .padding([.trailing, .top], 5)
+        .padding([.trailing, .top], 7)
         Text(item)
           .font(.title)
           .fontWeight(.semibold)
