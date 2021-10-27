@@ -24,15 +24,18 @@ struct HomeView: View {
   }
   var body: some View {
     NavigationView {
-      ScrollView {
-        LazyVGrid(columns: columns, spacing: 10) {
-          ForEach(filterTypes(preferences.onTypes)) {
-            HomeViewItem(item: $0.type, symbol: typesToSymbol[$0.type] ?? "", color: preferences.themeColor, destinationView: typeToView($0.type))
-              .padding(.horizontal, 5)
+      ZStack {
+        Color("Background").ignoresSafeArea()
+        ScrollView {
+          LazyVGrid(columns: columns, spacing: 10) {
+            ForEach(filterTypes(preferences.onTypes)) {
+              HomeViewItem(item: $0.type, symbol: typesToSymbol[$0.type] ?? "", color: preferences.themeColor, destinationView: typeToView($0.type))
+                .padding(.horizontal, 5)
+            }
           }
+          .padding(.horizontal, 10)
+          .searchable(text: $searchText)
         }
-        .padding(.horizontal, 10)
-        .searchable(text: $searchText)
       }
       .navigationBarTitle("Random")
       .toolbar {
