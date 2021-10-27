@@ -9,7 +9,9 @@ import SwiftUI
 
 struct GeneratorLists: View {
   @FetchRequest(entity: GeneratorList.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \GeneratorList.dateCreated, ascending: false)], predicate: nil, animation: .linear(duration: 0.4)) var lists: FetchedResults<GeneratorList>
+  @State private var coreDataRefreshID = UUID()
   @State private var addList = false
+  @State private var editList: GeneratorList?
   @State private var changeSelectedList = false
   @Environment(\.managedObjectContext) var moc
   @EnvironmentObject var preferences: UserPreferences
@@ -17,28 +19,15 @@ struct GeneratorLists: View {
   var selectedLists: [GeneratorList] {
     let generatorLists = lists.filter({ currentLists.contains($0.id ?? UUID()) })
     return generatorLists
-    //    var list = lists.first { generatorList in
-    //      generatorList.title == currentList
-    //    }
-    //    if list == nil {
-    //      list = lists.first
-    //      currentList = list?.title ?? ""
-    //    }
-    //    return list
   }
   var unselectedLists: [GeneratorList] {
     let generatorLists = lists.filter({ !(selectedLists.contains($0)) })
     return generatorLists
   }
-  //  @AppStorage(
-  //  @AppStorage("currentList") var currentList: [UUID] = [UUID()]
   @Binding var currentLists: [UUID]
   @State var deleteList: GeneratorList?
   init(currentLists: Binding<[UUID]>) {
     _currentLists = currentLists
-//    if let currentLists = UserDefaults.standard.array(forKey: "currentLists") as? [UUID] {
-//      self._currentLists = State(initialValue: currentLists)
-//    }
   }
   
   var body: some View {
@@ -69,6 +58,11 @@ struct GeneratorLists: View {
                   Text("Deselect")
                 }
                 .tint(.green)
+                Button {
+                  editList = selectedList
+                } label: {
+                  Text("Edit")
+                }
               }
             }
             .disabled(changeSelectedList)
@@ -86,9 +80,9 @@ struct GeneratorLists: View {
       }
       Section {
         ForEach(unselectedLists, id: \.self) { list in
-          NavigationLink {
+          NavigationLink (destination: {
             EditList(list: list)
-          } label: {
+          }, label: {
             GeometryReader { geo in
               HStack {
                 Circle()
@@ -97,8 +91,9 @@ struct GeneratorLists: View {
                 Text(list.title ?? "Unknown")
                 Spacer()
               }
+              
             }
-          }
+          })
           .swipeActions(edge: .leading, allowsFullSwipe: true) {
             Button {
               if let id = list.id {
@@ -110,6 +105,11 @@ struct GeneratorLists: View {
               Text("Select")
             }
             .tint(.green)
+            Button {
+              editList = list
+            } label: {
+              Text("Edit")
+            }
           }
           .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             Button {
@@ -124,17 +124,14 @@ struct GeneratorLists: View {
         Text("Swipe to the left to select the list. Swipe to the right to delete the list.")
       }
     }
-//    .onChange(of: currentLists, perform: { newValue in
-//      UserDefaults.standard.set(currentLists, forKey: "currentLists")
-//    })
+    .id(coreDataRefreshID)
+    .environment(\.editMode, Binding.constant(EditMode.inactive))
     .alert(item: $deleteList) { item in
       Alert(title: Text("Delete List"), message: Text("Are you sure you want to delete this list?"), primaryButton: Alert.Button.destructive(Text("Delete"), action: {
         withAnimation {
           moc.delete(item)
           try? moc.save()
         }
-        
-        
       }), secondaryButton: Alert.Button.cancel(Text("Cancel"), action: {
         deleteList = nil
       }))
@@ -147,16 +144,14 @@ struct GeneratorLists: View {
           Image(systemName: "plus")
         }
       }
-//      ToolbarItem(placement: .bottomBar) {
-//        Button {
-//          changeSelectedList.toggle()
-//        } label: {
-//          Text(changeSelectedList ? "Cancel" : "Change Selected List")
-//        }
-//      }
     }
     .sheet(isPresented: $addList) {
       AddList()
+    }
+    .sheet(item: $editList, onDismiss: {
+      coreDataRefreshID = UUID()
+    }) { item in
+      EditListTitle(list: item)
     }
     .navigationTitle("Lists")
     .accentColor(preferences.themeColor)
