@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="21A5543b" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="GeneratorList" representedClassName="GeneratorList" syncable="YES" codeGenerationType="class">
+        <attribute name="color" optional="YES" attributeType="Binary"/>
+        <attribute name="dateCreated" attributeType="Date" defaultDateTimeInterval="652506420" usesScalarValueType="NO"/>
+        <attribute name="dateModified" attributeType="Date" defaultDateTimeInterval="652506480" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="nonRepeating" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="title" attributeType="String"/>
+        <attribute name="totalTimes" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="Random" representedClassName="Random" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="randomType" attributeType="String"/>
+        <attribute name="timestamp" attributeType="Date" defaultDateTimeInterval="652090020" usesScalarValueType="NO"/>
+        <attribute name="value" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="Random" positionX="-63" positionY="-9" width="128" height="89"/>
+        <element name="GeneratorList" positionX="-63" positionY="18" width="128" height="134"/>
+    </elements>
+</model>
