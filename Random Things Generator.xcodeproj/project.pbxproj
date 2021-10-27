@@ -10,7 +10,7 @@
 		8B0AF9E82716664E009142BB /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0AF9E72716664E009142BB /* MailView.swift */; };
 		8B1D97A427251C6200236E96 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D97A327251C6200236E96 /* ImagePickerView.swift */; };
 		8B1D97A627251CD600236E96 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D97A527251CD600236E96 /* Collection+Extensions.swift */; };
-		8B1D97AD27252E7E00236E96 /* ReorganizeGenorators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D97AC27252E7E00236E96 /* ReorganizeGenorators.swift */; };
+		8B1D97AD27252E7E00236E96 /* ReorganizeGenerators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D97AC27252E7E00236E96 /* ReorganizeGenerators.swift */; };
 		8B29756F26DC7ECF0038CD92 /* DateGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B29756E26DC7ECF0038CD92 /* DateGenerator.swift */; };
 		8B29757126DCAAB20038CD92 /* MapGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B29757026DCAAB20038CD92 /* MapGenerator.swift */; };
 		8B52DB0A271F11A100A8EF70 /* purple@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B52DB03271F11A100A8EF70 /* purple@3x.png */; };
