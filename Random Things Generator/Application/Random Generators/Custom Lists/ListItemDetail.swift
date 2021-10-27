@@ -57,10 +57,21 @@ struct ListItemDetail: View {
       HStack {
         Text("Percentage shown of total")
         Spacer()
-        Text(totalPercentage(times: listItem.timesShown, totalTimes: listItem.list?.totalTimes))
+        Text(totalPercentage(times: listItem.timesShown, totalTimes: listItem.list?.totalTimesShown))
       }
     }
     .navigationTitle(listItem.itemName ?? "Unknown")
     .navigationBarTitleDisplayMode(.large)
+  }
+}
+
+extension GeneratorList {
+  var generatorListItems: [ListItem] {
+    self.items?.allObjects as? [ListItem] ?? []
+  }
+  var totalTimesShown: Int32 {
+    self.generatorListItems.reduce(0) { partialResult, listItem in
+      partialResult+listItem.timesShown
+    }
   }
 }
