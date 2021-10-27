@@ -54,7 +54,7 @@ struct SettingsMenu: View {
               }
             }
             NavigationLink {
-              ReorganizeGenorators()
+              ReorganizeGenerators()
             } label: {
               Image(systemName: "arrow.up.arrow.down.square")
               Text("Reorganize")

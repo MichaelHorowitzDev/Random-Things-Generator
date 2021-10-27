@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ReorganizeGenorators: View {
+struct ReorganizeGenerators: View {
   @EnvironmentObject var preferences: UserPreferences
     var body: some View {
       List {
