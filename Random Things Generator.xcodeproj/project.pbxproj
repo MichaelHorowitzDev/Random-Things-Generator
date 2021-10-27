@@ -54,6 +54,7 @@
 		8B9FEFDE26DE1B3200D24301 /* Random+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9FEFDC26DE1B3200D24301 /* Random+CoreDataClass.swift */; };
 		8B9FEFDF26DE1B3200D24301 /* Random+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9FEFDD26DE1B3200D24301 /* Random+CoreDataProperties.swift */; };
 		8B9FEFE126DE1C9800D24301 /* RandomHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9FEFE026DE1C9800D24301 /* RandomHistory.swift */; };
+		8BB01D0B27284CD800A7C693 /* EditList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB01D0A27284CD800A7C693 /* EditList.swift */; };
 		8BB2A22E26E4145700C27B0A /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2A22D26E4145700C27B0A /* Color+Extensions.swift */; };
 		8BB2A23226E432E800C27B0A /* ListsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2A23126E432E800C27B0A /* ListsGenerator.swift */; };
 		8BB2A23426E474AC00C27B0A /* GeneratorLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB2A23326E474AC00C27B0A /* GeneratorLists.swift */; };
@@ -82,7 +83,7 @@
 		8B0AF9E72716664E009142BB /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		8B1D97A327251C6200236E96 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		8B1D97A527251CD600236E96 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
-		8B1D97AC27252E7E00236E96 /* ReorganizeGenorators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReorganizeGenorators.swift; sourceTree = "<group>"; };
+		8B1D97AC27252E7E00236E96 /* ReorganizeGenerators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReorganizeGenerators.swift; sourceTree = "<group>"; };
 		8B29756E26DC7ECF0038CD92 /* DateGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateGenerator.swift; sourceTree = "<group>"; };
 		8B29757026DCAAB20038CD92 /* MapGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapGenerator.swift; sourceTree = "<group>"; };
 		8B52DB03271F11A100A8EF70 /* purple@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "purple@3x.png"; sourceTree = "<group>"; };
@@ -127,6 +128,7 @@
 		8B9FEFDD26DE1B3200D24301 /* Random+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Random+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		8B9FEFE026DE1C9800D24301 /* RandomHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomHistory.swift; sourceTree = "<group>"; };
 		8B9FEFE426DE233500D24301 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		8BB01D0A27284CD800A7C693 /* EditList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditList.swift; sourceTree = "<group>"; };
 		8BB2A22D26E4145700C27B0A /* Color+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		8BB2A23126E432E800C27B0A /* ListsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsGenerator.swift; sourceTree = "<group>"; };
 		8BB2A23326E474AC00C27B0A /* GeneratorLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorLists.swift; sourceTree = "<group>"; };
@@ -168,7 +170,7 @@
 		8B1D97AB27252E5C00236E96 /* Reorganize Generators */ = {
 			isa = PBXGroup;
 			children = (
-				8B1D97AC27252E7E00236E96 /* ReorganizeGenorators.swift */,
+				8B1D97AC27252E7E00236E96 /* ReorganizeGenerators.swift */,
 			);
 			path = "Reorganize Generators";
 			sourceTree = "<group>";
@@ -379,6 +381,7 @@
 				8B95E5D026E6B2A300349D4C /* ListItemDetail.swift */,
 				8BB2A23126E432E800C27B0A /* ListsGenerator.swift */,
 				8BCB745A270F3E4800EFAE2B /* HatPicker.swift */,
+				8BB01D0A27284CD800A7C693 /* EditList.swift */,
 			);
 			path = "Custom Lists";
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				8B74E1CB26D6CD1A00886949 /* ContentView.swift in Sources */,
 				8B9FEFDE26DE1B3200D24301 /* Random+CoreDataClass.swift in Sources */,
 				8BBC19682715C462002FEB5C /* GeneratorPreferences+CoreDataProperties.swift in Sources */,
+				8BB01D0B27284CD800A7C693 /* EditList.swift in Sources */,
 				8BEAABB42726FB7400F0BE70 /* DetectShake.swift in Sources */,
 				8B52DB232720592E00A8EF70 /* AppIcon.swift in Sources */,
 				8BB2A22E26E4145700C27B0A /* Color+Extensions.swift in Sources */,
@@ -525,7 +529,7 @@
 				8B74E1EB26D760FA00886949 /* RandomizeButton.swift in Sources */,
 				8B1D97A627251CD600236E96 /* Collection+Extensions.swift in Sources */,
 				8B7E861B26D98AE4004B0011 /* Binding+Extensions.swift in Sources */,
-				8B1D97AD27252E7E00236E96 /* ReorganizeGenorators.swift in Sources */,
+				8B1D97AD27252E7E00236E96 /* ReorganizeGenerators.swift in Sources */,
 				8B74E1F026D89FB900886949 /* Int+Extensions.swift in Sources */,
 				8B5B4F3E26D98377001994F4 /* SettingsMenu.swift in Sources */,
 				8B61A02D26DAF2CC007DBC50 /* CardRandomizer.swift in Sources */,
@@ -693,7 +697,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 3.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.michaelhorowitz.Random-Things-Generator";
+				PRODUCT_BUNDLE_IDENTIFIER = com.michaelhorowitz.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -730,7 +734,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 3.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.michaelhorowitz.Random-Things-Generator";
+				PRODUCT_BUNDLE_IDENTIFIER = com.michaelhorowitz.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
