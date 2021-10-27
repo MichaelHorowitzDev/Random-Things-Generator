@@ -31,6 +31,7 @@ struct HatPicker: View {
         VStack {
           Text("Remaining items: \(remainingItems.count)")
             .font(.title)
+            .foregroundColor(preferences.textColor)
           Spacer()
         }
         .padding(.top)
