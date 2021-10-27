@@ -121,7 +121,7 @@ struct GeneratorLists: View {
           }
         }
       } footer: {
-        Text("Swipe to the left to select the list. Swipe to the right to delete the list.")
+        Text("Swipe to the left to select the list or edit the list. Swipe to the right to delete the list.")
       }
     }
     .id(coreDataRefreshID)
