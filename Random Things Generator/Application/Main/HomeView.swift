@@ -34,7 +34,7 @@ struct HomeView: View {
             }
           }
           .padding(.horizontal, 10)
-          .searchable(text: $searchText)
+//          .searchable(text: $searchText)
         }
       }
       .navigationBarTitle("Random")
