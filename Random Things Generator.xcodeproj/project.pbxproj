@@ -28,12 +28,6 @@
 		8B52DB1D271F127200A8EF70 /* fire@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B52DB16271F127200A8EF70 /* fire@2x.png */; };
 		8B52DB1E271F127200A8EF70 /* purple-pink@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B52DB17271F127200A8EF70 /* purple-pink@2x.png */; };
 		8B52DB232720592E00A8EF70 /* AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B52DB222720592E00A8EF70 /* AppIcon.swift */; };
-		8B55464227299D2B0076970C /* RandomThingsGeneratorAppClipApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B55464127299D2B0076970C /* RandomThingsGeneratorAppClipApp.swift */; };
-		8B55464627299D2C0076970C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B55464527299D2C0076970C /* Assets.xcassets */; };
-		8B55464927299D2C0076970C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B55464827299D2C0076970C /* Preview Assets.xcassets */; };
-		8B55464B27299D2C0076970C /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B55464A27299D2C0076970C /* Persistence.swift */; };
-		8B55464E27299D2C0076970C /* RandomThingsGeneratorAppClip.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B55464C27299D2C0076970C /* RandomThingsGeneratorAppClip.xcdatamodeld */; };
-		8B55465327299D2C0076970C /* RandomThingsGeneratorAppClip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = 8B55463F27299D2B0076970C /* RandomThingsGeneratorAppClip.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8B5B4F3E26D98377001994F4 /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5B4F3D26D98377001994F4 /* SettingsMenu.swift */; };
 		8B61A02D26DAF2CC007DBC50 /* CardRandomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B61A02C26DAF2CC007DBC50 /* CardRandomizer.swift */; };
 		8B690BBD26DDB83200413FDA /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B690BBC26DDB83200413FDA /* UIColor+Extensions.swift */; };
@@ -57,8 +51,6 @@
 		8B95E5CF26E6B0A200349D4C /* ListItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B95E5CD26E6B0A200349D4C /* ListItem+CoreDataProperties.swift */; };
 		8B95E5D126E6B2A300349D4C /* ListItemDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B95E5D026E6B2A300349D4C /* ListItemDetail.swift */; };
 		8B97BE5C2729A38D0020D488 /* CSV in Frameworks */ = {isa = PBXBuildFile; productRef = 8B97BE5B2729A38D0020D488 /* CSV */; };
-		8B97BE60272A09480020D488 /* RandomizeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B97BE5F272A09480020D488 /* RandomizeButton.swift */; };
-		8B97BE62272A0A220020D488 /* NumberGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B97BE61272A0A220020D488 /* NumberGenerator.swift */; };
 		8B9FEFDE26DE1B3200D24301 /* Random+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9FEFDC26DE1B3200D24301 /* Random+CoreDataClass.swift */; };
 		8B9FEFDF26DE1B3200D24301 /* Random+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9FEFDD26DE1B3200D24301 /* Random+CoreDataProperties.swift */; };
 		8B9FEFE126DE1C9800D24301 /* RandomHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9FEFE026DE1C9800D24301 /* RandomHistory.swift */; };
@@ -87,16 +79,6 @@
 		8BF98EE72713C0B600DD8AAE /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF98EE62713C0B600DD8AAE /* Array+Extensions.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		8B55465127299D2C0076970C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8B74E1BD26D6CD1A00886949 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8B55463E27299D2B0076970C;
-			remoteInfo = RandomThingsGeneratorAppClip;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		8B55465427299D2D0076970C /* Embed App Clips */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -104,7 +86,6 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/AppClips";
 			dstSubfolderSpec = 16;
 			files = (
-				8B55465327299D2C0076970C /* RandomThingsGeneratorAppClip.app in Embed App Clips */,
 			);
 			name = "Embed App Clips";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -133,14 +114,6 @@
 		8B52DB16271F127200A8EF70 /* fire@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fire@2x.png"; sourceTree = "<group>"; };
 		8B52DB17271F127200A8EF70 /* purple-pink@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "purple-pink@2x.png"; sourceTree = "<group>"; };
 		8B52DB222720592E00A8EF70 /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
-		8B55463F27299D2B0076970C /* RandomThingsGeneratorAppClip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RandomThingsGeneratorAppClip.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B55464127299D2B0076970C /* RandomThingsGeneratorAppClipApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomThingsGeneratorAppClipApp.swift; sourceTree = "<group>"; };
-		8B55464527299D2C0076970C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8B55464827299D2C0076970C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		8B55464A27299D2C0076970C /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		8B55464D27299D2C0076970C /* RandomThingsGeneratorAppClip.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RandomThingsGeneratorAppClip.xcdatamodel; sourceTree = "<group>"; };
-		8B55464F27299D2C0076970C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8B55465027299D2C0076970C /* RandomThingsGeneratorAppClip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RandomThingsGeneratorAppClip.entitlements; sourceTree = "<group>"; };
 		8B5B4F3D26D98377001994F4 /* SettingsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
 		8B61A02C26DAF2CC007DBC50 /* CardRandomizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardRandomizer.swift; sourceTree = "<group>"; usesTabs = 0; };
 		8B690BBC26DDB83200413FDA /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
@@ -164,8 +137,6 @@
 		8B95E5CC26E6B0A200349D4C /* ListItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListItem+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		8B95E5CD26E6B0A200349D4C /* ListItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListItem+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		8B95E5D026E6B2A300349D4C /* ListItemDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemDetail.swift; sourceTree = "<group>"; };
-		8B97BE5F272A09480020D488 /* RandomizeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomizeButton.swift; sourceTree = "<group>"; };
-		8B97BE61272A0A220020D488 /* NumberGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberGenerator.swift; sourceTree = "<group>"; };
 		8B9FEFDC26DE1B3200D24301 /* Random+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Random+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		8B9FEFDD26DE1B3200D24301 /* Random+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Random+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		8B9FEFE026DE1C9800D24301 /* RandomHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomHistory.swift; sourceTree = "<group>"; };
@@ -197,13 +168,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		8B55463C27299D2B0076970C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8B74E1C226D6CD1A00886949 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -253,30 +217,6 @@
 			path = "App Icon";
 			sourceTree = "<group>";
 		};
-		8B55464027299D2B0076970C /* RandomThingsGeneratorAppClip */ = {
-			isa = PBXGroup;
-			children = (
-				8B97BE61272A0A220020D488 /* NumberGenerator.swift */,
-				8B97BE5F272A09480020D488 /* RandomizeButton.swift */,
-				8B55464127299D2B0076970C /* RandomThingsGeneratorAppClipApp.swift */,
-				8B55464527299D2C0076970C /* Assets.xcassets */,
-				8B55464A27299D2C0076970C /* Persistence.swift */,
-				8B55464F27299D2C0076970C /* Info.plist */,
-				8B55465027299D2C0076970C /* RandomThingsGeneratorAppClip.entitlements */,
-				8B55464C27299D2C0076970C /* RandomThingsGeneratorAppClip.xcdatamodeld */,
-				8B55464727299D2C0076970C /* Preview Content */,
-			);
-			path = RandomThingsGeneratorAppClip;
-			sourceTree = "<group>";
-		};
-		8B55464727299D2C0076970C /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				8B55464827299D2C0076970C /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
 		8B5B4F3F26D9837C001994F4 /* SettingsMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -292,7 +232,6 @@
 			isa = PBXGroup;
 			children = (
 				8B74E1C726D6CD1A00886949 /* Random Things Generator */,
-				8B55464027299D2B0076970C /* RandomThingsGeneratorAppClip */,
 				8B74E1C626D6CD1A00886949 /* Products */,
 				8B9FEFE326DE233500D24301 /* Frameworks */,
 			);
@@ -302,7 +241,6 @@
 			isa = PBXGroup;
 			children = (
 				8B74E1C526D6CD1A00886949 /* Random Things Generator.app */,
-				8B55463F27299D2B0076970C /* RandomThingsGeneratorAppClip.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -483,23 +421,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8B55463E27299D2B0076970C /* RandomThingsGeneratorAppClip */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8B55465727299D2D0076970C /* Build configuration list for PBXNativeTarget "RandomThingsGeneratorAppClip" */;
-			buildPhases = (
-				8B55463B27299D2B0076970C /* Sources */,
-				8B55463C27299D2B0076970C /* Frameworks */,
-				8B55463D27299D2B0076970C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = RandomThingsGeneratorAppClip;
-			productName = RandomThingsGeneratorAppClip;
-			productReference = 8B55463F27299D2B0076970C /* RandomThingsGeneratorAppClip.app */;
-			productType = "com.apple.product-type.application.on-demand-install-capable";
-		};
 		8B74E1C426D6CD1A00886949 /* Random Things Generator */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8B74E1D826D6CD1B00886949 /* Build configuration list for PBXNativeTarget "Random Things Generator" */;
@@ -512,7 +433,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				8B55465227299D2C0076970C /* PBXTargetDependency */,
 			);
 			name = "Random Things Generator";
 			packageProductDependencies = (
@@ -532,9 +452,6 @@
 				LastSwiftUpdateCheck = 1300;
 				LastUpgradeCheck = 1300;
 				TargetAttributes = {
-					8B55463E27299D2B0076970C = {
-						CreatedOnToolsVersion = 13.0;
-					};
 					8B74E1C426D6CD1A00886949 = {
 						CreatedOnToolsVersion = 13.0;
 					};
@@ -557,21 +474,11 @@
 			projectRoot = "";
 			targets = (
 				8B74E1C426D6CD1A00886949 /* Random Things Generator */,
-				8B55463E27299D2B0076970C /* RandomThingsGeneratorAppClip */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		8B55463D27299D2B0076970C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8B55464927299D2C0076970C /* Preview Assets.xcassets in Resources */,
-				8B55464627299D2C0076970C /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8B74E1C326D6CD1A00886949 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -598,18 +505,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		8B55463B27299D2B0076970C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8B55464B27299D2C0076970C /* Persistence.swift in Sources */,
-				8B97BE60272A09480020D488 /* RandomizeButton.swift in Sources */,
-				8B97BE62272A0A220020D488 /* NumberGenerator.swift in Sources */,
-				8B55464227299D2B0076970C /* RandomThingsGeneratorAppClipApp.swift in Sources */,
-				8B55464E27299D2C0076970C /* RandomThingsGeneratorAppClip.xcdatamodeld in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8B74E1C126D6CD1A00886949 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -671,87 +566,7 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		8B55465227299D2C0076970C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8B55463E27299D2B0076970C /* RandomThingsGeneratorAppClip */;
-			targetProxy = 8B55465127299D2C0076970C /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
-		8B55465527299D2D0076970C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = RandomThingsGeneratorAppClip/RandomThingsGeneratorAppClip.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"RandomThingsGeneratorAppClip/Preview Content\"";
-				DEVELOPMENT_TEAM = LR745V324B;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RandomThingsGeneratorAppClip/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Random Things Generator";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 3.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.MichaelHorowitz.Random.Clip;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		8B55465627299D2D0076970C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = RandomThingsGeneratorAppClip/RandomThingsGeneratorAppClip.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"RandomThingsGeneratorAppClip/Preview Content\"";
-				DEVELOPMENT_TEAM = LR745V324B;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RandomThingsGeneratorAppClip/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Random Things Generator";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 3.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.MichaelHorowitz.Random.Clip;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		8B74E1D626D6CD1B00886949 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -879,7 +694,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Random Things Generator/Random Things Generator.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Random Things Generator/Preview Content\"";
 				DEVELOPMENT_TEAM = LR745V324B;
 				ENABLE_PREVIEWS = YES;
@@ -917,7 +732,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Random Things Generator/Random Things Generator.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Random Things Generator/Preview Content\"";
 				DEVELOPMENT_TEAM = LR745V324B;
 				ENABLE_PREVIEWS = YES;
@@ -947,15 +762,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8B55465727299D2D0076970C /* Build configuration list for PBXNativeTarget "RandomThingsGeneratorAppClip" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8B55465527299D2D0076970C /* Debug */,
-				8B55465627299D2D0076970C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		8B74E1C026D6CD1A00886949 /* Build configuration list for PBXProject "Random Things Generator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -996,16 +802,6 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		8B55464C27299D2C0076970C /* RandomThingsGeneratorAppClip.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				8B55464D27299D2C0076970C /* RandomThingsGeneratorAppClip.xcdatamodel */,
-			);
-			currentVersion = 8B55464D27299D2C0076970C /* RandomThingsGeneratorAppClip.xcdatamodel */;
-			path = RandomThingsGeneratorAppClip.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
 		8B74E1D326D6CD1B00886949 /* Random_Things_Generator.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
