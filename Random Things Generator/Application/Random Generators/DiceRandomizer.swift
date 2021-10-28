@@ -78,7 +78,6 @@ struct DiceRandomizer: View {
           }
           .onRandomSuccess { result in
             currentDice = result.split(separator: "\n").map({ element in
-              print(element)
               return DiceItem(number: Int(element))
             })
             let coreDataItem = Random(context: moc)

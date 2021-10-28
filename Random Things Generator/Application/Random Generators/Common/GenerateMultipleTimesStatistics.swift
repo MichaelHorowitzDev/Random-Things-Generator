@@ -53,8 +53,6 @@ struct GenerateMultipleTimesStatistics: View {
             .padding(.bottom, 3)
           }
           .onChange(of: sortedBy) { newValue in
-            print(sortedBy)
-            print(newValue)
             switch newValue {
             case "Most Common":
               sortedItems = results.mostCommon()

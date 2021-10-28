@@ -58,7 +58,6 @@ class UserPreferences: ObservableObject {
     themeColor.isLight ? .black : .white
   }
   func saveUserDefaults(value: Any, key: String) {
-    print(value, key)
     defaults.set(value, forKey: key)
   }
   init() {

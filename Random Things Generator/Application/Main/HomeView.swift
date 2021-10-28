@@ -41,7 +41,6 @@ struct HomeView: View {
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button {
-            print("pressed")
             settingsPresented = true
           } label: {
             Image(systemName: "gear")

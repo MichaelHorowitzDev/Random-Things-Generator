@@ -264,7 +264,6 @@ private struct RandomHistoryItems<Format: View, Settings: View>: View {
         Button (action: {
           let tempDirectory = NSTemporaryDirectory()
           let tempURL = URL(fileURLWithPath: tempDirectory, isDirectory: true).appendingPathComponent("\(randomType)_\(UUID().uuidString.prefix(8)).csv")
-          print(tempURL)
           let stream = OutputStream(toFileAtPath: tempURL.path, append: false)!
           let csv = try! CSVWriter(stream: stream)
           for item in history {
