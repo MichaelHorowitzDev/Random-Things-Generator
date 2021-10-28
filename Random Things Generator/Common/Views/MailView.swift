@@ -17,18 +17,12 @@ struct MailView: UIViewControllerRepresentable {
   private var bccRecipients: [String]?
   private var preferredSendingEmailAddress: String = ""
   private var attachmentData: (attachment: Data, mimeType: String, fileName: String)?
-  private let result: ((Result<MFMailComposeResult, Error>) -> Void)?
-  @Binding private var bindingResult: Result<MFMailComposeResult, Error>?
+  private var errorResult: ((Result<MFMailComposeResult, Error>) -> Void)? = nil
+  private var mailResult: ((MailResult) -> Void)? = nil
 
-  init(_ result: @escaping (Result<MFMailComposeResult, Error>) -> Void) {
-    self.result = result
-    self._bindingResult = .constant(nil)
+  enum MailResult {
+    case success, failure
   }
-  init(result: Binding<Result<MFMailComposeResult, Error>?>) {
-    self._bindingResult = result
-    self.result = nil
-  }
-
   func makeUIViewController(context: Context) -> MFMailComposeViewController {
     let mailView = MFMailComposeViewController()
     mailView.mailComposeDelegate = context.coordinator
@@ -60,13 +54,13 @@ struct MailView: UIViewControllerRepresentable {
       defer {
         mailView.presentationMode.wrappedValue.dismiss()
       }
-      if mailView.bindingResult != nil {
-        if let error = error {
-          mailView.bindingResult = .failure(error)
+      if let boolResult = mailView.mailResult {
+        if error != nil {
+          boolResult(.failure)
         } else {
-          mailView.bindingResult = .success(result)
+          boolResult(.success)
         }
-      } else if let mailResult = mailView.result {
+      } else if let mailResult = mailView.errorResult {
         if let error = error {
           mailResult(.failure(error))
         } else {
@@ -111,6 +105,16 @@ extension MailView {
   func addAttachmentData(_ attachment: Data, mimeType: String, fileName: String) -> Self {
     var copy = self
     copy.attachmentData = (attachment, mimeType, fileName)
+    return copy
+  }
+  func errorResult(_ result: @escaping (Result<MFMailComposeResult, Error>) -> Void) -> Self {
+    var copy = self
+    copy.errorResult = result
+    return copy
+  }
+  func mailResult(_ result: @escaping (MailResult) -> Void) -> Self {
+    var copy = self
+    copy.mailResult = result
     return copy
   }
 }

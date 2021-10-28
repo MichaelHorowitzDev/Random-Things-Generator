@@ -12,7 +12,6 @@ struct SettingsMenu: View {
   @EnvironmentObject var preferences: UserPreferences
   @Environment(\.presentationMode) var presentationMode
   @State private var showsMail = false
-  @State private var result: Result<MFMailComposeResult, Error>? = nil
   @State private var emailCopied = false
   @State private var showsShareSheet = false
     var body: some View {
@@ -82,9 +81,7 @@ struct SettingsMenu: View {
             })
             .sheet(isPresented: $showsMail) {
               let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"]! as! String
-              MailView { result in
-                print(result)
-              }
+              MailView()
               .setToRecipients(["michaelhorowitzdev@gmail.com"])
               .setMessageBody("<p><br><br><br><br>Version \(version)</p>", isHTML: true)
               .setSubject("Random Things Generator")
