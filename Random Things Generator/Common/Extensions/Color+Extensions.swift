@@ -74,4 +74,7 @@ extension Color {
     let b = Double.random(in: 0...1)
     return Color(.sRGB, red: r, green: g, blue: b, opacity: 1)
   }
+  init(uiColor: UIColor) {
+    self.init(uiColor)
+  }
 }

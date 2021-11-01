@@ -187,7 +187,11 @@ public struct RandomGeneratorView<Content: View>: View {
                 settingsContent
                 if let generateRandom = generateRandom {
                   NavigationLink {
-                    GenerateMultipleTimes(generateRandom, formatValue: formatHistoryValue)
+                    if #available(iOS 15.0, *) {
+                      GenerateMultipleTimes(generateRandom, formatValue: formatHistoryValue)
+                    } else {
+                      GenerateMultipleTimesIOS14(generateRandom, formatValue: formatHistoryValue)
+                    }
                   } label: {
                     Text("Generate Multiple Times")
                   }
@@ -203,6 +207,7 @@ public struct RandomGeneratorView<Content: View>: View {
                 }
               }
               .customTapFunction(onHistoryItemTap)
+              .environmentObject(preferences)
           }
         }
       }

@@ -59,7 +59,7 @@ struct HomeView: View {
   @ViewBuilder
   func typeToView(_ type: String) -> some View {
     switch type {
-    case "Number": NumberGenerator()
+    case "Number": if #available(iOS 15, *) { NumberGenerator() } else { NumberGeneratorIOS14() }
     case "Coin": CoinFlipper()
     case "Card": CardRandomizer()
     case "Date": DateGenerator()

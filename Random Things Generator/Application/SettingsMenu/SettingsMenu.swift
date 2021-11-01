@@ -17,27 +17,32 @@ struct SettingsMenu: View {
     var body: some View {
       NavigationView {
         List {
-          Section("General") {
+          Section {
             HStack {
               Image(systemName: "waveform")
               Spacer()
               Toggle("Haptics", isOn: $preferences.hasHapticFeedback)
-                .tint(preferences.themeColor)
+//                .tint(preferences.themeColor)
             }
             HStack {
               Image(systemName: "hand.tap.fill")
               Spacer()
               Toggle("Tap to Randomize", isOn: !$preferences.showsRandomButton)
-                .tint(preferences.themeColor)
+//                .tint(preferences.themeColor)
             }
             HStack {
               Image(systemName: "iphone.radiowaves.left.and.right")
               Spacer()
               Toggle("Shake to Randomize", isOn: $preferences.hasShakeToGenerate)
-                .tint(preferences.themeColor)
+//                .accentColor(preferences.themeColor)
+//                .tint(preferences.themeColor)
             }
+            
+          } header: {
+            Text("General")
           }
-          Section("Customization") {
+          .toggleStyle(SwitchToggleStyle(tint: preferences.themeColor))
+          Section {
             NavigationLink {
               ThemeColor()
             } label: {
@@ -58,8 +63,10 @@ struct SettingsMenu: View {
               Image(systemName: "arrow.up.arrow.down.square")
               Text("Reorganize")
             }
+          } header: {
+            Text("Customization")
           }
-          Section("Support") {
+          Section {
             Button {
               if MFMailComposeViewController.canSendMail() {
                 showsMail = true
@@ -74,11 +81,14 @@ struct SettingsMenu: View {
                 Image(systemName: "paperplane")
               }
             }
-            .alert("Email Copied", isPresented: $emailCopied, actions: {
-              Button("OK", role: .cancel) {}
-            }, message: {
-              Text("You can now paste it wherever needed.")
+            .alert(isPresented: $emailCopied, content: {
+              Alert(title: Text("Email Copied"), message: Text("You can now paste it wherever needed."), dismissButton: .cancel(Text("OK")))
             })
+//            .alert("Email Copied", isPresented: $emailCopied, actions: {
+//              Button("OK", role: .cancel) {}
+//            }, message: {
+//              Text("You can now paste it wherever needed.")
+//            })
             .sheet(isPresented: $showsMail) {
               let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"]! as! String
               MailView()
@@ -111,6 +121,8 @@ struct SettingsMenu: View {
                 ShareSheet(activityItems: ["Check out the Random Things Generator App on the App Store!", url])
               }
             }
+          } header: {
+            Text("Support")
           }
         }
         .navigationTitle("Settings")

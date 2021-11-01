@@ -12,7 +12,8 @@ struct GeneratorLists: View {
   @State private var coreDataRefreshID = UUID()
   @State private var addList = false
   @State private var editList: GeneratorList?
-  @State private var changeSelectedList = false
+  @State private var changeItemSelected = false
+  @State private var changeItem: GeneratorList?
   @Environment(\.managedObjectContext) var moc
   @EnvironmentObject var preferences: UserPreferences
   
@@ -35,37 +36,7 @@ struct GeneratorLists: View {
       if selectedLists.count > 0 {
         Section {
           ForEach(selectedLists) { selectedList in
-            NavigationLink {
-              EditList(list: selectedList)
-            } label: {
-              GeometryReader { geo in
-                HStack {
-                  Circle()
-                    .fill(Color.withData(selectedList.color ?? Color.clear.data)!)
-                    .frame(width: geo.size.height, height: geo.size.height)
-                  Text(selectedList.title ?? "Unknown")
-                  Spacer()
-                }
-              }
-              .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                Button {
-                  if let id = selectedList.id {
-                    withAnimation {
-                      currentLists = currentLists.filter({ $0 != id })
-                    }
-                  }
-                } label: {
-                  Text("Deselect")
-                }
-                .tint(.green)
-                Button {
-                  editList = selectedList
-                } label: {
-                  Text("Edit")
-                }
-              }
-            }
-            .disabled(changeSelectedList)
+            SelectedListItem(selectedList: selectedList, editList: $editList, currentLists: $currentLists)
           }
           .onDelete { indexSet in
             for index in indexSet {
@@ -79,53 +50,54 @@ struct GeneratorLists: View {
         }
       }
       Section {
-        ForEach(unselectedLists, id: \.self) { list in
-          NavigationLink (destination: {
-            EditList(list: list)
-          }, label: {
-            GeometryReader { geo in
-              HStack {
-                Circle()
-                  .fill(Color.withData(list.color ?? Color.clear.data)!)
-                  .frame(width: geo.size.height, height: geo.size.height)
-                Text(list.title ?? "Unknown")
-                Spacer()
-              }
-              
-            }
-          })
-          .swipeActions(edge: .leading, allowsFullSwipe: true) {
-            Button {
-              if let id = list.id {
-                withAnimation {
-                  currentLists.append(id)
-                }
-              }
-            } label: {
-              Text("Select")
-            }
-            .tint(.green)
-            Button {
-              editList = list
-            } label: {
-              Text("Edit")
-            }
-          }
-          .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-            Button {
-              deleteList = list
-            } label: {
-              Text("Delete")
-            }
-            .tint(.red)
-          }
+        ForEach(unselectedLists, id: \.self) { unselectedList in
+          UnselectedListItem(unselectedList: unselectedList, editList: $editList, deleteList: $deleteList, currentLists: $currentLists)
         }
       } footer: {
-        Text("Swipe to the left to select the list or edit the list. Swipe to the right to delete the list.")
+        if #available(iOS 15, *) {
+          Text("Swipe to the left to select the list or edit the list. Swipe to the right to delete the list.")
+        } else {
+//          Text("Hold for options")
+        }
       }
     }
     .id(coreDataRefreshID)
     .environment(\.editMode, Binding.constant(EditMode.inactive))
+    .sheet(item: $changeItem, content: { item in
+      VStack {
+        Button {
+          if let id = item.id {
+            withAnimation {
+              if changeItemSelected {
+                currentLists = currentLists.filter({ $0 != id })
+              } else {
+                currentLists.append(id)
+              }
+            }
+          }
+        } label: {
+          Text(changeItemSelected ? "Unselect" : "Select")
+        }
+        Button {
+          editList = item
+        } label: {
+          Text("Edit")
+        }
+        if !changeItemSelected {
+          Button {
+            deleteList = item
+          } label: {
+            Text("Delete")
+              .padding(.horizontal)
+              .padding(5)
+          }
+
+        }
+      }
+    })
+//    .alert(isPresented: $changeItem, content: {
+//      alert(<#T##titleKey: LocalizedStringKey##LocalizedStringKey#>, isPresented: <#T##Binding<Bool>#>, actions: <#T##() -> View#>)
+//    })
     .alert(item: $deleteList) { item in
       Alert(title: Text("Delete List"), message: Text("Are you sure you want to delete this list?"), primaryButton: Alert.Button.destructive(Text("Delete"), action: {
         withAnimation {
@@ -139,19 +111,23 @@ struct GeneratorLists: View {
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
         Button {
+          print("add list")
           addList = true
         } label: {
           Image(systemName: "plus")
         }
+        .sheet(isPresented: $addList) {
+          AddList()
+            .environmentObject(preferences)
+        }
       }
     }
-    .sheet(isPresented: $addList) {
-      AddList()
-    }
+    
     .sheet(item: $editList, onDismiss: {
       coreDataRefreshID = UUID()
     }) { item in
       EditListTitle(list: item)
+        .environmentObject(preferences)
     }
     .navigationTitle("Lists")
     .accentColor(preferences.themeColor)
@@ -204,7 +180,8 @@ struct EditList: View {
               Text(item.itemName ?? "")
             } else {
               Image(systemName: "xmark.circle.fill")
-                .tint(.red)
+                .foregroundColor(.red)
+//                .tint(.red)
             }
           }
         }
@@ -216,11 +193,14 @@ struct EditList: View {
           }
         }
       }
-      .alert("Error", isPresented: $duplicateItem) {
-        Button("OK", role: .cancel) {}
-      } message: {
-        Text("An Item with this title already exists.")
-      }
+      .alert(isPresented: $duplicateItem, content: {
+        Alert(title: Text("Error"), message: Text("An item with this title already exists."), dismissButton: .cancel(Text("OK")))
+      })
+//      .alert("Error", isPresented: $duplicateItem) {
+//        Button("OK", role: .cancel) {}
+//      } message: {
+//        Text("An Item with this title already exists.")
+//      }
       .navigationTitle(title)
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
@@ -231,6 +211,124 @@ struct EditList: View {
           }
         }
       }
+    }
+  }
+}
+
+private struct SelectedListItem: View {
+  let selectedList: GeneratorList
+  @Binding var editList: GeneratorList?
+  @Binding var currentLists: [UUID]
+  var body: some View {
+    if #available(iOS 15.0, *) {
+      NavigationLink {
+        EditList(list: selectedList)
+      } label: {
+        GeometryReader { geo in
+          HStack {
+            Circle()
+              .fill(Color.withData(selectedList.color ?? Color.clear.data)!)
+              .frame(width: geo.size.height, height: geo.size.height)
+            Text(selectedList.title ?? "Unknown")
+            Spacer()
+          }
+        }
+      }
+      .swipeActions(edge: .leading, allowsFullSwipe: true) {
+        Button {
+          if let id = selectedList.id {
+            withAnimation {
+              currentLists = currentLists.filter({ $0 != id })
+            }
+          }
+        } label: {
+          Text("Deselect")
+        }
+        .tint(.green)
+        Button {
+          editList = selectedList
+        } label: {
+          Text("Edit")
+        }
+      }
+    } else {
+      NavigationLink {
+        EditList(list: selectedList)
+      } label: {
+        GeometryReader { geo in
+          HStack {
+            Circle()
+              .fill(Color.withData(selectedList.color ?? Color.clear.data)!)
+              .frame(width: geo.size.height, height: geo.size.height)
+            Text(selectedList.title ?? "Unknown")
+            Spacer()
+          }
+        }
+      }
+    }
+  }
+}
+
+private struct UnselectedListItem: View {
+  let unselectedList: GeneratorList
+  @Binding var editList: GeneratorList?
+  @Binding var deleteList: GeneratorList?
+  @Binding var currentLists: [UUID]
+  var body: some View {
+    if #available(iOS 15.0, *) {
+      NavigationLink (destination: {
+        EditList(list: unselectedList)
+      }, label: {
+        GeometryReader { geo in
+          HStack {
+            Circle()
+              .fill(Color.withData(unselectedList.color ?? Color.clear.data)!)
+              .frame(width: geo.size.height, height: geo.size.height)
+            Text(unselectedList.title ?? "Unknown")
+            Spacer()
+          }
+          
+        }
+      })
+        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+          Button {
+            if let id = unselectedList.id {
+              withAnimation {
+                currentLists.append(id)
+              }
+            }
+          } label: {
+            Text("Select")
+          }
+          .tint(.green)
+          Button {
+            editList = unselectedList
+          } label: {
+            Text("Edit")
+          }
+        }
+        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+          Button {
+            deleteList = unselectedList
+          } label: {
+            Text("Delete")
+          }
+          .tint(.red)
+        }
+    } else {
+      NavigationLink (destination: {
+        EditList(list: unselectedList)
+      }, label: {
+        GeometryReader { geo in
+          HStack {
+            Circle()
+              .fill(Color.withData(unselectedList.color ?? Color.clear.data)!)
+              .frame(width: geo.size.height, height: geo.size.height)
+            Text(unselectedList.title ?? "Unknown")
+            Spacer()
+          }
+        }
+      })
     }
   }
 }

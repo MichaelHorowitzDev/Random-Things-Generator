@@ -121,7 +121,7 @@ struct RandomHistory<Format:View, Settings: View>: View {
           Button("Done") {
             presentationMode.wrappedValue.dismiss()
           }
-          .foregroundColor(preferences.themeColor)
+//          .foregroundColor(preferences.themeColor)
         }
       }
     }
@@ -230,11 +230,14 @@ private struct RandomHistoryItems<Format: View, Settings: View>: View {
           }
           .buttonStyle(DefaultButtonStyle())
           .foregroundColor(.primary)
-          .alert("Copied", isPresented: $copiedText) {
-            Button("OK", role: .cancel) {}
-          } message: {
-            Text("Text has been copied.")
-          }
+          .alert(isPresented: $copiedText, content: {
+            Alert(title: Text("Copied"), message: Text("Text has been copied."), dismissButton: Alert.Button.cancel(Text("OK")))
+          })
+//          .alert("Copied", isPresented: $copiedText) {
+//            Button("OK", role: .cancel) {}
+//          } message: {
+//            Text("Text has been copied.")
+//          }
 
         }
       }, header: {

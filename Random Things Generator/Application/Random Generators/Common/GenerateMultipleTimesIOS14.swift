@@ -8,8 +8,7 @@
 import SwiftUI
 import Combine
 
-@available(iOS 15.0, *)
-struct GenerateMultipleTimes<Format: View>: View {
+struct GenerateMultipleTimesIOS14<Format: View>: View {
   @State private var showsAlert = false
   let function: () -> String
   let formatValue: ((String) -> Format)?
@@ -22,7 +21,7 @@ struct GenerateMultipleTimes<Format: View>: View {
   @State private var numberOfTimes = ""
   @State private var generateStatistics = false
   @State private var shareItem: ShareItem?
-  @FocusState private var focused: Bool
+//  @FocusState private var focused: Bool
   @EnvironmentObject var preferences: UserPreferences
     var body: some View {
 //      NavigationView {
@@ -39,7 +38,7 @@ struct GenerateMultipleTimes<Format: View>: View {
               }
               .keyboardType(.numberPad)
               .textFieldStyle(.roundedBorder)
-              .focused($focused)
+//              .focused($focused)
             Button {
               if let number = Int(numberOfTimes) {
                 if number > 0 {
@@ -47,7 +46,8 @@ struct GenerateMultipleTimes<Format: View>: View {
                     function()
                   }
                   self.results = results
-                  focused = false
+//                  focused = false
+                  hideKeyboard()
                 }
               }
             } label: {

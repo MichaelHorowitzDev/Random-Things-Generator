@@ -8,13 +8,13 @@
 import SwiftUI
 import Combine
 
-@available(iOS 15.0, *)
-struct NumberGenerator: View {
+struct NumberGeneratorIOS14: View {
   @State private var firstNumber = ""
   @State private var secondNumber = ""
   @State private var randomNumber = "?"
   @State private var animationAmount: CGFloat = 1
-  @FocusState private var isFocused: Bool
+  @State private var isFocused = false
+//  @FocusState private var isFocused: Bool
   @EnvironmentObject var preferences: UserPreferences
   @Environment(\.managedObjectContext) var moc
   @State private var settingsPresented = false
@@ -23,18 +23,22 @@ struct NumberGenerator: View {
         VStack {
           HStack(spacing: 20) {
             NumberEntry(placeholder: "First Number", number: $firstNumber, isFocused: $isFocused)
-              .highPriorityGesture(TapGesture())
+              .highPriorityGesture(TapGesture().onEnded({_ in
+                isFocused = true
+              }))
             NumberEntry(placeholder: "Second Number", number: $secondNumber, isFocused: $isFocused)
-              .highPriorityGesture(TapGesture())
+              .highPriorityGesture(TapGesture().onEnded({_ in
+                isFocused = true
+              }))
           }
-          .toolbar {
-            ToolbarItemGroup(placement: .keyboard) {
-              Spacer()
-              Button("Done") {
-                isFocused = false
-              }
-            }
-          }
+//          .toolbar {
+//            ToolbarItemGroup(placement: .keyboard) {
+//              Spacer()
+//              Button("Done") {
+//                isFocused = false
+//              }
+//            }
+//          }
           .padding()
           .padding(.top, 50)
           Spacer()
@@ -112,21 +116,26 @@ struct NumberGenerator: View {
   }
 }
 
-@available(iOS 15.0, *)
 private struct NumberEntry: View {
   let placeholder: String
   @Binding var number: String
-  private var isFocused: FocusState<Bool>.Binding
-  init(placeholder: String, number: Binding<String>, isFocused: FocusState<Bool>.Binding) {
+  @Binding var isFocused: Bool
+//  private var isFocused: FocusState<Bool>.Binding
+  init(placeholder: String, number: Binding<String>, isFocused: Binding<Bool>) {
     self.placeholder = placeholder
     self._number = number
-    self.isFocused = isFocused
+    self._isFocused = isFocused
   }
   var body: some View {
     TextField(placeholder, text: $number)
       .textFieldStyle(.roundedBorder)
       .keyboardType(.numberPad)
-      .focused(isFocused)
+      .onChange(of: isFocused, perform: { newValue in
+        if !newValue {
+          hideKeyboard()
+        }
+      })
+//      .focused(isFocused)
       .onReceive(Just(number)) { newValue in
         var filtered = newValue.filter {"0123456789".contains($0)}
         if filtered.count > 10 {
@@ -136,3 +145,11 @@ private struct NumberEntry: View {
       }
   }
 }
+
+#if canImport(UIKit)
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+#endif

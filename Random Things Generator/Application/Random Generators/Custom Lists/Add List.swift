@@ -105,14 +105,18 @@ struct AddList: View {
             } label: {
               Text("Done")
                 .fontWeight(.bold)
-                .tint(preferences.themeColor)
+                .foregroundColor(preferences.themeColor)
+//                .tint(preferences.themeColor)
             }
             .disabled(titleText == "")
-            .alert("Error", isPresented: $itemTitleExists) {
-              Button("OK", role: .cancel) {}
-            } message: {
-              Text("A List with this title already exists.")
-            }
+            .alert(isPresented: $itemTitleExists, content: {
+              Alert(title: Text("Error"), message: Text("A list with this title already exists."), dismissButton: .cancel(Text("OK")))
+            })
+//            .alert("Error", isPresented: $itemTitleExists) {
+//              Button("OK", role: .cancel) {}
+//            } message: {
+//              Text("A List with this title already exists.")
+//            }
           }
         }
       }

@@ -31,7 +31,8 @@ struct DateGenerator: View {
         VStack(spacing: 30) {
           DatePicker("Start", selection: $startingDate, in: ...Calendar.current.date(byAdding: .day, value: -1, to: endingDate)!, displayedComponents: .date)
             .datePickerStyle(.wheel)
-            .tint(Color(uiColor: .secondaryLabel))
+            .background(Color(uiColor: .secondaryLabel))
+//            .tint(Color(uiColor: .secondaryLabel))
             .padding(.leading)
             .background(
               RoundedRectangle(cornerRadius: 15)
@@ -39,7 +40,8 @@ struct DateGenerator: View {
             )
           DatePicker("End", selection: $endingDate, in: startingDate..., displayedComponents: .date)
             .datePickerStyle(.wheel)
-            .tint(Color(uiColor: .secondaryLabel))
+            .background(Color(uiColor: .secondaryLabel))
+//            .tint(Color(uiColor: .secondaryLabel))
             .padding(.leading)
             .background(
               RoundedRectangle(cornerRadius: 15)

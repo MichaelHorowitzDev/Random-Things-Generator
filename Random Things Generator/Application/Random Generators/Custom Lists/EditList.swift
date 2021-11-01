@@ -118,7 +118,8 @@ struct EditListTitle: View {
             } label: {
               Text("Save")
                 .fontWeight(.bold)
-                .tint(preferences.themeColor)
+                .foregroundColor(preferences.themeColor)
+//                .tint(preferences.themeColor)
             }
             .disabled(titleText == "")
           }
