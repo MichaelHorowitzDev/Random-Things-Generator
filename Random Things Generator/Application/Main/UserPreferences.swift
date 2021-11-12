@@ -19,8 +19,8 @@ private let defaultTypes = [
   ("Color", true),
   ("Date", true),
   ("Map", true),
-  ("Letter", false),
-  ("Password", false),
+  ("Letter", true),
+  ("Password", true),
   ("Lists", true)
 ]
 var defaultTypesOn: [String : Bool] {
