@@ -32,7 +32,7 @@ struct PasswordGenerator: View {
             }
             Toggle("Includes Numbers", isOn: $includesNumbers)
             Toggle("Includes Lowercase Letters", isOn: $lowercaseLetters)
-            Toggle("Includes Uppercase Letters", isOn: $lowercaseLetters)
+            Toggle("Includes Uppercase Letters", isOn: $uppercaseLetters)
             Toggle("Includes Symbols", isOn: $includesSymbols)
           }
           .frame(maxWidth: .infinity)
