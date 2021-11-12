@@ -52,9 +52,9 @@ struct GenerateMultipleTimes<Format: View>: View {
               Text("Generate")
                 .foregroundColor(.white)
                 .padding(5)
-                .background(.blue)
-                .cornerRadius(10)
             }
+            .background(.blue)
+            .cornerRadius(10)
           }
           .padding(.horizontal)
           List(0..<results.count, id: \.self) { num in
