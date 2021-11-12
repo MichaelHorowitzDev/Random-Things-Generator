@@ -46,6 +46,7 @@
 		8B7E861E26D99563004B0011 /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E861D26D99563004B0011 /* ThemeColor.swift */; };
 		8B7E862826D9ED64004B0011 /* CoinFlipper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E862726D9ED64004B0011 /* CoinFlipper.swift */; };
 		8B7E862A26D9EDB7004B0011 /* RandomGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E862926D9EDB7004B0011 /* RandomGeneratorView.swift */; };
+		8B904C56273E183E00E4FFF1 /* PasswordGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B904C55273E183E00E4FFF1 /* PasswordGenerator.swift */; };
 		8B95E5CB26E5600500349D4C /* TextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B95E5CA26E5600500349D4C /* TextFieldAlert.swift */; };
 		8B95E5CE26E6B0A200349D4C /* ListItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B95E5CC26E6B0A200349D4C /* ListItem+CoreDataClass.swift */; };
 		8B95E5CF26E6B0A200349D4C /* ListItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B95E5CD26E6B0A200349D4C /* ListItem+CoreDataProperties.swift */; };
@@ -133,6 +134,7 @@
 		8B7E861D26D99563004B0011 /* ThemeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColor.swift; sourceTree = "<group>"; };
 		8B7E862726D9ED64004B0011 /* CoinFlipper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinFlipper.swift; sourceTree = "<group>"; };
 		8B7E862926D9EDB7004B0011 /* RandomGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGeneratorView.swift; sourceTree = "<group>"; };
+		8B904C55273E183E00E4FFF1 /* PasswordGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGenerator.swift; sourceTree = "<group>"; };
 		8B95E5CA26E5600500349D4C /* TextFieldAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldAlert.swift; sourceTree = "<group>"; };
 		8B95E5CC26E6B0A200349D4C /* ListItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListItem+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		8B95E5CD26E6B0A200349D4C /* ListItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListItem+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
@@ -331,6 +333,7 @@
 				8BF98EDC271155F300DD8AAE /* Common */,
 				8B74E1E726D75DDD00886949 /* NumberGenerator.swift */,
 				8B7E862726D9ED64004B0011 /* CoinFlipper.swift */,
+				8B904C55273E183E00E4FFF1 /* PasswordGenerator.swift */,
 				8B61A02C26DAF2CC007DBC50 /* CardRandomizer.swift */,
 				8BCABA572720CD3C0006E4D6 /* DiceRandomizer.swift */,
 				8B29756E26DC7ECF0038CD92 /* DateGenerator.swift */,
@@ -523,6 +526,7 @@
 				8B29756F26DC7ECF0038CD92 /* DateGenerator.swift in Sources */,
 				8B95E5CF26E6B0A200349D4C /* ListItem+CoreDataProperties.swift in Sources */,
 				8BCABA582720CD3C0006E4D6 /* DiceRandomizer.swift in Sources */,
+				8B904C56273E183E00E4FFF1 /* PasswordGenerator.swift in Sources */,
 				8BF98EDB27114C4000DD8AAE /* ColorGenerator.swift in Sources */,
 				8B74E1C926D6CD1A00886949 /* Random_Things_GeneratorApp.swift in Sources */,
 				8B9FEFDF26DE1B3200D24301 /* Random+CoreDataProperties.swift in Sources */,

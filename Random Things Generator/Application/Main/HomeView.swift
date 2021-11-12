@@ -68,6 +68,7 @@ struct HomeView: View {
     case "Color": ColorGenerator()
     case "Dice": DiceRandomizer()
     case "Letter": LetterGenerator()
+    case "Password": PasswordGenerator()
     default: EmptyView()
     }
   }
@@ -80,7 +81,8 @@ struct HomeView: View {
     "Lists": "list.bullet.rectangle.fill",
     "Color": "eyedropper.full",
     "Dice": "dice.fill",
-    "Letter": "a.square.fill"
+    "Letter": "a.square.fill",
+    "Password": "key.fill"
   ]
 }
 

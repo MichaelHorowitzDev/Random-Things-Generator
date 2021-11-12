@@ -22,3 +22,10 @@ extension String {
     self.dropLast(k).map { $0.description }.joined()
   }
 }
+
+extension String {
+  static let lowercaseLetters = (97...122).map({Character(UnicodeScalar($0))})
+  static let uppercaseLetters = (65...90).map({Character(UnicodeScalar($0))})
+  static let symbols = Array(#"~`!@#$%^&*()_-+={[}]|\:;"'<,>.?/"#)
+  static let numbers: [Character] = Array((0...9).map({String($0)}).joined())
+}

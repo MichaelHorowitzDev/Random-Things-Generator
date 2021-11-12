@@ -20,6 +20,7 @@ private let defaultTypes = [
   ("Date", true),
   ("Map", true),
   ("Letter", false),
+  ("Password", false),
   ("Lists", true)
 ]
 var defaultTypesOn: [String : Bool] {
