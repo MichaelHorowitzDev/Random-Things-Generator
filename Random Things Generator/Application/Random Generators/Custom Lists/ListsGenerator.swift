@@ -7,19 +7,13 @@
 
 import SwiftUI
 
-struct ListsGenerator: View {
-  @EnvironmentObject var preferences: UserPreferences
-  @Environment(\.managedObjectContext) var moc
-  @FetchRequest(entity: GeneratorList.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \GeneratorList.dateCreated, ascending: false)], predicate: nil, animation: nil) var lists: FetchedResults<GeneratorList>
-  var selectedLists: [GeneratorList] {
-    lists.filter { generatorList in
-      if let id = generatorList.id {
-        return currentLists.contains(id)
-      }
-      return false
+class CurrentLists: ObservableObject {
+  @Published var lists = [UUID]() {
+    didSet {
+      UserDefaults.standard.set(lists.map({$0.uuidString}), forKey: "currentLists")
     }
   }
-  @State var currentLists = [UUID]()
+  
   init() {
     if let currentLists = UserDefaults.standard.array(forKey: "currentLists") as? [String] {
       var uuids = [UUID]()
@@ -28,9 +22,24 @@ struct ListsGenerator: View {
           uuids.append(uuid)
         }
       }
-      self._currentLists = State(initialValue: uuids)
+      self.lists = uuids
     }
   }
+}
+
+struct ListsGenerator: View {
+  @EnvironmentObject var preferences: UserPreferences
+  @Environment(\.managedObjectContext) var moc
+  @FetchRequest(entity: GeneratorList.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \GeneratorList.dateCreated, ascending: false)], predicate: nil, animation: nil) var lists: FetchedResults<GeneratorList>
+  var selectedLists: [GeneratorList] {
+    lists.filter { generatorList in
+      if let id = generatorList.id {
+        return currentLists.lists.contains(id)
+      }
+      return false
+    }
+  }
+  @ObservedObject var currentLists = CurrentLists()
   @State private var randomItem = "?"
   @State private var scale: CGFloat = 1
   @State private var showsAlert = false
@@ -72,7 +81,7 @@ struct ListsGenerator: View {
     .settingsPresentedContent({
       Section {
         NavigationLink {
-          GeneratorLists(currentLists: $currentLists)
+          GeneratorLists(currentLists: $currentLists.lists)
         } label: {
           Text("Selected List")
         }
@@ -119,9 +128,6 @@ struct ListsGenerator: View {
       item.list?.totalTimes += 1
       try? moc.save()
     })
-    .onChange(of: currentLists, perform: { newValue in
-      UserDefaults.standard.set(newValue.map({$0.uuidString}), forKey: "currentLists")
-    })
   }
   var allItemsWithParent: [(String, GeneratorList)] {
     var items = [(String, GeneratorList)]()
@@ -159,7 +165,7 @@ struct ListsGenerator: View {
   }
   var idPredicate: NSPredicate {
     var predicates = [NSPredicate]()
-    for id in currentLists {
+    for id in currentLists.lists {
       let predicate = NSPredicate(format: "id == %@", id as CVarArg)
       predicates.append(predicate)
     }
