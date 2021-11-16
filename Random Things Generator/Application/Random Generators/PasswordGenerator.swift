@@ -28,12 +28,19 @@ struct PasswordGenerator: View {
               VStack(spacing: 0) {
                 Text(String(Int(length)))
                 Slider(value: $length, in: 5...35, step: 1)
+                  .onChange(of: length) { newValue in
+                    UIImpactFeedbackGenerator(style: .light).impactOccurred(intensity: 0.7)
+                  }
               }
             }
             Toggle("Includes Numbers", isOn: $includesNumbers)
+              .disabled(!lowercaseLetters && !uppercaseLetters && !includesSymbols)
             Toggle("Includes Lowercase Letters", isOn: $lowercaseLetters)
+              .disabled(!includesNumbers && !uppercaseLetters && !includesSymbols)
             Toggle("Includes Uppercase Letters", isOn: $uppercaseLetters)
+              .disabled(!lowercaseLetters && !includesNumbers && !includesSymbols)
             Toggle("Includes Symbols", isOn: $includesSymbols)
+              .disabled(!lowercaseLetters && !uppercaseLetters && !includesNumbers)
           }
           .frame(maxWidth: .infinity)
           .padding()
