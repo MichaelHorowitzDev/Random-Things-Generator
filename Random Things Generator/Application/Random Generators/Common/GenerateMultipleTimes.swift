@@ -39,6 +39,7 @@ struct GenerateMultipleTimes<Format: View>: View {
               .textFieldStyle(.roundedBorder)
               .focused($focused)
             Button {
+              UIImpactFeedbackGenerator(style: .light).impactOccurred()
               if let number = Int(numberOfTimes) {
                 if number > 0 {
                   let results = (1...number).map {_ in

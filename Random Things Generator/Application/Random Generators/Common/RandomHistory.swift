@@ -209,6 +209,7 @@ private struct RandomHistoryItems<Format: View, Settings: View>: View {
               } else {
                 UIPasteboard.general.string = value
                 copiedText = true
+                UIImpactFeedbackGenerator(style: .light).impactOccurred()
               }
             }
           } label: {

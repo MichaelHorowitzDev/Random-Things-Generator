@@ -45,6 +45,9 @@ struct CardRandomizer: View {
               .labelsHidden()
               .padding(.horizontal)
               .padding(.bottom)
+              .onChange(of: cardCount) {_ in
+                UIImpactFeedbackGenerator(style: .light).impactOccurred(intensity: 0.7)
+              }
           }
           .frame(maxWidth: .infinity)
           .background(
