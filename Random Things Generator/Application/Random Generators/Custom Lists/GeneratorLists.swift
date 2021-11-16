@@ -124,6 +124,7 @@ struct GeneratorLists: View {
         Text("Swipe to the left to select the list or edit the list. Swipe to the right to delete the list.")
       }
     }
+    .animation(.default, value: currentLists)
     .id(coreDataRefreshID)
     .environment(\.editMode, Binding.constant(EditMode.inactive))
     .alert(item: $deleteList) { item in
