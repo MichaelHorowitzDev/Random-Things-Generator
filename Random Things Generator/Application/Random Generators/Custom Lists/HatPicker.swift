@@ -8,7 +8,7 @@
 import SwiftUI
 import CSV
 
-class HotPickerViewModel: ObservableObject {
+class HatPickerViewModel: ObservableObject {
   @Published var generatedItems = [String]()
 }
 
@@ -18,7 +18,7 @@ struct HatPicker: View {
   @State private var randomItem = "?"
   @State private var scale: CGFloat = 1
   @EnvironmentObject var preferences: UserPreferences
-  @StateObject var viewModel = HotPickerViewModel()
+  @StateObject var viewModel = HatPickerViewModel()
   @State private var presentHistory = false
   @State private var shareItem: Item? = nil
   
