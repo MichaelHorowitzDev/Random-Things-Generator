@@ -61,6 +61,7 @@ struct HatPicker: View {
       .onSettingsPressed {
         presentHistory = true
       }
+      .buttonDisabled(remainingItems.isEmpty)
       .sheet(isPresented: $presentHistory) {
         NavigationView {
           List((0..<viewModel.generatedItems.count).reversed(), id: \.self) {
