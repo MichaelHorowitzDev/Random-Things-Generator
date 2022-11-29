@@ -80,6 +80,7 @@ public struct RandomGeneratorView<Content: View>: View {
   private var canTap = true
   private var gestureDisabled = false
   private var overrideShowRandomButton = false
+  private var buttonDisabled = false
   @State private var settingsPresented = false
   private var canPresentSettings = true
   var randomType: String
@@ -150,6 +151,7 @@ public struct RandomGeneratorView<Content: View>: View {
             .onTouchUp {
               onTouchUp?()
             }
+            .isDisabled(buttonDisabled)
           }
           .zIndex(2)
         } else if !buttonOverContent {
@@ -348,6 +350,11 @@ extension RandomGeneratorView {
   func defaultValue(_ value: String) -> Self {
     var copy = self
     copy._randomizedValue = State(wrappedValue: value)
+    return copy
+  }
+  func buttonDisabled(_ bool: Bool) -> Self {
+    var copy = self
+    copy.buttonDisabled = bool
     return copy
   }
 }
