@@ -96,6 +96,19 @@ struct NumberGenerator: View {
         animationAmount = 1
       }
       .canTapToRandomize(!isFocused)
+      .settingsPresentedContent {
+        if let x = Int(firstNumber), let y = Int(secondNumber) {
+          if x <= y {
+            Section {
+              NavigationLink {
+                HatPicker(items: (x...y).map { String($0) })
+              } label: {
+                Text("Pick from hat")
+              }
+            }
+          }
+        }
+      }
     }
   func setNumbers() {
     guard var num1 = Int(firstNumber) else { return }
