@@ -87,6 +87,7 @@ struct NumberGenerator: View {
 //      })
       .onTap {
         isFocused = false
+        setNumbers()
       }
       .onRandomTouchDown {
         animationAmount = 0.97
