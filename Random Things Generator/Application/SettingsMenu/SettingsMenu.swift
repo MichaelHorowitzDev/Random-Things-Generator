@@ -82,7 +82,7 @@ struct SettingsMenu: View {
             .sheet(isPresented: $showsMail) {
               let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"]! as! String
               MailView()
-              .setToRecipients(["michaelhorowitzdev@gmail.com"])
+              .setToRecipients(["email@michaelhorowitz.dev"])
               .setMessageBody("<p><br><br><br><br>Version \(version)</p>", isHTML: true)
               .setSubject("Random Things Generator")
             }
