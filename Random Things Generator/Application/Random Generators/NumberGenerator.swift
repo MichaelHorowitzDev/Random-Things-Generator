@@ -18,13 +18,12 @@ struct NumberGenerator: View {
   @Environment(\.managedObjectContext) var moc
   @State private var settingsPresented = false
     var body: some View {
-      RandomGeneratorView("Number") {
+      ZStack {
+        preferences.themeColor.ignoresSafeArea(.all, edges: [.horizontal, .bottom])
         VStack {
           HStack(spacing: 20) {
             NumberEntry(placeholder: "First Number", number: $firstNumber, isFocused: $isFocused)
-              .highPriorityGesture(TapGesture())
             NumberEntry(placeholder: "Second Number", number: $secondNumber, isFocused: $isFocused)
-              .highPriorityGesture(TapGesture())
           }
           .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
@@ -37,77 +36,85 @@ struct NumberGenerator: View {
           .padding()
           .padding(.top, 50)
           Spacer()
+
+          Text(randomNumber)
+            .font(.system(size: 100))
+            .minimumScaleFactor(0.2)
+            .lineLimit(1)
+            .foregroundColor(preferences.textColor)
+            .padding()
+            .scaleEffect(animationAmount)
+
+          Spacer()
         }
-        Text(randomNumber)
-          .font(.system(size: 100))
-          .minimumScaleFactor(0.2)
-          .lineLimit(1)
-          .foregroundColor(preferences.textColor)
-          .padding()
-          .scaleEffect(animationAmount)
-      }
-      .onRandomPressed {
-        isFocused = false
-        setNumbers()
-//        guard let num1 = Int(firstNumber) else { return }
-//        guard let num2 = Int(secondNumber) else { return }
-//        let randNum = Int.random(in: num1...num2)
-//        randomNumber = String(randNum)
-//        let coreDataItem = Random(context: moc)
-//        coreDataItem.randomType = "Number"
-//        coreDataItem.timestamp = Date()
-//        coreDataItem.value = randomNumber
-//        try? moc.save()
-      }
-      .generateRandom({
-        guard let num1 = Int(firstNumber) else { return nil }
-        guard let num2 = Int(secondNumber) else { return nil }
-        if num1 > num2 { return nil }
-        return {
-          let randNum = Int.random(in: num1...num2)
-          return randNum.description
+        .zIndex(5)
+        RandomGeneratorView("Number") {
+
         }
-      })
-      .onRandomSuccess({ result in
-        randomNumber = result
-        let coreDataItem = Random(context: moc)
-        coreDataItem.randomType = "Number"
-        coreDataItem.timestamp = Date()
-        coreDataItem.value = randomNumber
-        try? moc.save()
-      })
-//      .generateMultipleTimes({
-//        guard let num1 = Int(firstNumber) else { return nil }
-//        guard let num2 = Int(secondNumber) else { return nil }
-//        if num1 > num2 { return nil }
-//        return {
-//          let randNum = Int.random(in: num1...num2)
-//          return randNum.description
-//        }
-//      })
-      .onTap {
-        isFocused = false
-        setNumbers()
-      }
-      .onRandomTouchDown {
-        animationAmount = 0.97
-      }
-      .onRandomTouchUp {
-        animationAmount = 1
-      }
-      .canTapToRandomize(!isFocused)
-      .settingsPresentedContent {
-        if let x = Int(firstNumber), let y = Int(secondNumber) {
-          if x <= y {
-            Section {
-              NavigationLink {
-                HatPicker(items: (x...y).map { String($0) })
-              } label: {
-                Text("Pick from hat")
+        .onRandomPressed {
+          isFocused = false
+          setNumbers()
+          //        guard let num1 = Int(firstNumber) else { return }
+          //        guard let num2 = Int(secondNumber) else { return }
+          //        let randNum = Int.random(in: num1...num2)
+          //        randomNumber = String(randNum)
+          //        let coreDataItem = Random(context: moc)
+          //        coreDataItem.randomType = "Number"
+          //        coreDataItem.timestamp = Date()
+          //        coreDataItem.value = randomNumber
+          //        try? moc.save()
+        }
+        .generateRandom({
+          guard let num1 = Int(firstNumber) else { return nil }
+          guard let num2 = Int(secondNumber) else { return nil }
+          if num1 > num2 { return nil }
+          return {
+            let randNum = Int.random(in: num1...num2)
+            return randNum.description
+          }
+        })
+        .onRandomSuccess({ result in
+          randomNumber = result
+          let coreDataItem = Random(context: moc)
+          coreDataItem.randomType = "Number"
+          coreDataItem.timestamp = Date()
+          coreDataItem.value = randomNumber
+          try? moc.save()
+        })
+        //      .generateMultipleTimes({
+        //        guard let num1 = Int(firstNumber) else { return nil }
+        //        guard let num2 = Int(secondNumber) else { return nil }
+        //        if num1 > num2 { return nil }
+        //        return {
+        //          let randNum = Int.random(in: num1...num2)
+        //          return randNum.description
+        //        }
+        //      })
+        .onTap {
+          isFocused = false
+          setNumbers()
+        }
+        .onRandomTouchDown {
+          animationAmount = 0.97
+        }
+        .onRandomTouchUp {
+          animationAmount = 1
+        }
+        .canTapToRandomize(!isFocused)
+        .settingsPresentedContent {
+          if let x = Int(firstNumber), let y = Int(secondNumber) {
+            if x <= y {
+              Section {
+                NavigationLink {
+                  HatPicker(items: (x...y).map { String($0) })
+                } label: {
+                  Text("Pick from hat")
+                }
               }
             }
           }
         }
+        .zIndex(2)
       }
     }
   func setNumbers() {
