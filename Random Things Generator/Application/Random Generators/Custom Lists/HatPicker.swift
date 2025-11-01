@@ -63,7 +63,7 @@ struct HatPicker: View {
       }
       .buttonDisabled(remainingItems.isEmpty)
       .sheet(isPresented: $presentHistory) {
-        NavigationView {
+        NavigationStack {
           List((0..<viewModel.generatedItems.count).reversed(), id: \.self) {
             Text(viewModel.generatedItems[$0])
           }

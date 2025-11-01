@@ -15,7 +15,7 @@ struct AddList: View {
   @Environment(\.managedObjectContext) var moc
   @EnvironmentObject var preferences: UserPreferences
   var body: some View {
-    NavigationView {
+    NavigationStack {
       ZStack {
         (Color(.secondarySystemGroupedBackground))
           .edgesIgnoringSafeArea(.all)

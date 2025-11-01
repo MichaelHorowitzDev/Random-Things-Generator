@@ -15,7 +15,7 @@ struct SettingsMenu: View {
   @State private var emailCopied = false
   @State private var showsShareSheet = false
     var body: some View {
-      NavigationView {
+      NavigationStack {
         List {
           Section("General") {
             HStack {

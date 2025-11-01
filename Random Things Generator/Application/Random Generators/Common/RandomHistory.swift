@@ -81,7 +81,7 @@ struct RandomHistory<Format:View, Settings: View>: View {
 //    }
   }
   var body: some View {
-    NavigationView {
+    NavigationStack {
 //      List {
 //        settings
 //        if generatorList != nil {

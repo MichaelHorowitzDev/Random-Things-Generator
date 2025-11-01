@@ -24,7 +24,7 @@ struct EditListTitle: View {
     _selectedColor = State(initialValue: selectedColor)
   }
   var body: some View {
-    NavigationView {
+    NavigationStack {
       ZStack {
         (Color(.secondarySystemGroupedBackground))
           .edgesIgnoringSafeArea(.all)
